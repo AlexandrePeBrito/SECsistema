@@ -4,11 +4,13 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 # Create your views here.
+import re
 from django.shortcuts import get_object_or_404, render, redirect
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+import re
 from sistemaSec.estagiario.models import Estagiario
 from sistemaSec.supervisor.models import Supervisor
 from sistemaSec.sede.models import Sede
@@ -40,24 +42,42 @@ def criar_estagiario_partiu_estagio(request):
         faculdade = request.POST['faculdade']
         estagio = request.POST['estagio']
 
-        sedeObj = Sede.objects.get(id_sede=sede)
-        faculdadeObj = Faculdade.objects.get(id_faculdade=faculdade)
-        estagioObj = Estagio.objects.get(id_estagio=estagio)
-        supervisorObj = Supervisor.objects.get(id_supervisor = supervisor)
-        estagiario = Estagiario.objects.create(cpf_estagiario = cpf,
-            nome_estagiario = nome_estagiario, rg_estagiario = rg,
-            turno_estagiario = turno, email_estagiario = email,
-            semestre_estagiario = semestre, nis_pis_estagiario = nis,
-            telefone_estagiario = telefone, nome_responsavel_estagiario = responsavel,
-            data_nascimento_estagiario = nascimento,
-            genero_estagiario = genero, raca_estagiario = raca,
-            bairro_estagiario = bairro, numero_estagiario = numero,
-            complemento_estagiario = complemento, matricula_estagiario = Matricula,
-            situacao_estagiario = situaçao, supervisor_estagiario = supervisorObj,
-            sede_estagiario = sedeObj, faculdade_estagiario = faculdadeObj,
-            estagio_estagiario = estagioObj)
-        
-        estagiario.save()
+        #validacao de error
+        erros = [{"Erro": 'CPF', "Valido": isCpfValid(cpf), "Mensagem": "CPF Invalido"},
+                 {"Erro": 'Rg', "Valido": True, "Mensagem": "Preencher RG"},
+                 {"Erro": 'Nome', "Valido": True, "Mensagem": "Preencher Nome"},
+                 {"Erro": 'Turno', "Valido": True, "Mensagem": "Preencher Nome"},
+                 {"Erro": 'Email', "Valido": True, "Mensagem": "Preencher Nome"},
+                 {"Erro": 'Telefone', "Valido": True, "Mensagem": "Preencher Nome"},
+                 {"Erro": 'Semestre', "Valido": True, "Mensagem": "Preencher Nome"},
+                 {"Erro": 'Nascimento', "Valido": True, "Mensagem": "Preencher Nome"},
+                 {"Erro": 'Genero', "Valido": True, "Mensagem": "Preencher Nome"},
+                 {"Erro": 'Raca', "Valido": True, "Mensagem": "Preencher Nome"},
+                 {"Erro": 'Situacao', "Valido": True, "Mensagem": "Preencher Nome"}]
+
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+        if len(list(ExisteErros))>0:
+            print("existe erros")
+        else:
+            sedeObj = Sede.objects.get(id_sede=sede)
+            faculdadeObj = Faculdade.objects.get(id_faculdade=faculdade)
+            estagioObj = Estagio.objects.get(id_estagio=estagio)
+            supervisorObj = Supervisor.objects.get(id_supervisor = supervisor)
+            estagiario = Estagiario.objects.create(cpf_estagiario = cpf,
+                nome_estagiario = nome_estagiario, rg_estagiario = rg,
+                turno_estagiario = turno, email_estagiario = email,
+                semestre_estagiario = semestre, nis_pis_estagiario = nis,
+                telefone_estagiario = telefone, nome_responsavel_estagiario = responsavel,
+                data_nascimento_estagiario = nascimento,
+                genero_estagiario = genero, raca_estagiario = raca,
+                bairro_estagiario = bairro, numero_estagiario = numero,
+                complemento_estagiario = complemento, matricula_estagiario = Matricula,
+                situacao_estagiario = situaçao, supervisor_estagiario = supervisorObj,
+                sede_estagiario = sedeObj, faculdade_estagiario = faculdadeObj,
+                estagio_estagiario = estagioObj)
+            
+            estagiario.save()
         return redirect("/")
     else:
         return redirect("sistemaSec/templates/home/PAES_criar_estagiario.html")
@@ -148,3 +168,68 @@ def atualizar_estagiario_partiu_estagio(request):
     else:
         return redirect("home/PAES_criar_estagiario.html")
 
+
+def isCpfValid(cpf):
+     # Check if type is str
+    if not isinstance(cpf,str):
+        return False
+
+    # Remove some unwanted characters
+    cpf = re.sub("[^0-9]",'',cpf)
+    
+    # Verify if CPF number is equal
+    if cpf=='00000000000' or cpf=='11111111111' or cpf=='22222222222' or cpf=='33333333333' or cpf=='44444444444' or cpf=='55555555555' or cpf=='66666666666' or cpf=='77777777777' or cpf=='88888888888' or cpf=='99999999999':
+        return False
+
+    # Checks if string has 11 characters
+    if len(cpf) != 11:
+        return False
+
+    sum = 0
+    weight = 10
+
+    """ Calculating the first cpf check digit. """
+    for n in range(9):
+        sum = sum + int(cpf[n]) * weight
+
+        # Decrement weight
+        weight = weight - 1
+
+    verifyingDigit = 11 -  sum % 11
+
+    if verifyingDigit > 9 :
+        firstVerifyingDigit = 0
+    else:
+        firstVerifyingDigit = verifyingDigit
+
+    """ Calculating the second check digit of cpf. """
+    sum = 0
+    weight = 11
+    for n in range(10):
+        sum = sum + int(cpf[n]) * weight
+
+        # Decrement weight
+        weight = weight - 1
+
+    verifyingDigit = 11 -  sum % 11
+
+    if verifyingDigit > 9 :
+        secondVerifyingDigit = 0
+    else:
+        secondVerifyingDigit = verifyingDigit
+
+    if cpf[-2:] == "%s%s" % (firstVerifyingDigit,secondVerifyingDigit):
+        return True
+    return False
+
+def isEmpty(campo):
+    if len(campo) == 0:
+        return False
+    else:
+        return True
+
+def isChoiceEmpty(campo):
+    if campo == 0:
+        return False
+    else:
+        return True

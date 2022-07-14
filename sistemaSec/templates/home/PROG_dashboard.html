@@ -40,6 +40,7 @@
                                     <div>
                                         <a href="{% url 'criar_programa' %}" type="button" class="btn btn-success" style="margin-left: 85%;">+ Criar Programa</a>
                                     </div>
+                                    
                                     <form action="{% url 'consultar_programa' %}" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form-group">

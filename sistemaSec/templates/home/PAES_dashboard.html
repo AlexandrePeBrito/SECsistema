@@ -40,6 +40,7 @@
                                     <div>
                                         <a href="{% url 'criar_estagiario_partiu_estagio' %}" type="button" class="btn btn-success" style="margin-left: 85%;">+ Criar Estagiario</a>
                                     </div>
+                                    
                                     <form action="{% url 'consultar_estagiario_partiu_estagio' %}" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form-group">
@@ -70,7 +71,7 @@
                                         <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-left: 45%;">Consultar</button>
                                     </form>
 
-                                    {% if estagiarios %}
+                                    {% if estagiario %}
                                     <div class="card-block table-border-style">
                                         <div class="table-responsive">
                                             <table class="table">
