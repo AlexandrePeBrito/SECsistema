@@ -71,7 +71,7 @@
                                         <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-left: 45%;">Consultar</button>
                                     </form>
 
-                                    {% if estagiarios %}
+                                    {% if estagiario %}
                                     <div class="card-block table-border-style">
                                         <div class="table-responsive">
                                             <table class="table">
@@ -98,7 +98,7 @@
                                                         <td>{{ estagiario.supervisor_estagiario }}</td>
                                                         <td>{{ estagiario.sede_estagiario }}</td>
                                                         <td>{{ estagiario.faculdade_estagiario }}</td>
-                                                        
+                                                        <td><a href="{% url 'editar_estagiario_partiu_estagio' estagiario.cpf_estagiario %}" type="button" class="btn btn-success" style="margin-top: 10px; margin-left: 45%;">Editar</a></td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>
