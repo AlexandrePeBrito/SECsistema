@@ -78,7 +78,10 @@ def criar_estagiario_partiu_estagio(request):
                 estagio_estagiario = estagioObj)
             
             estagiario.save()
-        return redirect("/")
+            msg = {
+                'mensagem':'Cadastro tudo ok!'
+            }
+            return render(request,"home/PAES_buscar_estagiario.html",msg)
     else:
         return redirect("sistemaSec/templates/home/PAES_criar_estagiario.html")
 

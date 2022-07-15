@@ -36,6 +36,12 @@
                                 <div class="card-header">
                                     <h5>Cadastro</h5>
                                 </div>
+                                {% if mensagem %}
+                                    <div class="alert alert-success" role="alert">
+                                        <p>Success</p>
+                                        <p>{{ mensagem }}</p>
+                                    </div>
+                                {% endif %}
                                 <div class="col-md-6">
                                     <form action="{% url 'criar_estagiario_partiu_estagio' %}" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
