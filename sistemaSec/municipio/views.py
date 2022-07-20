@@ -10,7 +10,7 @@ def criar_municipio(request):
         nome_municipio = request.POST['nome_municipio']
         id_nte_municipio = request.POST['id_nte_municipio']
         
-        erros =[{"Erro": 'Nome do Municipio', "Valido": isEmpty(nome_municipio), "Supervisor": "Nome Invalido"},
+        erros =[{"Erro": 'Nome do Municipio', "Valido": isEmpty(nome_municipio), "Mensagem": "Nome Invalido"},
                 {"Erro": 'Nte do Municipio', "Valido": isEmpty(id_nte_municipio), "Mensagem": "NTE Invalido"}]
         
         err = filter(lambda x: x['Valido'] == False, erros)
@@ -59,7 +59,7 @@ def atualizar_municipio(request):
         munp.nome_municipio = request.POST['nome_municipio']
         nte = request.POST['id_nte_municipio']
 
-        erros =[{"Erro": 'Nome do Municipio', "Valido": isEmpty(munp.nome_municipio), "Supervisor": "Nome Invalido"},
+        erros =[{"Erro": 'Nome do Municipio', "Valido": isEmpty(munp.nome_municipio), "Mensagem": "Nome Invalido"},
                 {"Erro": 'Nte do Municipio', "Valido": isEmpty(nte), "Mensagem": "NTE Invalido"}]
         
         err = filter(lambda x: x['Valido'] == False, erros)

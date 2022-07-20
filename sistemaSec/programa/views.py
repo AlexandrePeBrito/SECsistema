@@ -11,7 +11,7 @@ def criar_programa(request):
     if request.method == "POST":
         nome_programa = request.POST['nome_programa']
         
-        erros =[{"Erro": 'Nome do Programa', "Valido": isEmpty(nome_programa), "Supervisor": "Nome Invalido"}]
+        erros =[{"Erro": 'Nome do Programa', "Valido": isEmpty(nome_programa), "Mensagem": "Nome Invalido"}]
         
         err = filter(lambda x: x['Valido'] == False, erros)
         ExisteErros = map(lambda x: x['Erro'], err)
@@ -53,7 +53,7 @@ def atualizar_programa(request):
         prog = Programa.objects.get(pk=id_programa)
         prog.nome_programa = request.POST['nome_programa']
 
-        erros =[{"Erro": 'Nome do Programa', "Valido": isEmpty(prog.nome_programa), "Supervisor": "Nome Invalido"}]
+        erros =[{"Erro": 'Nome do Programa', "Valido": isEmpty(prog.nome_programa), "Mensagem": "Nome Invalido"}]
         
         err = filter(lambda x: x['Valido'] == False, erros)
         ExisteErros = map(lambda x: x['Erro'], err)

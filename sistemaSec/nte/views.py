@@ -13,7 +13,7 @@ def criar_nte(request):
         email = request.POST['email']
         telefone = request.POST['telefone']
 
-        erros =[{"Erro": 'Supervisor do NTE', "Valido": isEmpty(nome_direitor_NTE), "Supervisor": "Nome Invalido"},
+        erros =[{"Erro": 'Supervisor do NTE', "Valido": isEmpty(nome_direitor_NTE), "Mensagem": "Nome Invalido"},
                 {"Erro": 'Telefone do NTE', "Valido": isEmpty(telefone), "Mensagem": "Telefone Invalido"},
                 {"Erro": 'Email do NTE', "Valido": isEmpty(email), "Mensagem": "Email Invalido"}]
         
@@ -61,7 +61,7 @@ def atualizar_nte(request):
         nt.telefone_NTE = request.POST['telefone']
 
         
-        erros =[{"Erro": 'Supervisor do NTE', "Valido": isEmpty(nt.nome_direitor_NTE), "Supervisor": "Nome Invalido"},
+        erros =[{"Erro": 'Supervisor do NTE', "Valido": isEmpty(nt.nome_direitor_NTE), "Mensagem": "Nome Invalido"},
                 {"Erro": 'Telefone do NTE', "Valido": isEmpty(nt.telefone_NTE), "Mensagem": "Telefone Invalido"},
                 {"Erro": 'Email do NTE', "Valido": isEmpty(nt.email_NTE), "Mensagem": "Email Invalido"}]
         

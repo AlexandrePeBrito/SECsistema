@@ -11,7 +11,7 @@ def criar_curso(request):
     if request.method == "POST":
         nome_curso = request.POST['nome_curso']
         
-        erros =[{"Erro": 'Nome do Curso', "Valido": isEmpty(nome_curso), "Supervisor": "Nome Invalido"}]
+        erros =[{"Erro": 'Nome do Curso', "Valido": isEmpty(nome_curso), "Mensagem": "Nome Invalido"}]
         
         err = filter(lambda x: x['Valido'] == False, erros)
         ExisteErros = map(lambda x: x['Erro'], err)
@@ -53,7 +53,7 @@ def atualizar_curso(request):
         cs = Curso.objects.get(pk=id_curso)
         cs.nome_curso = request.POST['nome_curso']
 
-        erros =[{"Erro": 'Nome do Curso', "Valido": isEmpty(cs.nome_curso), "Supervisor": "Nome Invalido"}]
+        erros =[{"Erro": 'Nome do Curso', "Valido": isEmpty(cs.nome_curso), "Mensagem": "Nome Invalido"}]
         
         err = filter(lambda x: x['Valido'] == False, erros)
         ExisteErros = map(lambda x: x['Erro'], err)
