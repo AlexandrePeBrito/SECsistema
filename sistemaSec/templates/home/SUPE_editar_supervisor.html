@@ -15,12 +15,12 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">Estagiários</h5>
+                                <h5 class="m-b-10">Supervisor</h5>
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="{% url 'dashboard_partiu_estagio' %}">DashBoard</a></li>
-                                <li class="breadcrumb-item"><a href="{% url 'editar_supervisor' supervisor.id_supervisor %}">Editar Estagiário</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'dashboard_supervisor' %}">DashBoard</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'editar_supervisor' supervisor.id_supervisor %}">Editar Supervisor</a></li>
                             </ul>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Hello card</h5>
+                                    <h5>Atualizar Supervisor</h5>
                                 </div>
                                 <div class="col-md-6">
                                     <form action="{% url 'atualizar_supervisor' %}" method="POST" enctype="multipart/form-data">
@@ -50,7 +50,7 @@
                                             <input type="text" class="form-control" name="email" placeholder="email" value="{{supervisor.email_supervisor}}">
                                             
                                             <label>telefone</label>
-                                            <input type="text" class="form-control" name="telefone" placeholder="telefone" value="{{supervisor.telefone_supervisor}}">
+                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="telefone" value="{{supervisor.telefone_supervisor}}">
                                             
                                             {% for sd in sede %}
                                             <label>Sede</label>
@@ -73,6 +73,6 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
-
-
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+{% endblock javascripts %}

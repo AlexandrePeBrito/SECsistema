@@ -53,10 +53,11 @@ def pages(request):
         return HttpResponse(html_template.render(context, request))
 
 @login_required(login_url="/login/")
-def dashboard_partiu_estagio(request):
+def dashboard_partiu_estagio(request, mensagem):
     estagiario = Estagiario.objects.all()
     dados ={
-        'estagiarios': estagiario
+        'estagiarios': estagiario,
+        'mesagem': mensagem
     }
     return render(request, 'home/PAES_dashboard.html',dados)
 

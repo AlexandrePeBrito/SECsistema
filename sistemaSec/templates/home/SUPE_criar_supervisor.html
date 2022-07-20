@@ -47,7 +47,7 @@
                                             <input type="text" class="form-control" name="email" placeholder="email">
                                             
                                             <label>telefone</label>
-                                            <input type="text" class="form-control" name="telefone" placeholder="telefone">
+                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="telefone">
 
                                             <label>Sede</label>
                                             <input type="text" class="form-control" name="sede_supervisor" placeholder="Sede">
@@ -69,6 +69,8 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+{% endblock javascripts %}
 
 

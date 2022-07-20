@@ -12,15 +12,32 @@ def criar_supervisor(request):
         nome_supervisor = request.POST['nome_supervisor']
         email = request.POST['email']
         telefone = request.POST['telefone']
-        
         sede_supervisor = request.POST['sede_supervisor']
-        sede = Sede.objects.get(id_sede = sede_supervisor)
-        supervisor = Supervisor.objects.create(nome_supervisor = nome_supervisor,
-            email_supervisor = email, telefone_supervisor = telefone)
+
+        erros =[{"Erro": 'Nome', "Valido": isEmpty(nome_supervisor), "Mensagem": "Nome Invalido"},
+                {"Erro": 'Email', "Valido": isEmpty(email), "Mensagem": "Email Invalido"},
+                {"Erro": 'Telefone', "Valido": isEmpty(telefone), "Mensagem": "Telefone Invalido"},
+                {"Erro": 'Supervisor', "Valido": isEmpty(sede_supervisor), "Mensagem": "Sede Invalida"}]
         
-        supervisor.sede_supervisor.add(sede)
-        supervisor.save()
-        return redirect("/")
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+
+            return render(request,"home/SUPE_criar_supervisor.html")
+
+        else:
+            sede = Sede.objects.get(id_sede = sede_supervisor)
+            supervisor = Supervisor.objects.create(nome_supervisor = nome_supervisor,
+                email_supervisor = email, telefone_supervisor = telefone)
+            
+            supervisor.sede_supervisor.add(sede)
+            supervisor.save()
+
+            msg = 'Supervisor Cadastrado com Sucesso!'
+            return render(request, 'home/SUPE_dashboard.html',cadastrado_supervisor(msg))
+
     else:
         return redirect("sistemaSec/templates/home/SUPE_criar_supervisor.html")
 
@@ -55,16 +72,42 @@ def atualizar_supervisor(request):
         sup.nome_supervisor = request.POST['nome_supervisor']
         sup.email_supervisor = request.POST['email']
         sup.telefone_supervisor = request.POST['telefone']
-
         sede_supervisor = request.POST['sede_supervisor']
-        sede = Sede.objects.get(id_sede = sede_supervisor)
-        sup.sede_supervisor.add(sede)
-        sup.save()
 
-        supervisores = Supervisor.objects.all()
-        dados = {"supervisores":supervisores}
-        return render(request,"home/SUPE_dashboard.html",dados)
+        erros =[{"Erro": 'Nome', "Valido": isEmpty(sup.nome_supervisor), "Mensagem": "Nome Invalido"},
+                {"Erro": 'Email', "Valido": isEmpty(sup.email_supervisor), "Mensagem": "Email Invalido"},
+                {"Erro": 'Telefone', "Valido": isEmpty(sup.telefone_supervisor), "Mensagem": "Telefone Invalido"},
+                {"Erro": 'Supervisor', "Valido": isEmpty(sede_supervisor), "Mensagem": "Sede Invalida"}]
+        
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            sede = Sede.objects.get(id_sede = sede_supervisor)
+            sup.sede_supervisor.add(sede)
+            sup.save()
+
+            msg = 'Supervisor Alterado com Sucesso!'
+        return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(msg))
     else:
         return redirect("home/SUPE_criar_supervisor.html")
+
+
+def cadastrado_supervisor(msg):
+    supervisor = Supervisor.objects.all()
+    dados ={
+        'supervisores': supervisor,
+        'mensagem':msg
+    }
+    return dados
+
+
+def isEmpty(campo):
+    if len(campo) == 0:
+        return False
+    else:
+        return True
 
 
