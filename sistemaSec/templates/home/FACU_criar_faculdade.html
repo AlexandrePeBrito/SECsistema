@@ -34,7 +34,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Hello card</h5>
+                                    <h5>Criar Faculdade</h5>
                                 </div>
                                 <div class="col-md-6">
                                     <form action="{% url 'criar_faculdade' %}" method="POST" enctype="multipart/form-data">
@@ -44,7 +44,7 @@
                                             <input type="text" class="form-control" name="nome_faculdade" placeholder="Nome da Faculdade">
                                             
                                             <label>CNPJ</label>
-                                            <input type="text" class="form-control" name="cnpj_faculdade" placeholder="cnpj da Faculdade">
+                                            <input type="text" class="form-control mask-cnpj" name="cnpj_faculdade" placeholder="cnpj da Faculdade">
                                             
                                             <label>Nome do Direitor</label>
                                             <input type="text" class="form-control" name="direitor_faculdade" placeholder="Nome do Direitor">
@@ -53,7 +53,7 @@
                                             <input type="text" class="form-control" name="campus" placeholder="Campus">
 
                                             <label>telefone</label>
-                                            <input type="text" class="form-control" name="telefone" placeholder="Telefone">
+                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="Telefone">
                                             
                                         </div>
                                         <div  class="form-group"></div>
@@ -72,6 +72,9 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+{% endblock javascripts %}
+
 
 

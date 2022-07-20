@@ -13,13 +13,26 @@ def criar_faculdade(request):
         direitor_faculdade = request.POST['direitor_faculdade']
         campus = request.POST['campus']
         telefone = request.POST['telefone']
+
+        erros =[{"Erro": 'Nome da Faculdade', "Valido": isEmpty(nome_faculdade), "Mensagem": "Carga Horaria Invalida"},
+                {"Erro": 'Cnpj da Faculdade', "Valido": isEmpty(cnpj_faculdade), "Mensagem": "Area Invalida"},
+                {"Erro": 'Direitor da Faculdade', "Valido": isEmpty(direitor_faculdade), "Mensagem": "Edital Invalido"},
+                {"Erro": 'Campus da Faculdade', "Valido": isEmpty(campus), "Mensagem": "Curso Invalido"},
+                {"Erro": 'Telefone da Faculdade', "Valido": isEmpty(telefone), "Mensagem": "Curso Invalido"}]
         
-        faculdade = Faculdade.objects.create(nome_faculdade = nome_faculdade,
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            faculdade = Faculdade.objects.create(nome_faculdade = nome_faculdade,
             cnpj_faculdade = cnpj_faculdade, nome_direitor_faculdade = direitor_faculdade,
             telefone_faculdade = telefone, campus_faculdade = campus)
         
-        faculdade.save()
-        return redirect("/")
+            faculdade.save()
+            msg = 'Estagio Cadastrado com Sucesso!'
+        return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(msg))
     else:
         return redirect("sistemaSec/templates/home/FACU_criar_faculdade.html")
 
@@ -53,12 +66,37 @@ def atualizar_faculdade(request):
         fac.nome_direitor_faculdade = request.POST['nome_direitor_faculdade']
         fac.telefone_faculdade = request.POST['telefone_faculdade']
         fac.campus_faculdade = request.POST['campus_faculdade']
-        fac.save()
 
-        faculdades = Faculdade.objects.all()
-        dados = {"faculdades":faculdades}
-        return render(request,"home/FACU_dashboard.html",dados)
+        erros =[{"Erro": 'Nome da Faculdade', "Valido": isEmpty(fac.nome_faculdade), "Mensagem": "Nome Invalido"},
+                {"Erro": 'Cnpj da Faculdade', "Valido": isEmpty(fac.cnpj_faculdade), "Mensagem": "CNPJ Invalido"},
+                {"Erro": 'Direitor da Faculdade', "Valido": isEmpty(fac.nome_direitor_faculdade), "Mensagem": "Direitor Invalido"},
+                {"Erro": 'Campus da Faculdade', "Valido": isEmpty(fac.campus_faculdade), "Mensagem": "Campus Invalido"},
+                {"Erro": 'Telefone da Faculdade', "Valido": isEmpty( fac.telefone_faculdade), "Mensagem": "Telefone Invalido"}]
+        
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            fac.save()
+            msg = 'Estagio Alterado com Sucesso!'
+        return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(msg))
     else:
         return redirect("home/FACU_criar_faculdade.html")
 
+
+def cadastrado_faculdade(msg):
+    faculdades = Faculdade.objects.all()
+    dados ={
+        'faculdades': faculdades,
+        'mensagem':msg
+    }
+    return dados
+
+def isEmpty(campo):
+    if len(campo) == 0:
+        return False
+    else:
+        return True
 

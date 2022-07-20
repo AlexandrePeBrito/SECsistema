@@ -34,7 +34,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Hello card</h5>
+                                    <h5>Alterar Faculdade</h5>
                                 </div>
                                 <div class="col-md-6">
                                     <form action="{% url 'atualizar_faculdade' %}" method="POST" enctype="multipart/form-data">
@@ -47,7 +47,7 @@
                                             <input type="text" class="form-control" name="nome_faculdade" placeholder="Nome da Faculdade" value="{{faculdade.nome_faculdade}}">
 
                                             <label>CNPJ</label>
-                                            <input type="text" class="form-control" name="cnpj_faculdade" placeholder="cnpj da Faculdade" value="{{faculdade.cnpj_faculdade}}">
+                                            <input type="text" class="form-control mask-cnpj" name="cnpj_faculdade" placeholder="cnpj da Faculdade" value="{{faculdade.cnpj_faculdade}}">
                                             
                                             <label>Nome do Direitor</label>
                                             <input type="text" class="form-control" name="nome_direitor_faculdade" placeholder="Nome do Direitor" value="{{faculdade.nome_direitor_faculdade}}">
@@ -56,7 +56,7 @@
                                             <input type="text" class="form-control" name="campus_faculdade" placeholder="Campus" value="{{faculdade.campus_faculdade}}">
 
                                             <label>telefone</label>
-                                            <input type="text" class="form-control" name="telefone_faculdade" placeholder="Telefone" value="{{faculdade.telefone_faculdade}}">
+                                            <input type="text" class="form-control mask-telefone" name="telefone_faculdade" placeholder="Telefone" value="{{faculdade.telefone_faculdade}}">
                                             
                                         </div>
                                         <div  class="form-group"></div>
@@ -75,6 +75,7 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
-
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+{% endblock javascripts %}
 
