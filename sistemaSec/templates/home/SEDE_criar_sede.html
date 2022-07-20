@@ -34,7 +34,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Hello card</h5>
+                                    <h5>Criar Sede</h5>
                                 </div>
                                 <div class="col-md-6">
                                     <form action="{% url 'criar_sede' %}" method="POST" enctype="multipart/form-data">
@@ -44,10 +44,10 @@
                                             <input type="text" class="form-control" name="nome_sede" placeholder="Nome da Sede">
 
                                             <label>Codigo do Inep</label>
-                                            <input type="text" class="form-control" name="codigo_inep_sede" placeholder="Codigo do Inep">
+                                            <input type="text" class="form-control mask-matricula" name="codigo_inep_sede" placeholder="Codigo do Inep">
 
                                             <label>Telefone</label>
-                                            <input type="text" class="form-control" name="telefone_sede" placeholder="Telefone">
+                                            <input type="text" class="form-control mask-telefone" name="telefone_sede" placeholder="Telefone">
 
                                             <label>Nome do Responsavel</label>
                                             <input type="text" class="form-control" name="nome_responsavel_sede" placeholder="Nome do Responsavel">
@@ -56,7 +56,7 @@
                                             <input type="text" class="form-control" name="bairro_sede" placeholder="Bairro">
 
                                             <label>Email</label>
-                                            <input type="text" class="form-control" name="email_sede" placeholder="Email">
+                                            <input type="email" class="form-control" name="email_sede" placeholder="Email">
 
                                             <label>Municipio</label>
                                             <input type="text" class="form-control" name="id_municipio_sede" placeholder="Municipio">
@@ -80,6 +80,6 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
-
-
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+{% endblock javascripts %}

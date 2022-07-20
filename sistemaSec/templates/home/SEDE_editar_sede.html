@@ -47,10 +47,10 @@
                                             <input type="text" class="form-control" name="nome_sede" placeholder="Nome da Sede" value="{{sede.nome_sede}}">
 
                                             <label>Codigo do Inep</label>
-                                            <input type="text" class="form-control" name="codigo_inep_sede" placeholder="Codigo do Inep" value="{{sede.codigo_inep_sede}}">
+                                            <input type="text" class="form-control mask-matricula" name="codigo_inep_sede" placeholder="Codigo do Inep" value="{{sede.codigo_inep_sede}}">
 
                                             <label>Telefone</label>
-                                            <input type="text" class="form-control" name="telefone_sede" placeholder="Telefone" value="{{sede.telefone_sede}}">
+                                            <input type="text" class="form-control mask-telefone" name="telefone_sede" placeholder="Telefone" value="{{sede.telefone_sede}}">
 
                                             <label>Nome do Responsavel</label>
                                             <input type="text" class="form-control" name="nome_responsavel_sede" placeholder="Nome do Responsavel" value="{{sede.nome_responsavel_sede}}">
@@ -59,7 +59,7 @@
                                             <input type="text" class="form-control" name="bairro_sede" placeholder="Bairro" value="{{sede.bairro_sede}}">
 
                                             <label>Email</label>
-                                            <input type="text" class="form-control" name="email_sede" placeholder="Email" value="{{sede.email_sede}}">
+                                            <input type="email" class="form-control" name="email_sede" placeholder="Email" value="{{sede.email_sede}}">
 
                                             <label>Municipio</label>
                                             <input type="text" class="form-control" name="id_municipio_sede" placeholder="Municipio" value="{{sede.id_municipio_sede}}">
@@ -83,6 +83,8 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+{% endblock javascripts %}
 
 

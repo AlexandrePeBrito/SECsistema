@@ -74,10 +74,10 @@ def atualizar_supervisor(request):
         sup.telefone_supervisor = request.POST['telefone']
         sede_supervisor = request.POST['sede_supervisor']
 
-        erros =[{"Erro": 'Nome', "Valido": isEmpty(sup.nome_supervisor), "Mensagem": "Nome Invalido"},
-                {"Erro": 'Email', "Valido": isEmpty(sup.email_supervisor), "Mensagem": "Email Invalido"},
-                {"Erro": 'Telefone', "Valido": isEmpty(sup.telefone_supervisor), "Mensagem": "Telefone Invalido"},
-                {"Erro": 'Supervisor', "Valido": isEmpty(sede_supervisor), "Mensagem": "Sede Invalida"}]
+        erros =[{"Erro": 'Nome do Supervisor', "Valido": isEmpty(sup.nome_supervisor), "Mensagem": "Nome Invalido"},
+                {"Erro": 'Email do Supervisor', "Valido": isEmpty(sup.email_supervisor), "Mensagem": "Email Invalido"},
+                {"Erro": 'Telefone do Supervisor', "Valido": isEmpty(sup.telefone_supervisor), "Mensagem": "Telefone Invalido"},
+                {"Erro": 'Sede do Supervisor ', "Valido": isEmpty(sede_supervisor), "Mensagem": "Sede Invalida"}]
         
         err = filter(lambda x: x['Valido'] == False, erros)
         ExisteErros = map(lambda x: x['Erro'], err)

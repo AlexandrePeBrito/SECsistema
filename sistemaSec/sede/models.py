@@ -6,7 +6,7 @@ class Sede(models.Model):
     id_sede = models.AutoField(primary_key=True)
     nome_sede = models.CharField(max_length=200)
     codigo_inep_sede = models.CharField(max_length=8)
-    telefone_sede = models.CharField(max_length=12)
+    telefone_sede = models.CharField(max_length=15)
     nome_responsavel_sede = models.CharField(max_length=200)
     bairro_sede = models.CharField(max_length=50)
     email_sede = models.CharField(max_length=200)

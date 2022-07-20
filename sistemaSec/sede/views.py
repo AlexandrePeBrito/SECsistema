@@ -20,17 +20,32 @@ def criar_sede(request):
         id_nte_sede = request.POST['id_nte_sede']
         id_municipio_sede = request.POST['id_municipio_sede']
         
-        nte = NTE.objects.get(id_NTE=id_nte_sede)
-        municipio = Municipio.objects.get(id_municipio=id_municipio_sede)
-
-        sede = Sede.objects.create(nome_sede = nome_sede,
-        codigo_inep_sede = codigo_inep_sede, telefone_sede = telefone_sede,
-        nome_responsavel_sede = nome_responsavel_sede, bairro_sede = bairro_sede,
-        email_sede = email_sede, id_nte_sede = nte,
-        id_municipio_sede = municipio)
+        erros =[{"Erro": 'Nome da Sede', "Valido": isEmpty(nome_sede), "Mensagem": "Nome Invalido"},
+                {"Erro": 'Telefone da Sede', "Valido": isEmpty(telefone_sede), "Mensagem": "Telefone Invalido"},
+                {"Erro": 'Supervisor da Sede', "Valido": isEmpty(nome_responsavel_sede), "Mensagem": "Supervisor Invalido"},
+                {"Erro": 'Bairro da Sede', "Valido": isEmpty(bairro_sede), "Mensagem": "Bairro Invalido"},
+                {"Erro": 'Email da Sede', "Valido": isEmpty(email_sede), "Mensagem": "Email Invalido"},
+                {"Erro": 'NTE da Sede', "Valido": isEmpty(id_nte_sede), "Mensagem": "NTE Invalido"},
+                {"Erro": 'Municipio da Sede', "Valido": isEmpty(id_municipio_sede), "Mensagem": "Municipio Invalido"}]
         
-        sede.save()
-        return redirect("/")
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            nte = NTE.objects.get(id_NTE=id_nte_sede)
+            municipio = Municipio.objects.get(id_municipio=id_municipio_sede)
+
+            sede = Sede.objects.create(nome_sede = nome_sede,
+            codigo_inep_sede = codigo_inep_sede, telefone_sede = telefone_sede,
+            nome_responsavel_sede = nome_responsavel_sede, bairro_sede = bairro_sede,
+            email_sede = email_sede, id_nte_sede = nte,
+            id_municipio_sede = municipio)
+            
+            sede.save()
+            msg = 'Sede Cadastrada com Sucesso!'
+        return render(request,"home/SEDE_dashboard.html",cadastrado_sede(msg))
     else:
         return redirect("sistemaSec/templates/home/SEDE_criar_sede.html")
 
@@ -69,18 +84,45 @@ def atualizar_sede(request):
         sed.nome_responsavel_sede = request.POST['nome_responsavel_sede']
         sed.bairro_sede = request.POST['bairro_sede']
         sed.email_sede = request.POST['email_sede']
-
         id_nte_sede = request.POST['id_nte_sede']
-        nte = NTE.objects.get(id_NTE=id_nte_sede)
         id_municipio_sede = request.POST['id_municipio_sede']
-        municipio = Municipio.objects.get(id_municipio = id_municipio_sede)
 
-        sed.id_nte_sede = nte
-        sed.id_municipio_sede = municipio
-        sed.save()
+        erros =[{"Erro": 'Nome da Sede', "Valido": isEmpty(sed.nome_sede), "Mensagem": "Nome Invalido"},
+                {"Erro": 'Telefone da Sede', "Valido": isEmpty(sed.telefone_sede), "Mensagem": "Telefone Invalido"},
+                {"Erro": 'Supervisor da Sede', "Valido": isEmpty(sed.nome_responsavel_sede), "Mensagem": "Supervisor Invalido"},
+                {"Erro": 'Bairro da Sede', "Valido": isEmpty(sed.bairro_sede), "Mensagem": "Bairro Invalido"},
+                {"Erro": 'Email da Sede', "Valido": isEmpty(sed.email_sede), "Mensagem": "Email Invalido"},
+                {"Erro": 'NTE da Sede', "Valido": isEmpty(id_nte_sede), "Mensagem": "NTE Invalido"},
+                {"Erro": 'Municipio da Sede', "Valido": isEmpty(id_municipio_sede), "Mensagem": "Municipio Invalido"}]
+        
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
 
-        sede = Sede.objects.all()
-        dados ={'sedes': sede}
-        return render(request, 'home/SEDE_dashboard.html',dados)
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            municipio = Municipio.objects.get(id_municipio = id_municipio_sede)
+            nte = NTE.objects.get(id_NTE=id_nte_sede)
+            sed.id_nte_sede = nte
+            sed.id_municipio_sede = municipio
+            sed.save()
+
+            msg = 'Sede Alterada com Sucesso!'
+        return render(request,"home/SEDE_dashboard.html",cadastrado_sede(msg))
     else:
         return redirect("home/SEDE_criar_sede.html")
+
+def cadastrado_sede(msg):
+    sede = Sede.objects.all()
+    dados ={
+        'sedes': sede,
+        'mensagem':msg
+    }
+    return dados
+
+def isEmpty(campo):
+    if len(campo) == 0:
+        return False
+    else:
+        return True
+
