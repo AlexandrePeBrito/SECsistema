@@ -13,13 +13,24 @@ def criar_edital(request):
         quantidade_vagas = request.POST['quantidade_vagas']
         prog = request.POST['programa']
         
-        programa = Programa.objects.get(id_programa=prog)
-        edital = Edital.objects.create(id_edital = id_edital,
-            quantidade_vagas_edital = quantidade_vagas,
-            id_programa_edital = programa)
+        erros =[{"Erro": 'Codigo do Edital', "Valido": isEmpty(id_edital), "Supervisor": "Codigo Invalido"},
+                {"Erro": 'Vagas do Edital', "Valido": isEmpty(quantidade_vagas), "Supervisor": "Quantidade de Vagas Invalido"},
+                {"Erro": 'Programa do Edital', "Valido": isEmpty(prog), "Supervisor": "Programa Invalido"}]
         
-        edital.save()
-        return redirect("/")
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            programa = Programa.objects.get(id_programa=prog)
+            edital = Edital.objects.create(id_edital = id_edital,
+                quantidade_vagas_edital = quantidade_vagas,
+                id_programa_edital = programa)
+            
+            edital.save()
+            msg = 'Edital Cadastrado com Sucesso!'
+        return render(request,"home/EDTL_dashboard.html",cadastrado_edital(msg))
     else:
         return redirect("sistemaSec/templates/home/EDTL_criar_edital.html")
 
@@ -51,14 +62,38 @@ def atualizar_edital(request):
         edt = Edital.objects.get(pk=cod_edital)
         edt.id_edital= cod_edital
         edt.quantidade_vagas_edital = request.POST['quantidade_vagas']
-       
         prog = request.POST['programa']
-        programa = Programa.objects.get(id_programa=prog)
-        edt.id_programa_edital = programa
-        edt.save()
 
-        editais = Edital.objects.all()
-        dados ={'editais': editais}
-        return render(request, 'home/EDTL_dashboard.html',dados)
+        erros =[{"Erro": 'Codigo do Edital', "Valido": isEmpty(edt.id_edital), "Supervisor": "Codigo Invalido"},
+                {"Erro": 'Vagas do Edital', "Valido": isEmpty(edt.quantidade_vagas_edital), "Supervisor": "Quantidade de Vagas Invalido"},
+                {"Erro": 'Programa do Edital', "Valido": isEmpty(prog), "Supervisor": "Programa Invalido"}]
+        
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            programa = Programa.objects.get(id_programa=prog)
+            edt.id_programa_edital = programa
+            edt.save()
+
+            msg = 'Edital Alterado com Sucesso!'
+        return render(request,"home/EDTL_dashboard.html",cadastrado_edital(msg))
     else:
         return redirect("home/EDTL_criar_edital.html")
+
+
+def cadastrado_edital(msg):
+    editais = Edital.objects.all()
+    dados ={
+        'editais': editais,
+        'mensagem':msg
+    }
+    return dados
+
+def isEmpty(campo):
+    if len(campo) == 0:
+        return False
+    else:
+        return True
