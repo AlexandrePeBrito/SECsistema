@@ -29,6 +29,11 @@
             <div class="main-body">
                 <div class="page-wrapper">
                     <!-- [ Main Content ] start -->
+                    {% if mensagem %}
+                        <div class="alert alert-success" role="alert">
+                            <p>{{ mensagem }}</p>
+                        </div>
+                    {% endif %}
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
@@ -98,7 +103,7 @@
                                                         <td>{{ estagiario.supervisor_estagiario }}</td>
                                                         <td>{{ estagiario.sede_estagiario }}</td>
                                                         <td>{{ estagiario.faculdade_estagiario }}</td>
-                                                        
+                                                        <td><a href="{% url 'editar_estagiario_partiu_estagio' estagiario.cpf_estagiario %}" type="button" class="btn btn-success" style="margin-top: 10px; margin-left: 45%;">Editar</a></td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>

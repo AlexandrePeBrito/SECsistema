@@ -43,7 +43,7 @@ def criar_estagiario_partiu_estagio(request):
         estagio = request.POST['estagio']
 
         #validacao de error
-        erros = [{"Erro": 'CPF', "Valido": isCpfValid(cpf), "Mensagem": "CPF Invalido"},
+        erros = [{"Erro": 'CPF', "Valido": True, "Mensagem": "CPF Invalido"},
                  {"Erro": 'Rg', "Valido": True, "Mensagem": "Preencher RG"},
                  {"Erro": 'Nome', "Valido": True, "Mensagem": "Preencher Nome"},
                  {"Erro": 'Turno', "Valido": True, "Mensagem": "Preencher Nome"},
@@ -79,9 +79,9 @@ def criar_estagiario_partiu_estagio(request):
             
             estagiario.save()
             msg = {
-                'mensagem':'Cadastro tudo ok!'
+                'mensagem':'Estagiario Cadastrado com Sucesso'
             }
-            return render(request,"home/PAES_buscar_estagiario.html",msg)
+            return render(request,"home/PAES_dashboard.html")
     else:
         return redirect("sistemaSec/templates/home/PAES_criar_estagiario.html")
 
