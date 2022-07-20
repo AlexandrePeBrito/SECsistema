@@ -13,9 +13,9 @@ def criar_edital(request):
         quantidade_vagas = request.POST['quantidade_vagas']
         prog = request.POST['programa']
         
-        erros =[{"Erro": 'Codigo do Edital', "Valido": isEmpty(id_edital), "Supervisor": "Codigo Invalido"},
-                {"Erro": 'Vagas do Edital', "Valido": isEmpty(quantidade_vagas), "Supervisor": "Quantidade de Vagas Invalido"},
-                {"Erro": 'Programa do Edital', "Valido": isEmpty(prog), "Supervisor": "Programa Invalido"}]
+        erros =[{"Erro": 'Codigo do Edital', "Valido": isEmpty(id_edital), "Mensagem": "Codigo Invalido"},
+                {"Erro": 'Vagas do Edital', "Valido": isEmpty(quantidade_vagas), "Mensagem": "Quantidade de Vagas Invalido"},
+                {"Erro": 'Programa do Edital', "Valido": isEmpty(prog), "Mensagem": "Programa Invalido"}]
         
         err = filter(lambda x: x['Valido'] == False, erros)
         ExisteErros = map(lambda x: x['Erro'], err)
@@ -64,9 +64,9 @@ def atualizar_edital(request):
         edt.quantidade_vagas_edital = request.POST['quantidade_vagas']
         prog = request.POST['programa']
 
-        erros =[{"Erro": 'Codigo do Edital', "Valido": isEmpty(edt.id_edital), "Supervisor": "Codigo Invalido"},
-                {"Erro": 'Vagas do Edital', "Valido": isEmpty(edt.quantidade_vagas_edital), "Supervisor": "Quantidade de Vagas Invalido"},
-                {"Erro": 'Programa do Edital', "Valido": isEmpty(prog), "Supervisor": "Programa Invalido"}]
+        erros =[{"Erro": 'Codigo do Edital', "Valido": isEmpty(edt.id_edital), "Mensagem": "Codigo Invalido"},
+                {"Erro": 'Vagas do Edital', "Valido": isEmpty(edt.quantidade_vagas_edital), "Mensagem": "Quantidade de Vagas Invalido"},
+                {"Erro": 'Programa do Edital', "Valido": isEmpty(prog), "Mensagem": "Programa Invalido"}]
         
         err = filter(lambda x: x['Valido'] == False, erros)
         ExisteErros = map(lambda x: x['Erro'], err)

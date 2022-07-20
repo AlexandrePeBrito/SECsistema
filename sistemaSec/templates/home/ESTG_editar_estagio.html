@@ -34,7 +34,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Hello card</h5>
+                                    <h5>Atualizar Estagio</h5>
                                 </div>
                                 <div class="col-md-6">
                                     <form action="{% url 'atualizar_estagio' %}" method="POST" enctype="multipart/form-data">
@@ -44,7 +44,7 @@
                                             <input type="int" class="form-control" name="id_estagio" placeholder="ID" value="{{estagio.id_estagio}}">
                                             
                                             <label>Carga Horaria</label>
-                                            <input type="text" class="form-control" name="carga_horaria_estagio" placeholder="Carga Horaria" value="{{estagio.carga_horaria_estagio}}">
+                                            <input type="text" class="form-control mask-matricula" name="carga_horaria_estagio" placeholder="Carga Horaria" value="{{estagio.carga_horaria_estagio}}">
 
                                             <label>Area</label>
                                             <input type="text" class="form-control" name="area_estagio" placeholder="Area" value="{{estagio.area_estagio}}">
@@ -71,6 +71,9 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+{% endblock javascripts %}
+
 
 
