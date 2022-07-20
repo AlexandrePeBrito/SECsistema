@@ -34,7 +34,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Hello card</h5>
+                                    <h5>Criar NTE</h5>
                                 </div>
                                 <div class="col-md-6">
                                     <form action="{% url 'criar_nte' %}" method="POST" enctype="multipart/form-data">
@@ -44,10 +44,10 @@
                                             <input type="text" class="form-control" name="nome_direitor_NTE" placeholder="Nome do Direitor">
                                             
                                             <label>Email</label>
-                                            <input type="text" class="form-control" name="email" placeholder="email">
+                                            <input type="email" class="form-control" name="email" placeholder="email">
                                             
                                             <label>Telefone</label>
-                                            <input type="text" class="form-control" name="telefone" placeholder="telefone">
+                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="telefone">
                                             
                                         </div>
                                         <div  class="form-group"></div>
@@ -66,6 +66,8 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+{% endblock javascripts %}
 
 

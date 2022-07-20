@@ -12,12 +12,23 @@ def criar_nte(request):
         nome_direitor_NTE = request.POST['nome_direitor_NTE']
         email = request.POST['email']
         telefone = request.POST['telefone']
+
+        erros =[{"Erro": 'Supervisor do NTE', "Valido": isEmpty(nome_direitor_NTE), "Supervisor": "Nome Invalido"},
+                {"Erro": 'Telefone do NTE', "Valido": isEmpty(telefone), "Mensagem": "Telefone Invalido"},
+                {"Erro": 'Email do NTE', "Valido": isEmpty(email), "Mensagem": "Email Invalido"}]
         
-        nte = NTE.objects.create(nome_direitor_NTE = nome_direitor_NTE,
-            email_NTE = email, telefone_NTE = telefone)
-        
-        nte.save()
-        return redirect("/")
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            nte = NTE.objects.create(nome_direitor_NTE = nome_direitor_NTE,
+                email_NTE = email, telefone_NTE = telefone)
+            
+            nte.save()
+            msg = 'NTE Cadastrado com Sucesso!'
+        return render(request,"home/NTE_dashboard.html",cadastrado_nte(msg))
     else:
         return redirect("sistemaSec/templates/home/NTE_criar_nte.html")
 
@@ -48,10 +59,37 @@ def atualizar_nte(request):
         nt.nome_direitor_NTE = request.POST['nome_direitor']
         nt.email_NTE = request.POST['email']
         nt.telefone_NTE = request.POST['telefone']
-        nt.save()
 
-        nte = NTE.objects.all()
-        dados ={'NTEs': nte}
-        return render(request, 'home/NTE_dashboard.html',dados)
+        
+        erros =[{"Erro": 'Supervisor do NTE', "Valido": isEmpty(nt.nome_direitor_NTE), "Supervisor": "Nome Invalido"},
+                {"Erro": 'Telefone do NTE', "Valido": isEmpty(nt.telefone_NTE), "Mensagem": "Telefone Invalido"},
+                {"Erro": 'Email do NTE', "Valido": isEmpty(nt.email_NTE), "Mensagem": "Email Invalido"}]
+        
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            nt.save()
+    
+            msg = 'NTE Alterado com Sucesso!'
+        return render(request,"home/NTE_dashboard.html",cadastrado_nte(msg))
     else:
         return redirect("home/NTE_criar_nte.html")
+
+
+def cadastrado_nte(msg):
+    nte = NTE.objects.all()
+    dados ={
+        'NTEs': nte,
+        'mensagem':msg
+    }
+    return dados
+
+def isEmpty(campo):
+    if len(campo) == 0:
+        return False
+    else:
+        return True
+

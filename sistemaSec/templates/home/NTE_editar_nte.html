@@ -34,7 +34,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Hello card</h5>
+                                    <h5 class="m-b-10">Atualizar NTE</h5>
                                 </div>
                                 <div class="col-md-6">
                                     <form action="{% url 'atualizar_nte' %}" method="POST" enctype="multipart/form-data">
@@ -47,10 +47,10 @@
                                             <input type="text" class="form-control" name="nome_direitor" placeholder="Nome do Direitor" value="{{nte.nome_direitor_NTE}}">
 
                                             <label>Email</label>
-                                            <input type="text" class="form-control" name="email" placeholder="email" value="{{nte.email_NTE}}">
+                                            <input type="email" class="form-control" name="email" placeholder="email" value="{{nte.email_NTE}}">
                                             
                                             <label>telefone</label>
-                                            <input type="text" class="form-control" name="telefone" placeholder="telefone" value="{{nte.telefone_NTE}}">
+                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="telefone" value="{{nte.telefone_NTE}}">
                                             
                                         </div>
                                         <div  class="form-group"></div>
@@ -69,6 +69,8 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+{% endblock javascripts %}
 
 
