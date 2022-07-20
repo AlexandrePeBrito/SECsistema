@@ -10,12 +10,22 @@ def criar_municipio(request):
         nome_municipio = request.POST['nome_municipio']
         id_nte_municipio = request.POST['id_nte_municipio']
         
-        nte = NTE.objects.get(id_NTE=id_nte_municipio)
-        municipio = Municipio.objects.create(nome_municipio = nome_municipio,
-            id_nte_municipio = nte)
+        erros =[{"Erro": 'Nome do Municipio', "Valido": isEmpty(nome_municipio), "Supervisor": "Nome Invalido"},
+                {"Erro": 'Nte do Municipio', "Valido": isEmpty(id_nte_municipio), "Mensagem": "NTE Invalido"}]
         
-        municipio.save()
-        return redirect("/")
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            nte = NTE.objects.get(id_NTE=id_nte_municipio)
+            municipio = Municipio.objects.create(nome_municipio = nome_municipio,
+                id_nte_municipio = nte)
+            
+            municipio.save()
+            msg = 'Municipio Cadastrado com Sucesso!'
+        return render(request,"home/MUNI_dashboard.html",cadastrado_municipio(msg))
     else:
         return redirect("sistemaSec/templates/home/MUNI_criar_municipio.html")
 
@@ -47,14 +57,38 @@ def atualizar_municipio(request):
         munp = Municipio.objects.get(pk=cod_municipio)
         munp.id_municipio= cod_municipio
         munp.nome_municipio = request.POST['nome_municipio']
-       
         nte = request.POST['id_nte_municipio']
-        Nte = NTE.objects.get(id_NTE=nte)
-        munp.id_nte_municipio = Nte
-        munp.save()
 
-        municipios = Municipio.objects.all()
-        dados ={'municipios': municipios}
-        return render(request, 'home/MUNI_dashboard.html',dados)
+        erros =[{"Erro": 'Nome do Municipio', "Valido": isEmpty(munp.nome_municipio), "Supervisor": "Nome Invalido"},
+                {"Erro": 'Nte do Municipio', "Valido": isEmpty(nte), "Mensagem": "NTE Invalido"}]
+        
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            Nte = NTE.objects.get(id_NTE=nte)
+            munp.id_nte_municipio = Nte
+            munp.save()
+
+            msg = 'Municipio Cadastrado com Sucesso!'
+        return render(request,"home/MUNI_dashboard.html",cadastrado_municipio(msg))
+
     else:
         return redirect("home/MUNI_criar_municipio.html")
+
+
+def cadastrado_municipio(msg):
+    municipios = Municipio.objects.all()
+    dados ={
+        'municipios': municipios,
+        'mensagem':msg
+    }
+    return dados
+
+def isEmpty(campo):
+    if len(campo) == 0:
+        return False
+    else:
+        return True

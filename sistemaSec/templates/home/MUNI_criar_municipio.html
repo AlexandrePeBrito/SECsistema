@@ -34,7 +34,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Hello card</h5>
+                                    <h5>Criar Municipio</h5>
                                 </div>
                                 <div class="col-md-6">
                                     <form action="{% url 'criar_municipio' %}" method="POST" enctype="multipart/form-data">
@@ -44,7 +44,7 @@
                                             <input type="text" class="form-control" name="nome_municipio" placeholder="Nome do Municipio">
                                             
                                             <label>Codigo do NTE</label>
-                                            <input type="text" class="form-control" name="id_nte_municipio" placeholder="Codigo do NTE">
+                                            <input type="text" class="form-control mask-matricula" name="id_nte_municipio" placeholder="Codigo do NTE">
                                         </div>
                                         <div  class="form-group"></div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>
@@ -62,6 +62,9 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+{% endblock javascripts %}
+
 
 
