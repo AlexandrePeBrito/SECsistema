@@ -11,10 +11,19 @@ def criar_programa(request):
     if request.method == "POST":
         nome_programa = request.POST['nome_programa']
         
-        programa = Programa.objects.create(nome_programa = nome_programa)
+        erros =[{"Erro": 'Nome do Programa', "Valido": isEmpty(nome_programa), "Supervisor": "Nome Invalido"}]
         
-        programa.save()
-        return redirect("/")
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            programa = Programa.objects.create(nome_programa = nome_programa)
+            
+            programa.save()
+            msg = 'Programa Cadastrado com Sucesso!'
+        return render(request,"home/PROG_dashboard.html",cadastrado_programa(msg))
     else:
         return redirect("sistemaSec/templates/home/PROG_criar_programa.html")
 
@@ -43,10 +52,33 @@ def atualizar_programa(request):
         id_programa = request.POST['id_programa']
         prog = Programa.objects.get(pk=id_programa)
         prog.nome_programa = request.POST['nome_programa']
-        prog.save()
 
-        programa = Programa.objects.all()
-        dados ={'programas': programa}
-        return render(request, 'home/PROG_dashboard.html',dados)
+        erros =[{"Erro": 'Nome do Programa', "Valido": isEmpty(prog.nome_programa), "Supervisor": "Nome Invalido"}]
+        
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            prog.save()
+
+            msg = 'Programa Alterado com Sucesso!'
+        return render(request,"home/PROG_dashboard.html",cadastrado_programa(msg))
     else:
         return redirect("home/PROG_criar_programa.html")
+
+
+def cadastrado_programa(msg):
+    programa = Programa.objects.all()
+    dados ={
+        'programas': programa,
+        'mensagem':msg
+    }
+    return dados
+
+def isEmpty(campo):
+    if len(campo) == 0:
+        return False
+    else:
+        return True
