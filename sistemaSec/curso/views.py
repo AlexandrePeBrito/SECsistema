@@ -11,10 +11,19 @@ def criar_curso(request):
     if request.method == "POST":
         nome_curso = request.POST['nome_curso']
         
-        curso = Curso.objects.create(nome_curso = nome_curso)
+        erros =[{"Erro": 'Nome do Curso', "Valido": isEmpty(nome_curso), "Supervisor": "Nome Invalido"}]
         
-        curso.save()
-        return redirect("/")
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            curso = Curso.objects.create(nome_curso = nome_curso)
+        
+            curso.save()
+            msg = 'Curso Cadastrado com Sucesso!'
+        return render(request,"home/CUSO_dashboard.html",cadastrado_curso(msg))
     else:
         return redirect("sistemaSec/templates/home/CUSO_criar_curso.html")
 
@@ -43,10 +52,33 @@ def atualizar_curso(request):
         id_curso = request.POST['id_curso']
         cs = Curso.objects.get(pk=id_curso)
         cs.nome_curso = request.POST['nome_curso']
-        cs.save()
 
-        curso = Curso.objects.all()
-        dados ={'cursos': curso}
-        return render(request, 'home/CUSO_dashboard.html',dados)
+        erros =[{"Erro": 'Nome do Curso', "Valido": isEmpty(cs.nome_curso), "Supervisor": "Nome Invalido"}]
+        
+        err = filter(lambda x: x['Valido'] == False, erros)
+        ExisteErros = map(lambda x: x['Erro'], err)
+
+        if len(list(ExisteErros))>0:
+            print("Existe erros")
+        else:
+            cs.save()
+
+            msg = 'Curso Cadastrado com Sucesso!'
+        return render(request,"home/CUSO_dashboard.html",cadastrado_curso(msg))
     else:
         return redirect("home/CUSO_criar_curso.html")
+
+
+def cadastrado_curso(msg):
+    curso = Curso.objects.all()
+    dados ={
+        'cursos': curso,
+        'mensagem':msg
+    }
+    return dados
+
+def isEmpty(campo):
+    if len(campo) == 0:
+        return False
+    else:
+        return True
