@@ -41,19 +41,24 @@
                                         {% csrf_token %}
                                         <div class="form-group" >
                                             <label>ID</label>
-                                            <input type="int" class="form-control" name="id_estagio" placeholder="ID" value="{{estagio.id_estagio}}">
+                                            <input type="int" class="form-control" name="id_estagio" placeholder="ID" value="{{estagio.id_estagio}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>Carga Horaria</label>
-                                            <input type="text" class="form-control mask-matricula" name="carga_horaria_estagio" placeholder="Carga Horaria" value="{{estagio.carga_horaria_estagio}}">
+                                            <input type="text" class="form-control mask-matricula" name="carga_horaria_estagio" placeholder="Carga Horaria" value="{{estagio.carga_horaria_estagio}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>Area</label>
-                                            <input type="text" class="form-control" name="area_estagio" placeholder="Area" value="{{estagio.area_estagio}}">
+                                            <input type="text" class="form-control" name="area_estagio" placeholder="Area" value="{{estagio.area_estagio}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>Edital</label>
-                                            <input type="text" class="form-control" name="id_edital_estagio" placeholder="Edital" value="{{estagio.id_edital_estagio}}">
+                                            <input type="text" class="form-control" name="id_edital_estagio" placeholder="Edital" value="{{estagio.id_edital_estagio}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>Curso</label>
-                                            <input type="text" class="form-control" name="id_cursos_estagio" placeholder="Cuso" value="{{estagio.id_cursos_estagio}}">
+                                            <input type="text" class="form-control" name="id_cursos_estagio" placeholder="Curso" value="{{estagio.id_cursos_estagio}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                         </div>
                                         <div  class="form-group"></div>
                                         <button type="submit" class="btn btn-primary">Atualizar</button>

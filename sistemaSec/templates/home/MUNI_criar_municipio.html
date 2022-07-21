@@ -41,10 +41,12 @@
                                         {% csrf_token %}
                                         <div class="form-group" >
                                             <label>Nome do Municipio</label>
-                                            <input type="text" class="form-control" name="nome_municipio" placeholder="Nome do Municipio">
+                                            <input type="text" class="form-control" name="nome_municipio" placeholder="Nome do Municipio" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>Codigo do NTE</label>
-                                            <input type="text" class="form-control mask-matricula" name="id_nte_municipio" placeholder="Codigo do NTE">
+                                            <input type="text" class="form-control mask-matricula" name="id_nte_municipio" placeholder="Codigo do NTE" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                         </div>
                                         <div  class="form-group"></div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>

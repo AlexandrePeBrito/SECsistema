@@ -41,28 +41,35 @@
                                         {% csrf_token %}
                                         <div class="form-group" >
                                             <label>Nome da Sede</label>
-                                            <input type="text" class="form-control" name="nome_sede" placeholder="Nome da Sede">
+                                            <input type="text" class="form-control" name="nome_sede" placeholder="Nome da Sede" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>Codigo do Inep</label>
                                             <input type="text" class="form-control mask-matricula" name="codigo_inep_sede" placeholder="Codigo do Inep">
 
                                             <label>Telefone</label>
-                                            <input type="text" class="form-control mask-telefone" name="telefone_sede" placeholder="Telefone">
+                                            <input type="text" class="form-control mask-telefone" name="telefone_sede" placeholder="Telefone" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>Nome do Responsavel</label>
-                                            <input type="text" class="form-control" name="nome_responsavel_sede" placeholder="Nome do Responsavel">
+                                            <input type="text" class="form-control" name="nome_responsavel_sede" placeholder="Nome do Responsavel" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>Bairro</label>
-                                            <input type="text" class="form-control" name="bairro_sede" placeholder="Bairro">
+                                            <input type="text" class="form-control" name="bairro_sede" placeholder="Bairro" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>Email</label>
-                                            <input type="email" class="form-control" name="email_sede" placeholder="Email">
+                                            <input type="email" class="form-control" name="email_sede" placeholder="Email" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>Municipio</label>
-                                            <input type="text" class="form-control" name="id_municipio_sede" placeholder="Municipio">
+                                            <input type="text" class="form-control" name="id_municipio_sede" placeholder="Municipio" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>NTE</label>
-                                            <input type="text" class="form-control" name="id_nte_sede" placeholder="Codigo do NTE">
+                                            <input type="text" class="form-control" name="id_nte_sede" placeholder="Codigo do NTE" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                         </div>
                                         <div  class="form-group"></div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>

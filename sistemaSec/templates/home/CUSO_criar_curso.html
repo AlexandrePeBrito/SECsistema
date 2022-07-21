@@ -41,7 +41,8 @@
                                         {% csrf_token %}
                                         <div class="form-group" >
                                             <label>Nome do Curso</label>
-                                            <input type="text" class="form-control" name="nome_curso" placeholder="Nome do Curso">
+                                            <input type="text" class="form-control" name="nome_curso" placeholder="Nome do Curso" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                         </div>
                                         <div  class="form-group"></div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>

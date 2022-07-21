@@ -41,22 +41,28 @@
                                         {% csrf_token %}
                                         <div class="form-group" >
                                             <label>ID</label>
-                                            <input type="int" class="form-control" name="id_faculdade" placeholder="ID" value="{{faculdade.id_faculdade}}">
+                                            <input type="int" class="form-control" name="id_faculdade" placeholder="ID" value="{{faculdade.id_faculdade}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>Nome da Faculdade</label>
-                                            <input type="text" class="form-control" name="nome_faculdade" placeholder="Nome da Faculdade" value="{{faculdade.nome_faculdade}}">
+                                            <input type="text" class="form-control" name="nome_faculdade" placeholder="Nome da Faculdade" value="{{faculdade.nome_faculdade}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>CNPJ</label>
-                                            <input type="text" class="form-control mask-cnpj" name="cnpj_faculdade" placeholder="cnpj da Faculdade" value="{{faculdade.cnpj_faculdade}}">
+                                            <input type="text" class="form-control mask-cnpj" name="cnpj_faculdade" placeholder="cnpj da Faculdade" value="{{faculdade.cnpj_faculdade}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>Nome do Direitor</label>
-                                            <input type="text" class="form-control" name="nome_direitor_faculdade" placeholder="Nome do Direitor" value="{{faculdade.nome_direitor_faculdade}}">
+                                            <input type="text" class="form-control" name="nome_direitor_faculdade" placeholder="Nome do Direitor" value="{{faculdade.nome_direitor_faculdade}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>Campus</label>
-                                            <input type="text" class="form-control" name="campus_faculdade" placeholder="Campus" value="{{faculdade.campus_faculdade}}">
+                                            <input type="text" class="form-control" name="campus_faculdade" placeholder="Campus" value="{{faculdade.campus_faculdade}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>telefone</label>
-                                            <input type="text" class="form-control mask-telefone" name="telefone_faculdade" placeholder="Telefone" value="{{faculdade.telefone_faculdade}}">
+                                            <input type="text" class="form-control mask-telefone" name="telefone_faculdade" placeholder="Telefone" value="{{faculdade.telefone_faculdade}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                         </div>
                                         <div  class="form-group"></div>

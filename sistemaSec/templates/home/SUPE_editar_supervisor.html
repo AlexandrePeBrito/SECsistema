@@ -41,20 +41,25 @@
                                         {% csrf_token %}
                                         <div class="form-group" >
                                             <label>ID</label>
-                                            <input type="int" class="form-control" name="id_supervisor" placeholder="id_supervisor" value="{{supervisor.id_supervisor}}">
+                                            <input type="int" class="form-control" name="id_supervisor" placeholder="id_supervisor" value="{{supervisor.id_supervisor}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>Nome do Supervisor</label>
-                                            <input type="text" class="form-control" name="nome_supervisor" placeholder="Nome do Supervisor" value="{{supervisor.nome_supervisor}}">
+                                            <input type="text" class="form-control" name="nome_supervisor" placeholder="Nome do Supervisor" value="{{supervisor.nome_supervisor}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>Email</label>
-                                            <input type="email" class="form-control" name="email" placeholder="email" value="{{supervisor.email_supervisor}}">
+                                            <input type="email" class="form-control" name="email" placeholder="email" value="{{supervisor.email_supervisor}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>telefone</label>
-                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="telefone" value="{{supervisor.telefone_supervisor}}">
+                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="telefone" value="{{supervisor.telefone_supervisor}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             {% for sd in sede %}
                                             <label>Sede</label>
-                                            <input type="text" class="form-control" name="sede_supervisor" placeholder="Sede" value="{{sd}}">
+                                            <input type="text" class="form-control" name="sede_supervisor" placeholder="Sede" value="{{sd}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             {% endfor %}
                                         </div>
                                         <div  class="form-group"></div>

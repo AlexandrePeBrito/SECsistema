@@ -41,10 +41,12 @@
                                         {% csrf_token %}
                                         <div class="form-group" >
                                             <label>ID</label>
-                                            <input type="text" class="form-control" name="id_programa" placeholder="ID" value="{{programa.id_programa}}">
+                                            <input type="text" class="form-control" name="id_programa" placeholder="ID" value="{{programa.id_programa}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>Nome do Programa</label>
-                                            <input type="text" class="form-control" name="nome_programa" placeholder="Nome do Programa" value="{{programa.nome_programa}}">
+                                            <input type="text" class="form-control" name="nome_programa" placeholder="Nome do Programa" value="{{programa.nome_programa}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                         </div>
                                         <div  class="form-group"></div>
                                         <button type="submit" class="btn btn-primary">Atualizar</button>

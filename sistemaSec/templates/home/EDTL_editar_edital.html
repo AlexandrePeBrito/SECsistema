@@ -41,13 +41,16 @@
                                         {% csrf_token %}
                                         <div class="form-group" >
                                             <label>Codigo do Edital</label>
-                                            <input type="int" class="form-control" name="id_edital" placeholder="Numero do edital" value="{{edital.id_edital}}">
+                                            <input type="int" class="form-control" name="id_edital" placeholder="Numero do edital" value="{{edital.id_edital}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>Quantidade de Vagas</label>
-                                            <input type="text" class="form-control" name="quantidade_vagas" placeholder="Quantidade Vagas" value="{{edital.quantidade_vagas_edital}}">
+                                            <input type="text" class="form-control" name="quantidade_vagas" placeholder="Quantidade Vagas" value="{{edital.quantidade_vagas_edital}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>Programa</label>
-                                            <input type="text" class="form-control" name="programa" placeholder="Programa" value="{{edital.id_programa_edital}}">
+                                            <input type="text" class="form-control" name="programa" placeholder="Programa" value="{{edital.id_programa_edital}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                         </div>
 

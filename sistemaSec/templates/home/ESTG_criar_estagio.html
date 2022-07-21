@@ -41,16 +41,20 @@
                                         {% csrf_token %}
                                         <div class="form-group" >
                                             <label>Carga Horaria</label>
-                                            <input type="text" class="form-control mask-matricula" name="carga_horaria_estagio" placeholder="Carga Horaria">
+                                            <input type="text" class="form-control mask-matricula" name="carga_horaria_estagio" placeholder="Carga Horaria" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>Area</label>
-                                            <input type="text" class="form-control" name="area_estagio" placeholder="Area">
+                                            <input type="text" class="form-control" name="area_estagio" placeholder="Area" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>Edital</label>
-                                            <input type="text" class="form-control" name="id_edital_estagio" placeholder="Edital">
+                                            <input type="text" class="form-control" name="id_edital_estagio" placeholder="Edital" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>Curso</label>
-                                            <input type="text" class="form-control" name="id_cursos_estagio" placeholder="Curso">
+                                            <input type="text" class="form-control" name="id_cursos_estagio" placeholder="Curso" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                         </div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>

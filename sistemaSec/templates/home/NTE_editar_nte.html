@@ -41,16 +41,20 @@
                                         {% csrf_token %}
                                         <div class="form-group" >
                                             <label>ID</label>
-                                            <input type="text" class="form-control" name="id_nte" placeholder="ID" value="{{nte.id_NTE}}">
+                                            <input type="text" class="form-control" name="id_nte" placeholder="ID" value="{{nte.id_NTE}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>Nome do Direitor</label>
-                                            <input type="text" class="form-control" name="nome_direitor" placeholder="Nome do Direitor" value="{{nte.nome_direitor_NTE}}">
+                                            <input type="text" class="form-control" name="nome_direitor" placeholder="Nome do Direitor" value="{{nte.nome_direitor_NTE}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>Email</label>
-                                            <input type="email" class="form-control" name="email" placeholder="email" value="{{nte.email_NTE}}">
+                                            <input type="email" class="form-control" name="email" placeholder="email" value="{{nte.email_NTE}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                             <label>telefone</label>
-                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="telefone" value="{{nte.telefone_NTE}}">
+                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="telefone" value="{{nte.telefone_NTE}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            onchange="try{setCustomValidity('')}catch(e){}">
                                             
                                         </div>
                                         <div  class="form-group"></div>
