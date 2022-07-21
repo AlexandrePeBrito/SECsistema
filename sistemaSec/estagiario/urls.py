@@ -7,4 +7,5 @@ urlpatterns = [
     path("partiu-estagio/criar/", views.criar_estagiario_partiu_estagio, name="criar_estagiario_partiu_estagio"),
     path("partiu-estagio/editar/<str:cpf_estagiario>", views.editar_estagiario_partiu_estagio, name="editar_estagiario_partiu_estagio"),
     path("partiu-estagio/atualizar/", views.atualizar_estagiario_partiu_estagio, name="atualizar_estagiario_partiu_estagio"),
+    
 ]

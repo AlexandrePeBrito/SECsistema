@@ -15,7 +15,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">DashBoard - Partiu Estagio</h5>
+                                <h5 class="m-b-10">DashBoard - Estagiario NOVO</h5>
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
@@ -38,12 +38,12 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Estagiarios</h5>
+                                    <h5>Estagiarios Mais Futuro</h5>
                                 </div>
                                 
                                 <div class="card-body">
                                     <div>
-                                        <a href="{% url 'criar_estagiario_partiu_estagio' %}" type="button" class="btn btn-success" style="margin-left: 85%;">+ Criar Estagiario</a>
+                                        <a href="" type="button" class="btn btn-success" style="margin-left: 85%;">+ Criar Estagiario</a>
                                     </div>
                                     
                                     <form action="{% url 'consultar_estagiario_partiu_estagio' %}" enctype="multipart/form-data">
@@ -93,7 +93,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {% for estagiario in estagiarios %}
+                                                    {% for estagiario in estagiarios%}
                                                     <tr>
                                                         <td>{{ estagiario.cpf_estagiario }}</td>
                                                         <td>{{ estagiario.nome_estagiario }}</td>
@@ -103,7 +103,7 @@
                                                         <td>{{ estagiario.supervisor_estagiario }}</td>
                                                         <td>{{ estagiario.sede_estagiario }}</td>
                                                         <td>{{ estagiario.faculdade_estagiario }}</td>
-                                                        <td><a href="{% url 'editar_estagiario_partiu_estagio' estagiario.cpf_estagiario %}" type="button" class="btn btn-success" style="margin-top: 10px; margin-left: 45%;">Editar</a></td>
+                                                        <td><a href="{% url 'editar_estagiario_partiu_estagio' 'estagiario.cpf_estagiario' %}" type="button" class="btn btn-success" style="margin-top: 10px; margin-left: 45%;">Editar</a></td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>

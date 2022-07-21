@@ -20,15 +20,11 @@
                         <label>Programas</label>
                     </li>
                     <li data-username="Componentes que rodam sobre o programa Mais Futuro" class="nav-item pcoded-hasmenu">
-                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Mais futuro</span></a>
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Mais futuro</span></a>
                         <ul class="pcoded-submenu">
-                            <li class=""><a href="/COMP_button.html" class="">Button</a></li>
-                            <li class=""><a href="/COMP_badges.html" class="">Badges</a></li>
-                            <li class=""><a href="/COMP_breadcrumb_pagination.html" class="">Breadcrumb & paggination</a></li>
-                            <li class=""><a href="/COMP_collapse.html" class="">Collapse</a></li>
-                            <li class=""><a href="/COMP_tabs.html" class="">Tabs & pills</a></li>
-                            <li class=""><a href="/COMP_typography.html" class="">Typography</a></li>
-                            <li class=""><a href="/COMP_icons.html" class="">Feather<span class="pcoded-badge label label-danger">NEW</span></a></li>
+                            <li class=""><a href="{% url 'dashboard_estagiario' %}" class=""><i class="feather icon-users"></i> Estagiarios</a></li>
+                            <li class=""><a href="/COMP_button.html" class=""><i class="feather icon-bar-chart-2"></i> Dados</a></li>
+                            <li class=""><a href="/COMP_button.html" class=""><i class="feather icon-file-text"></i> Editais</a></li>
                         </ul>
                     </li>
                     <li data-username="Componentes que rodam sobre o programa Partiu Estágio" class="nav-item pcoded-hasmenu">
@@ -40,9 +36,9 @@
                         </ul>
                     </li>
                     <li data-username="Componentes que rodam sobre o programa Primeiro Emprego" class="nav-item pcoded-hasmenu">
-                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-grid"></i></span><span class="pcoded-mtext">Primeiro Emprego</span></a>
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Primeiro Emprego</span></a>
                         <ul class="pcoded-submenu">
-                            <li class=""><a href="/COMP_button.html" class=""><i class="feather icon-users"></i> Estagiarios</a></li>
+                            <li class=""><a href="{% url 'dashboard_partiu_estagio' %}" class=""><i class="feather icon-users"></i> Estagiarios</a></li>
                             <li class=""><a href="/COMP_button.html" class=""><i class="feather icon-bar-chart-2"></i> Dados</a></li>
                             <li class=""><a href="/COMP_button.html" class=""><i class="feather icon-file-text"></i> Editais</a></li>
                         </ul>
