@@ -13,7 +13,7 @@ from ..sede.models import Sede
 class Estagiario(models.Model):
     cpf_estagiario = CPFField(primary_key=True)
     nome_estagiario = models.CharField(max_length=100)
-    rg_estagiario = models.CharField(max_length=11)
+    rg_estagiario = models.CharField(max_length=12)
     turno_estagiario = models.CharField(max_length=10)
     email_estagiario = models.CharField(max_length=200)
     semestre_estagiario = models.IntegerField()

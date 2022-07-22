@@ -6,7 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 from django import template
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from django.urls import reverse
 from sistemaSec.estagiario.models import Estagiario
@@ -53,20 +53,27 @@ def pages(request):
         return HttpResponse(html_template.render(context, request))
 
 @login_required(login_url="/login/")
-def dashboard_partiu_estagio(request):
-    estagiario = Estagiario.objects.all()
+def dashboard_estagiario_partiu_estagio(request):
+    programa_consulta = get_object_or_404(Programa,id_programa=1)
+    sede_consulta = Edital.objects.filter(id_programa_edital_id=programa_consulta)
+    estagio = Estagio.objects.filter(id_edital_estagio_id__in=sede_consulta)
+    estagiario = Estagiario.objects.filter(estagio_estagiario_id__in=estagio)
     dados ={
         'estagiarios': estagiario
     }
     return render(request, 'home/PAES_dashboard.html',dados)
 
+
 @login_required(login_url="/login/")
-def dashboard_estagiario(request):
-    estagiario = Estagiario.objects.all()
+def dashboard_estagiario_mais_futuro(request):
+    programa_consulta = get_object_or_404(Programa,id_programa=2)
+    sede_consulta = Edital.objects.filter(id_programa_edital_id=programa_consulta)
+    estagio = Estagio.objects.filter(id_edital_estagio_id__in=sede_consulta)
+    estagiario = Estagiario.objects.filter(estagio_estagiario_id__in=estagio)
     dados ={
         'estagiarios': estagiario
     }
-    return render(request, 'home/ESTA_dashboard.html',dados)
+    return render(request, 'home/MFES_dashboard.html',dados)
 
 @login_required(login_url="/login/")
 def dashboard_supervisor(request):
@@ -125,4 +132,3 @@ def dashboard_estagio(request):
     estagio = Estagio.objects.all()
     dados ={'estagios': estagio}
     return render(request, 'home/ESTG_dashboard.html',dados)
-
