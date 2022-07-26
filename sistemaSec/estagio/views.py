@@ -54,8 +54,19 @@ def consultar_estagio(request):
             listar_por_edital = lista_por_area.filter(Q(id_edital_estagio__id_edital__icontains=edital_consulta))
             listar_por_curso = listar_por_edital.filter(Q(id_cursos_estagio__nome_curso__icontains=curso_consulta))
     
-    dados = {"estagios": listar_por_curso}
-    return render(request,"home/ESTG_buscar_estagio.html",dados)
+    if listar_por_curso:
+        dados = {
+            "estagios": listar_por_curso,
+            "error": False,
+            "mensagem": "Consulta Feita com Sucesso!"
+        }
+    else:
+        dados = {
+            "estagios": listar_por_curso,
+            "error": True,
+            "mensagem": "Nenhum Estagio Localizado!"
+        }
+    return render(request,"home/ESTG_dashboard.html",dados)
     
 @login_required(login_url="/login/")    
 def editar_estagio(request,id_estagio):
