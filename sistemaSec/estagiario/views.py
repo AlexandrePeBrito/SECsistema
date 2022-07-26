@@ -110,12 +110,23 @@ def consultar_estagiario_partiu_estagio(request):
             lista_por_supervisor = lista_por_bairro.filter(Q(supervisor_estagiario__nome_supervisor__icontains=supervisor_consulta))
             lista_por_sede = lista_por_supervisor.filter(Q(sede_estagiario__nome_sede__icontains=sede_consulta))
             lista_por_faculdade = lista_por_sede.filter(Q(faculdade_estagiario__nome_faculdade__icontains=faculdade_consulta))
+            lista_partiu_estagio = lista_por_faculdade.filter(Q(estagio_estagiario=1))
 
-    dados = {
-        "estagiarios": lista_por_faculdade
-    }
-
-    return render(request,"home/PAES_buscar_estagiario.html",dados)
+    
+    if lista_partiu_estagio:
+        dados = {
+            "estagiarios": lista_partiu_estagio,
+            "error": False,
+            "mensagem": "Consulta Feita com Sucesso!"
+        }
+    else:
+        dados = {
+            "estagiarios": lista_partiu_estagio,
+            "error": True,
+            "mensagem": "Nenhum Estagiario Localizado!"
+        }
+    
+    return render(request,"home/PAES_dashboard.html",dados)
     
 @login_required(login_url="/login/")    
 def editar_estagiario_partiu_estagio(request,cpf_estagiario):
@@ -375,12 +386,22 @@ def consultar_estagiario_mais_futuro(request):
             lista_por_supervisor = lista_por_bairro.filter(Q(supervisor_estagiario__nome_supervisor__icontains=supervisor_consulta))
             lista_por_sede = lista_por_supervisor.filter(Q(sede_estagiario__nome_sede__icontains=sede_consulta))
             lista_por_faculdade = lista_por_sede.filter(Q(faculdade_estagiario__nome_faculdade__icontains=faculdade_consulta))
+            lista_mais_futuro = lista_por_faculdade.filter(Q(estagio_estagiario=2))
 
-    dados = {
-        "estagiarios": lista_por_faculdade
-    }
+    if lista_mais_futuro:
+        dados = {
+            "estagiarios": lista_mais_futuro,
+            "error": False,
+            "mensagem": "Consulta Feita com Sucesso!"
+        }
+    else:
+        dados = {
+            "estagiarios": lista_mais_futuro,
+            "error": True,
+            "mensagem": "Nenhum Estagiario Localizado!"
+        }
 
-    return render(request,"home/MFES_buscar_estagiario.html",dados)
+    return render(request,"home/MFES_dashboard.html",dados)
     
 @login_required(login_url="/login/")    
 def editar_estagiario_mais_futuro(request,cpf_estagiario):
