@@ -63,8 +63,20 @@ def consultar_sede(request):
             lista_por_bairro = lista_por_sede.filter(Q(bairro_sede__icontains = bairro_consulta))
             lista_por_municipio = lista_por_bairro.filter(Q(id_municipio_sede__nome_municipio__icontains = municipio_consulta))
     
-    dados = {"sedes": lista_por_municipio}
-    return render(request,"home/SEDE_buscar_sede.html",dados)
+    if lista_por_municipio:
+        dados = {
+            "sedes": lista_por_municipio,
+            "error": False,
+            "mensagem": "Consulta Feita com Sucesso!"
+        }
+    else:
+        dados = {
+            "sedes": lista_por_municipio,
+            "error": True,
+            "mensagem": "Nenhuma Sede Localizado!"
+        }
+    print(lista_por_municipio)   
+    return render(request,"home/SEDE_dashboard.html", dados)
     
 @login_required(login_url="/login/")    
 def editar_sede(request,id_sede):

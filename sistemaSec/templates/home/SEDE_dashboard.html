@@ -36,10 +36,17 @@
                                     <h5>Sede</h5>
                                 </div>
                                 {% if mensagem %}
-                                    <div class="alert alert-success" role="alert">
-                                        <button class="close" data-dismiss="alert">&times;</button>
-                                        <p>{{ mensagem }}</p>
-                                    </div>
+                                    {% if error %}
+                                        <div class="alert alert-danger" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-success" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% endif %}
                                 {% endif %}
                                 <div class="card-body">
                                     <div>
@@ -74,7 +81,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {% for sede in sedes%}
+                                                    {% for sede in sedes %}
                                                     <tr>
                                                         <td>{{ sede.id_sede }}</td>
                                                         <td>{{ sede.nome_sede }}</td>
