@@ -151,7 +151,7 @@ def atualizar_estagiario_partiu_estagio(request):
         supervisor = request.POST['supervisor']
         sede = request.POST['sede']
         faculdade = request.POST['faculdade']
-        estagio = request.POST.get('estagio', True)
+        estagio = request.POST['Estagio']
         erros = [{"Erro": 'CPF', "Valido": True, "Mensagem": "CPF Invalido"},
                  {"Erro": 'Rg', "Valido": True, "Mensagem": "Preencher RG"},
                  {"Erro": 'Nome', "Valido": True, "Mensagem": "Preencher Nome"},
@@ -178,6 +178,7 @@ def atualizar_estagiario_partiu_estagio(request):
             est.faculdade_estagiario = faculdadeObj
             est.estagio_estagiario = estagioObj
             est.save()
+            print(estagio)
             msg = 'Estagiario Atualizado com Sucesso!'
         return render(request,"home/PAES_dashboard.html",cadastrado_estagiario_partiu_estagio(msg))
     else:
@@ -283,12 +284,6 @@ def cadastrado_estagiario_mais_futuro(msg):
    
     return dados
 
-
-
-
-
-
-
 @login_required(login_url="/login/")
 def criar_estagiario_mais_futuro(request):
     if request.method == "POST":
@@ -393,7 +388,7 @@ def editar_estagiario_mais_futuro(request,cpf_estagiario):
 
     editar_estagiario_mais_futuro = { 'estagiario':estagiario }
     
-    return render(request, 'home/PAES_editar_estagiario.html', editar_estagiario_mais_futuro)
+    return render(request, 'home/MFES_editar_estagiario.html', editar_estagiario_mais_futuro)
 
 @login_required(login_url="/login/")
 def atualizar_estagiario_mais_futuro(request):
@@ -420,7 +415,7 @@ def atualizar_estagiario_mais_futuro(request):
         supervisor = request.POST['supervisor']
         sede = request.POST['sede']
         faculdade = request.POST['faculdade']
-        estagio = request.POST.get('estagio', True)
+        estagio = request.POST['Estagio']
         erros = [{"Erro": 'CPF', "Valido": True, "Mensagem": "CPF Invalido"},
                  {"Erro": 'Rg', "Valido": True, "Mensagem": "Preencher RG"},
                  {"Erro": 'Nome', "Valido": True, "Mensagem": "Preencher Nome"},
@@ -448,7 +443,7 @@ def atualizar_estagiario_mais_futuro(request):
             est.estagio_estagiario = estagioObj
             est.save()
             msg = 'Estagiario Atualizado com Sucesso!'
-        return render(request,"home/MFES_dashboard.html",cadastrado_estagiario_mais_futuro(msg))
+        return render(request,"home/index.html",cadastrado_estagiario_mais_futuro(msg))
     else:
         return redirect("home/MFES_criar_estagiario.html")
 

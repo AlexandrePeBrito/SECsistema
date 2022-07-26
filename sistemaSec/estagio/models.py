@@ -10,3 +10,6 @@ class Estagio(models.Model):
     #foreign key
     id_edital_estagio = models.ForeignKey(Edital, on_delete=models.PROTECT, related_name="estagios")
     id_cursos_estagio = models.ForeignKey(Curso, on_delete=models.PROTECT, related_name="estagios")
+    
+    def __str__(self):
+        return str(self.id_estagio)

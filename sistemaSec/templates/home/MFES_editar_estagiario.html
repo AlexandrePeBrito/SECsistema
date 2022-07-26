@@ -15,12 +15,12 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">Estagiários</h5>
+                                <h5 class="m-b-10">Estagiário Mais Futuro</h5>
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="{% url 'dashboard_estagiario_partiu_estagio' %}">DashBoard</a></li>
-                                <li class="breadcrumb-item"><a href="{% url 'editar_estagiario_partiu_estagio' estagiario.cpf_estagiario %}">Editar Estagiário</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'dashboard_estagiario_mais_futuro' %}">DashBoard</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'editar_estagiario_mais_futuro' estagiario.cpf_estagiario %}">Editar Estagiário</a></li>
                             </ul>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                                     <h5>Atualizar Estagiario</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{% url 'atualizar_estagiario_partiu_estagio' %}" method="POST" enctype="multipart/form-data">
+                                    <form action="{% url 'atualizar_estagiario_mais_futuro' %}" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form-group" >
                                             <label>Nome do Estagiario</label>

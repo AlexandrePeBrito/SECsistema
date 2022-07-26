@@ -14,6 +14,12 @@
             <!-- [ breadcrumb ] end -->
             <div class="main-body">
                 <div class="page-wrapper">
+                    {% if mensagem %}
+                        <div class="alert alert-success" role="alert">
+                            <button class="close" data-dismiss="alert">&times;</button>
+                            <p>{{ mensagem }}</p>
+                        </div>
+                    {% endif %}
                     <!-- [ Main Content ] start -->
                     <div class="row">
                         <!--[ daily sales section ] start-->
