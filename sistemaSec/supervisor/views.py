@@ -51,9 +51,21 @@ def consultar_supervisor(request):
 
         if consultar_supervisor:
             lista_por_nome = supervisores.filter(Q(nome_supervisor__icontains=nome_consulta))
-            
-    dados = {"supervisores": lista_por_nome}
-    return render(request,"home/SUPE_buscar_supervisor.html",dados)
+    
+    if lista_por_nome:
+        dados = {
+            "supervisores": lista_por_nome,
+            "error": False,
+            "mensagem": "Consulta Feita com Sucesso!"
+        }
+    else:
+        dados = {
+            "supervisores": lista_por_nome,
+            "error": True,
+            "mensagem": "Nenhum Supervisor Localizado!"
+        }
+   
+    return render(request,"home/SUPE_dashboard.html",dados)
     
 @login_required(login_url="/login/")    
 def editar_supervisor(request,id_supervisor):
