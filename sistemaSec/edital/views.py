@@ -46,8 +46,19 @@ def consultar_edital(request):
             lista_por_edital = edital.filter(Q(id_edital__icontains=edital_consulta))
             listar_por_programa = lista_por_edital.filter(Q(id_programa_edital__nome_programa__icontains=programa_consulta))
     
-    dados = {"editais": listar_por_programa}
-    return render(request,"home/EDTL_buscar_edital.html",dados)
+    if listar_por_programa:
+        dados = {
+            "editais": listar_por_programa,
+            "error": False,
+            "mensagem": "Consulta Feita com Sucesso!"
+        }
+    else:
+        dados = {
+            "editais": listar_por_programa,
+            "error": True,
+            "mensagem": "Nenhum Edital Localizado!"
+        }
+    return render(request,"home/EDTL_dashboard.html",dados)
     
 @login_required(login_url="/login/")    
 def editar_edital(request,id_edital):
