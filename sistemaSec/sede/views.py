@@ -73,7 +73,7 @@ def consultar_sede(request):
         dados = {
             "sedes": lista_por_municipio,
             "error": True,
-            "mensagem": "Nenhuma Sede Localizado!"
+            "mensagem": "Nenhuma Sede Localizada!"
         }
 
     return render(request,"home/SEDE_dashboard.html", dados)

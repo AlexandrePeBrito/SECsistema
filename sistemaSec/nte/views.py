@@ -52,7 +52,7 @@ def consultar_nte(request):
         dados = {
             "NTEs": lista_por_nte,
             "error": True,
-            "mensagem": "Nenhuma Sede Localizado!"
+            "mensagem": "Nenhum NTE Localizado!"
         }
     return render(request,"home/NTE_dashboard.html",dados)
     

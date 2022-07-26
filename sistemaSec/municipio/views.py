@@ -51,7 +51,7 @@ def consultar_municipio(request):
         dados = {
             "municipios": listar_por_nte,
             "error": True,
-            "mensagem": "Nenhuma Municipio Localizado!"
+            "mensagem": "Nenhum Municipio Localizado!"
         }
     return render(request,"home/MUNI_dashboard.html",dados)
     
