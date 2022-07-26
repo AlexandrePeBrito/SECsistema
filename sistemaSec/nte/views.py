@@ -42,8 +42,19 @@ def consultar_nte(request):
         if consultar_nte:
             lista_por_nte= nte.filter(Q(id_NTE__icontains=nte_consulta))
     
-    dados = {"NTEs": lista_por_nte}
-    return render(request,"home/NTE_buscar_nte.html",dados)
+    if lista_por_nte:
+        dados = {
+            "NTEs": lista_por_nte,
+            "error": False,
+            "mensagem": "Consulta Feita com Sucesso!"
+        }
+    else:
+        dados = {
+            "NTEs": lista_por_nte,
+            "error": True,
+            "mensagem": "Nenhuma Sede Localizado!"
+        }
+    return render(request,"home/NTE_dashboard.html",dados)
     
 @login_required(login_url="/login/")    
 def editar_nte(request,id_NTE):

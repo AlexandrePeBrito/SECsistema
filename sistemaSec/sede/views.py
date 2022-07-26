@@ -75,7 +75,7 @@ def consultar_sede(request):
             "error": True,
             "mensagem": "Nenhuma Sede Localizado!"
         }
-    print(lista_por_municipio)   
+
     return render(request,"home/SEDE_dashboard.html", dados)
     
 @login_required(login_url="/login/")    
