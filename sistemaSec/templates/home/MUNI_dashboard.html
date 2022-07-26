@@ -36,10 +36,17 @@
                                     <h5>Municipio</h5>
                                 </div>
                                 {% if mensagem %}
-                                    <div class="alert alert-success" role="alert">
-                                        <button class="close" data-dismiss="alert">&times;</button>
-                                        <p>{{ mensagem }}</p>
-                                    </div>
+                                    {% if error %}
+                                        <div class="alert alert-danger" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-success" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% endif %}
                                 {% endif %}
                                 <div class="card-body">
                                     <div>

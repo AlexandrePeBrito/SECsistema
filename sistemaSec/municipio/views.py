@@ -41,8 +41,19 @@ def consultar_municipio(request):
             lista_por_municipio = muncipio.filter(Q(nome_municipio__icontains = municipio_consulta))
             listar_por_nte = lista_por_municipio.filter(Q(id_nte_municipio__id_NTE__icontains = nte_consulta))
     
-    dados = {"municipios": listar_por_nte}
-    return render(request,"home/MUNI_buscar_municipio.html",dados)
+    if listar_por_nte:
+        dados = {
+            "municipios": listar_por_nte,
+            "error": False,
+            "mensagem": "Consulta Feita com Sucesso!"
+        }
+    else:
+        dados = {
+            "municipios": listar_por_nte,
+            "error": True,
+            "mensagem": "Nenhuma Municipio Localizado!"
+        }
+    return render(request,"home/MUNI_dashboard.html",dados)
     
 @login_required(login_url="/login/")    
 def editar_municipio(request,id_municipio):
