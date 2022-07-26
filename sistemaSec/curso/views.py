@@ -37,8 +37,19 @@ def consultar_curso(request):
         if consultar_curso:
             lista_por_curso= curso.filter(Q(nome_curso__icontains=curso_consulta))
     
-    dados = {"cursos": lista_por_curso}
-    return render(request,"home/CUSO_buscar_curso.html",dados)
+    if lista_por_curso:
+        dados = {
+            "cursos": lista_por_curso,
+            "error": False,
+            "mensagem": "Consulta Feita com Sucesso!"
+        }
+    else:
+        dados = {
+            "cursos": lista_por_curso,
+            "error": True,
+            "mensagem": "Nenhuma Curso Localizado!"
+        }
+    return render(request,"home/CUSO_dashboard.html",dados)
     
 @login_required(login_url="/login/")    
 def editar_curso(request,id_curso):
