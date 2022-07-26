@@ -37,8 +37,20 @@ def consultar_programa(request):
         if consultar_programa:
             lista_por_programa= programa.filter(Q(nome_programa__icontains=programa_consulta))
     
-    dados = {"programas": lista_por_programa}
-    return render(request,"home/PROG_buscar_programa.html",dados)
+    if lista_por_programa:
+        dados = {
+            "programas": lista_por_programa,
+            "error": False,
+            "mensagem": "Consulta Feita com Sucesso!"
+        }
+    else:
+        dados = {
+            "programas": lista_por_programa,
+            "error": True,
+            "mensagem": "Nenhum Programa Localizado!"
+        }
+
+    return render(request,"home/PROG_dashboard.html",dados)
     
 @login_required(login_url="/login/")    
 def editar_programa(request,id_programa):
