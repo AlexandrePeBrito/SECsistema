@@ -47,7 +47,7 @@ def consultar_curso(request):
         dados = {
             "cursos": lista_por_curso,
             "error": True,
-            "mensagem": "Nenhuma Curso Localizado!"
+            "mensagem": "Nenhum Curso Localizado!"
         }
     return render(request,"home/CUSO_dashboard.html",dados)
     

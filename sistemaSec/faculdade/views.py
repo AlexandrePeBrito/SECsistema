@@ -47,8 +47,19 @@ def consultar_faculdade(request):
         if consultar_faculdade:
             lista_por_nome = faculdade.filter(Q(nome_faculdade__icontains=nome_consulta))
             
-    dados = {"faculdades": lista_por_nome}
-    return render(request,"home/FACU_buscar_faculdade.html",dados)
+    if lista_por_nome:
+        dados = {
+            "faculdades": lista_por_nome,
+            "error": False,
+            "mensagem": "Consulta Feita com Sucesso!"
+        }
+    else:
+        dados = {
+            "faculdades": lista_por_nome,
+            "error": True,
+            "mensagem": "Nenhuma Faculdade Localizada!"
+        }
+    return render(request,"home/FACU_dashboard.html",dados)
     
 @login_required(login_url="/login/")    
 def editar_faculdade(request,id_faculdade):
