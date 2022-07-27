@@ -39,7 +39,9 @@ def criar_supervisor(request):
             return render(request, 'home/SUPE_dashboard.html',cadastrado_supervisor(msg))
 
     else:
-        return redirect("sistemaSec/templates/home/SUPE_criar_supervisor.html")
+        sedes = Sede.objects.all()
+        print(sedes)
+        return render(request, "home/SUPE_criar_supervisor.html", {"sedes":sedes})
 
 @login_required(login_url="/login/")
 def consultar_supervisor(request):

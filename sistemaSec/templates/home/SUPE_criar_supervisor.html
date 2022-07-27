@@ -53,8 +53,13 @@
                                             onchange="try{setCustomValidity('')}catch(e){}">
 
                                             <label>Sede</label>
-                                            <input type="text" class="form-control" name="sede_supervisor" placeholder="Sede" required oninvalid = "this.setCustomValidity('Campo requerido')" 
+                                            <input type="text" list="sedes" class="form-control" name="sede_supervisor" placeholder="Sede" required oninvalid = "this.setCustomValidity('Campo requerido')" 
                                             onchange="try{setCustomValidity('')}catch(e){}">
+                                            <datalist id="sedes">
+                                                {% for sede in sedes %}
+                                                    <option value="{{ sede.id_sede }}">{{ sede.nome_sede }}</option>
+                                                {% endfor %}
+                                            </datalist>
                                             
                                         </div>
                                         <div  class="form-group"></div>
