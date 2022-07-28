@@ -58,41 +58,4 @@ def login_view(request):
 
     return render(request, "cadastro/login.html", {"form": form, "msg": msg})
 
-def criar_estagiario_partiu_estagio(request):
-    if request.method == "POST":
-        nome_estagiario = request.POST['nome_estagiario']
-        cpf = request.POST['cpf']
-        rg = request.POST['rg']
-        turno = request.POST['turno']
-        email = request.POST['email']
-        semestre = request.POST['semestre']
-        nis = request.POST['nis']
-        telefone = request.POST['telefone']
-        responsavel = request.POST['responsavel']
-        nascimento = request.POST['nascimento']
-        genero = request.POST['genero']
-        raca = request.POST['raca']
-        bairro = request.POST['bairro']
-        numero = request.POST['numero']
-        complemento = request.POST['complemento']
-        Matricula = request.POST['Matricula']
-        situaçao = request.POST['situaçao']
-        supervisor = request.POST['supervisor']
-
-        supervisorObj = Supervisor.objects.get(id_supervisor=supervisor)
-        estagiario = Estagiario.objects.create(cpf_estagiario = cpf,
-            nome_estagiario = nome_estagiario, rg_estagiario = rg,
-            turno_estagiario = turno, email_estagiario = email,
-            semestre_estagiario = semestre, nis_pis_estagiario = nis,
-            telefone_estagiario = telefone, nome_responsavel_estagiario = responsavel,
-            data_nascimento_estagiario = nascimento,
-            genero_estagiario = genero, raca_estagiario = raca,
-            bairro_estagiario = bairro, numero_estagiario = numero,
-            complemento_estagiario = complemento, matricula_estagiario = Matricula,
-            situacao_estagiario = situaçao, supervisor_estagiario = supervisorObj)
-        
-        estagiario.save()
-        return redirect("/")
-    else:
-        return redirect("sistemaSec/templates/home/PAES_criar_estagiario.html")
 

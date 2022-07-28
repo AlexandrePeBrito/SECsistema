@@ -5,6 +5,38 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from sistemaSec.supervisor.models import Supervisor
 from sistemaSec.sede.models import Sede
+from .forms import SupervisorForm
+
+@login_required(login_url="/login/")
+def cadastro_supervisor_form(request):
+    form = SupervisorForm(request.POST)
+    
+    if request.method =="GET":
+        form = SupervisorForm()
+        return render(request,"home/SUPE_criar_supervisor.html",{"form": form})
+    
+    else:
+        if form.is_valid():
+            nome_supervisor = form.cleaned_data.get("nome_supervisor")
+            email_supervisor = form.cleaned_data.get("email_supervisor")
+            telefone_supervisor = form.cleaned_data.get("telefone_supervisor")
+            sede_supervisor = form.cleaned_data.get("sede_supervisor")
+
+            supervisor = Supervisor.objects.create(nome_supervisor = nome_supervisor,
+                email_supervisor = email_supervisor, telefone_supervisor = telefone_supervisor)
+            supervisor.sede_supervisor.add(sede_supervisor)
+            msg = 'Supervisor Cadastrado com Sucesso!'
+
+            return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form,msg))
+        
+        msg = 'Ocorreu um ERRO no Cadastro!'
+            
+        return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form,msg))
+
+    
+
+
+
 
 @login_required(login_url="/login/")
 def criar_supervisor(request):
@@ -109,10 +141,11 @@ def atualizar_supervisor(request):
         return redirect("home/SUPE_criar_supervisor.html")
 
 
-def cadastrado_supervisor(msg):
+def cadastrado_supervisor(form,msg):
     supervisor = Supervisor.objects.all()
     dados ={
-        'supervisores': supervisor,
+        'supervisores':supervisor,
+        'form': form,
         'mensagem':msg
     }
     return dados
