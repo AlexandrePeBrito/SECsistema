@@ -8,7 +8,7 @@ from sistemaSec.sede.models import Sede
 from .forms import SupervisorForm
 
 @login_required(login_url="/login/")
-def cadastro_supervisor_form(request):
+def criar_supervisor(request):
     form = SupervisorForm(request.POST)
     
     if request.method =="GET":
@@ -21,10 +21,11 @@ def cadastro_supervisor_form(request):
             email_supervisor = form.cleaned_data.get("email_supervisor")
             telefone_supervisor = form.cleaned_data.get("telefone_supervisor")
             sede_supervisor = form.cleaned_data.get("sede_supervisor")
-
+            
             supervisor = Supervisor.objects.create(nome_supervisor = nome_supervisor,
                 email_supervisor = email_supervisor, telefone_supervisor = telefone_supervisor)
             supervisor.sede_supervisor.add(sede_supervisor)
+            supervisor.save()
             msg = 'Supervisor Cadastrado com Sucesso!'
 
             return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form,msg))
@@ -33,47 +34,6 @@ def cadastro_supervisor_form(request):
             
         return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form,msg))
 
-    
-
-
-
-
-@login_required(login_url="/login/")
-def criar_supervisor(request):
-    if request.method == "POST":
-        nome_supervisor = request.POST['nome_supervisor']
-        email = request.POST['email']
-        telefone = request.POST['telefone']
-        sede_supervisor = request.POST['sede_supervisor']
-
-        erros =[{"Erro": 'Nome', "Valido": isEmpty(nome_supervisor), "Mensagem": "Nome Invalido"},
-                {"Erro": 'Email', "Valido": isEmpty(email), "Mensagem": "Email Invalido"},
-                {"Erro": 'Telefone', "Valido": isEmpty(telefone), "Mensagem": "Telefone Invalido"},
-                {"Erro": 'Supervisor', "Valido": isEmpty(sede_supervisor), "Mensagem": "Sede Invalida"}]
-        
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
-
-        if len(list(ExisteErros))>0:
-            print("Existe erros")
-
-            return render(request,"home/SUPE_criar_supervisor.html")
-
-        else:
-            sede = Sede.objects.get(id_sede = sede_supervisor)
-            supervisor = Supervisor.objects.create(nome_supervisor = nome_supervisor,
-                email_supervisor = email, telefone_supervisor = telefone)
-            
-            supervisor.sede_supervisor.add(sede)
-            supervisor.save()
-
-            msg = 'Supervisor Cadastrado com Sucesso!'
-            return render(request, 'home/SUPE_dashboard.html',cadastrado_supervisor(msg))
-
-    else:
-        sedes = Sede.objects.all()
-        print(sedes)
-        return render(request, "home/SUPE_criar_supervisor.html", {"sedes":sedes})
 
 @login_required(login_url="/login/")
 def consultar_supervisor(request):
@@ -103,43 +63,30 @@ def consultar_supervisor(request):
     
 @login_required(login_url="/login/")    
 def editar_supervisor(request,id_supervisor):
-    supervisor = get_object_or_404(Supervisor, pk=id_supervisor)
-    sede = supervisor.sede_supervisor.all()
+    supervisor = Supervisor.objects.get(id_supervisor=id_supervisor)
+    
+    form = SupervisorForm(instance=supervisor)
+    editar_supervisor = { 
+        'supervisor': supervisor,
+        'form': form }
 
-    editar_supervisor = { 'supervisor':supervisor,
-                          'sede': sede }
-    return render(request, 'home/SUPE_editar_supervisor.html', editar_supervisor)
-
-@login_required(login_url="/login/")
-def atualizar_supervisor(request):
-    if request.method == 'POST':
-        id_supervisor = request.POST['id_supervisor']
-        sup = Supervisor.objects.get(pk=id_supervisor)
-        sup.nome_supervisor = request.POST['nome_supervisor']
-        sup.email_supervisor = request.POST['email']
-        sup.telefone_supervisor = request.POST['telefone']
-        sede_supervisor = request.POST['sede_supervisor']
-
-        erros =[{"Erro": 'Nome do Supervisor', "Valido": isEmpty(sup.nome_supervisor), "Mensagem": "Nome Invalido"},
-                {"Erro": 'Email do Supervisor', "Valido": isEmpty(sup.email_supervisor), "Mensagem": "Email Invalido"},
-                {"Erro": 'Telefone do Supervisor', "Valido": isEmpty(sup.telefone_supervisor), "Mensagem": "Telefone Invalido"},
-                {"Erro": 'Sede do Supervisor ', "Valido": isEmpty(sede_supervisor), "Mensagem": "Sede Invalida"}]
-        
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
-
-        if len(list(ExisteErros))>0:
-            print("Existe erros")
-        else:
-            sede = Sede.objects.get(id_sede = sede_supervisor)
-            sup.sede_supervisor.add(sede)
-            sup.save()
-
+    if request.method == "POST":
+        form = SupervisorForm(request.POST, instance=supervisor)
+        if form.is_valid():
+            sede=Sede.objects.get(nome_sede=form.cleaned_data.get("sede_supervisor")[0])
+            sede_supervisor = form.cleaned_data.get("sede_supervisor")[0]
+            print(f"sede {sede}")
+            print(f"sede_supervisor {sede_supervisor}")
+            supervisor.sede_supervisor.add(sede)
+            supervisor.save()
+            
             msg = 'Supervisor Alterado com Sucesso!'
-        return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(msg))
+            return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form,msg))
+        msg = 'Ocorreu um erro!'
+        return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form,msg))
     else:
-        return redirect("home/SUPE_criar_supervisor.html")
-
+        return render(request, 'home/SUPE_editar_supervisor.html', editar_supervisor)
+    
 
 def cadastrado_supervisor(form,msg):
     supervisor = Supervisor.objects.all()
