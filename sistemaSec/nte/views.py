@@ -4,33 +4,33 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from sistemaSec.nte.models import NTE
-
+from .forms import NTEForm
 
 @login_required(login_url="/login/")
 def criar_nte(request):
-    if request.method == "POST":
-        nome_direitor_NTE = request.POST['nome_direitor_NTE']
-        email = request.POST['email']
-        telefone = request.POST['telefone']
+    form = NTEForm(request.POST)
 
-        erros =[{"Erro": 'Supervisor do NTE', "Valido": isEmpty(nome_direitor_NTE), "Mensagem": "Nome Invalido"},
-                {"Erro": 'Telefone do NTE', "Valido": isEmpty(telefone), "Mensagem": "Telefone Invalido"},
-                {"Erro": 'Email do NTE', "Valido": isEmpty(email), "Mensagem": "Email Invalido"}]
+    if request.method == "GET":
+        form = NTEForm()
+        return render(request,"home/NTE_criar_nte.html", {"form": form})
+
+    else: 
+        if form.is_valid(): 
+            nome_direitor_NTE = form.cleaned_data.get("nome_direitor_NTE")
+            email = form.cleaned_data.get("email_NTE")
+            telefone = form.cleaned_data.get("telefone_NTE")
+
         
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
-
-        if len(list(ExisteErros))>0:
-            print("Existe erros")
-        else:
             nte = NTE.objects.create(nome_direitor_NTE = nome_direitor_NTE,
                 email_NTE = email, telefone_NTE = telefone)
             
             nte.save()
             msg = 'NTE Cadastrado com Sucesso!'
-        return render(request,"home/NTE_dashboard.html",cadastrado_nte(msg))
-    else:
-        return redirect("sistemaSec/templates/home/NTE_criar_nte.html")
+
+            return render(request,"home/NTE_dashboard.html",cadastrado_nte(form, msg))
+
+        msg = 'Ocorreu um ERRO no Cadastro!'
+        return render(request,"home/NTE_dashboard.html",cadastrado_nte(form, msg))
 
 @login_required(login_url="/login/")
 def consultar_nte(request):
@@ -54,46 +54,37 @@ def consultar_nte(request):
             "error": True,
             "mensagem": "Nenhum NTE Localizado!"
         }
+
     return render(request,"home/NTE_dashboard.html",dados)
     
 @login_required(login_url="/login/")    
 def editar_nte(request,id_NTE):
-    nte = get_object_or_404(NTE, pk=id_NTE)
-    edt_nte = { 'nte':nte }
-    return render(request, 'home/NTE_editar_nte.html', edt_nte)
+    nte = NTE.objects.get(id_NTE=id_NTE)
+    form = NTEForm(instance = nte)
 
-@login_required(login_url="/login/")
-def atualizar_nte(request):
-    if request.method == 'POST':
-        id_NTE = request.POST['id_nte']
-        nt = NTE.objects.get(pk=id_NTE)
-        nt.nome_direitor_NTE = request.POST['nome_direitor']
-        nt.email_NTE = request.POST['email']
-        nt.telefone_NTE = request.POST['telefone']
+    edt_nte = { 
+        'nte':nte,
+        'form': form  }
 
-        
-        erros =[{"Erro": 'Supervisor do NTE', "Valido": isEmpty(nt.nome_direitor_NTE), "Mensagem": "Nome Invalido"},
-                {"Erro": 'Telefone do NTE', "Valido": isEmpty(nt.telefone_NTE), "Mensagem": "Telefone Invalido"},
-                {"Erro": 'Email do NTE', "Valido": isEmpty(nt.email_NTE), "Mensagem": "Email Invalido"}]
-        
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
+    if request.method == "POST":
+        form = NTEForm(request.POST, instance = nte)
+        if form.is_valid():
+            nte.save()
 
-        if len(list(ExisteErros))>0:
-            print("Existe erros")
-        else:
-            nt.save()
-    
             msg = 'NTE Alterado com Sucesso!'
-        return render(request,"home/NTE_dashboard.html",cadastrado_nte(msg))
+            return render(request,"home/NTE_dashboard.html",cadastrado_nte(form, msg))
+
+        msg = "Ocorreu um erro!"
+        return render(request,"home/NTE_dashboard.html",cadastrado_nte(form, msg))
     else:
-        return redirect("home/NTE_criar_nte.html")
+        return render(request, 'home/NTE_editar_nte.html', edt_nte)
 
 
-def cadastrado_nte(msg):
+def cadastrado_nte(form, msg):
     nte = NTE.objects.all()
     dados ={
         'NTEs': nte,
+        'form': form,
         'mensagem':msg
     }
     return dados

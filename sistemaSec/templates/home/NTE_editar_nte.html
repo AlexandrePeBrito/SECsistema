@@ -37,27 +37,12 @@
                                     <h5 class="m-b-10">Atualizar NTE</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{% url 'atualizar_nte' %}" method="POST" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="" >
                                         {% csrf_token %}
-                                        <div class="form-group" >
-                                            <label>ID</label>
-                                            <input type="text" class="form-control" name="id_nte" placeholder="ID" value="{{nte.id_NTE}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                            <label>Nome do Direitor</label>
-                                            <input type="text" class="form-control" name="nome_direitor" placeholder="Nome do Direitor" value="{{nte.nome_direitor_NTE}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
+                                        
+                                        {{ form }}
 
-                                            <label>Email</label>
-                                            <input type="email" class="form-control" name="email" placeholder="email" value="{{nte.email_NTE}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                            <label>telefone</label>
-                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="telefone" value="{{nte.telefone_NTE}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                        </div>
-                                        <div  class="form-group"></div>
+                                        <div class="card"></div>
                                         <button type="submit" class="btn btn-primary">Atualizar</button>
                                     </form>
                                 </div>

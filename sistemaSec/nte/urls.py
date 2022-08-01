@@ -6,5 +6,4 @@ urlpatterns = [
     path("nte/buscar/", views.consultar_nte, name="consultar_nte"),
     path("nte/criar/", views.criar_nte, name="criar_nte"),
     path("nte/editar/<str:id_NTE>", views.editar_nte, name="editar_nte"),
-    path("nte/atualizar/", views.atualizar_nte, name="atualizar_nte"),
 ]

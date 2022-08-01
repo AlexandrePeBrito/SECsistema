@@ -37,23 +37,12 @@
                                     <h5>Criar NTE</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{% url 'criar_nte' %}" method="POST" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="">
                                         {% csrf_token %}
-                                        <div class="form-group" >
-                                            <label>Nome do Direitor</label>
-                                            <input type="text" class="form-control" name="nome_direitor_NTE" placeholder="Nome do Direitor" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                            <label>Email</label>
-                                            <input type="email" class="form-control" name="email" placeholder="email" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                            <label>Telefone</label>
-                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="telefone" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                        </div>
-                                        <div  class="form-group"></div>
+
+                                        {{ form }}
+                                        
+                                        <div class="card"></div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                                     </form>
                                 </div>

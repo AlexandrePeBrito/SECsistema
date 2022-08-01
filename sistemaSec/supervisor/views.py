@@ -26,13 +26,13 @@ def criar_supervisor(request):
                 email_supervisor = email_supervisor, telefone_supervisor = telefone_supervisor)
             supervisor.sede_supervisor.add(sede_supervisor)
             supervisor.save()
-            msg = 'Supervisor Cadastrado com Sucesso!'
+            msg = "Supervisor Cadastrado com Sucesso!"
 
-            return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form,msg))
+            return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form, msg))
         
-        msg = 'Ocorreu um ERRO no Cadastro!'
+        msg = "Ocorreu um ERRO no Cadastro!"
             
-        return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form,msg))
+        return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form, msg))
 
 
 @login_required(login_url="/login/")
@@ -40,8 +40,8 @@ def consultar_supervisor(request):
     lista_por_nome = None
     supervisores = Supervisor.objects.all()
     
-    if 'buscar_supervisor' in request.GET:
-        nome_consulta=request.GET['buscar_supervisor']
+    if "buscar_supervisor" in request.GET:
+        nome_consulta=request.GET["buscar_supervisor"]
 
         if consultar_supervisor:
             lista_por_nome = supervisores.filter(Q(nome_supervisor__icontains=nome_consulta))
@@ -67,33 +67,31 @@ def editar_supervisor(request,id_supervisor):
     
     form = SupervisorForm(instance=supervisor)
     editar_supervisor = { 
-        'supervisor': supervisor,
-        'form': form }
+        "supervisor": supervisor,
+        "form": form }
 
     if request.method == "POST":
         form = SupervisorForm(request.POST, instance=supervisor)
         if form.is_valid():
             sede = form.cleaned_data.get("sede_supervisor")
-            #sede=Sede.objects.get(nome_sede=form.cleaned_data.get("sede_supervisor"))
-            print(sede)
-            
+                       
             supervisor.sede_supervisor.set(sede)
-            #supervisor.save()
+            supervisor.save()
             
-            msg = 'Supervisor Alterado com Sucesso!'
-            return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form,msg))
-        msg = 'Ocorreu um erro!'
-        return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form,msg))
+            msg = "Supervisor Alterado com Sucesso!"
+            return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form, msg))
+        msg = "Ocorreu um erro!"
+        return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form, msg))
     else:
-        return render(request, 'home/SUPE_editar_supervisor.html', editar_supervisor)
+        return render(request, "home/SUPE_editar_supervisor.html", editar_supervisor)
     
 
-def cadastrado_supervisor(form,msg):
+def cadastrado_supervisor(form, msg):
     supervisor = Supervisor.objects.all()
     dados ={
-        'supervisores':supervisor,
-        'form': form,
-        'mensagem':msg
+        "supervisores":supervisor,
+        "form": form,
+        "mensagem":msg
     }
     return dados
 
