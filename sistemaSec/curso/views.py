@@ -76,7 +76,6 @@ def editar_curso(request,id_curso):
     else:
         return render(request, 'home/CUSO_editar_curso.html', edt_curso)
 
-
 def cadastrado_curso(form, msg):
     curso = Curso.objects.all()
     dados ={

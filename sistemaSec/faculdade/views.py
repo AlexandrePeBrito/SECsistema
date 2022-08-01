@@ -4,37 +4,37 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from sistemaSec.faculdade.models import Faculdade
+from .forms import FaculdadeForm
 
 @login_required(login_url="/login/")
 def criar_faculdade(request):
-    if request.method == "POST":
-        nome_faculdade = request.POST['nome_faculdade']
-        cnpj_faculdade = request.POST['cnpj_faculdade']
-        direitor_faculdade = request.POST['direitor_faculdade']
-        campus = request.POST['campus']
-        telefone = request.POST['telefone']
+    form = FaculdadeForm
 
-        erros =[{"Erro": 'Nome da Faculdade', "Valido": isEmpty(nome_faculdade), "Mensagem": "Carga Horaria Invalida"},
-                {"Erro": 'Cnpj da Faculdade', "Valido": isEmpty(cnpj_faculdade), "Mensagem": "Area Invalida"},
-                {"Erro": 'Direitor da Faculdade', "Valido": isEmpty(direitor_faculdade), "Mensagem": "Edital Invalido"},
-                {"Erro": 'Campus da Faculdade', "Valido": isEmpty(campus), "Mensagem": "Curso Invalido"},
-                {"Erro": 'Telefone da Faculdade', "Valido": isEmpty(telefone), "Mensagem": "Curso Invalido"}]
+    if request.method == "GET":
+        form = FaculdadeForm()
+
+        return render(request, "home/FACU_criar_faculdade.html", {"form": form})
         
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
+    else:
+        if form.is_valid():
 
-        if len(list(ExisteErros))>0:
-            print("Existe erros")
-        else:
+            nome_faculdade = form.cleaned_data.get('nome_faculdade')
+            cnpj_faculdade = form.cleaned_data.get('cnpj_faculdade')
+            direitor_faculdade = form.cleaned_data.get('nome_direitor_faculdade')
+            campus = form.cleaned_data.get('campus_faculdade')
+            telefone = form.cleaned_data.get('telefone_faculdade')
+
+        
             faculdade = Faculdade.objects.create(nome_faculdade = nome_faculdade,
             cnpj_faculdade = cnpj_faculdade, nome_direitor_faculdade = direitor_faculdade,
             telefone_faculdade = telefone, campus_faculdade = campus)
         
             faculdade.save()
-            msg = 'Estagio Cadastrado com Sucesso!'
-        return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(msg))
-    else:
-        return redirect("sistemaSec/templates/home/FACU_criar_faculdade.html")
+            msg = 'Faculdade Cadastrada com Sucesso!'
+            return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(form, msg))
+        
+        msg = 'Ocorreu um ERRO no Cadastro!'
+        return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(form, msg))
 
 @login_required(login_url="/login/")
 def consultar_faculdade(request):
@@ -63,44 +63,32 @@ def consultar_faculdade(request):
     
 @login_required(login_url="/login/")    
 def editar_faculdade(request,id_faculdade):
-    faculdade = get_object_or_404(Faculdade, pk=id_faculdade)
-    edt_faculdade = { 'faculdade':faculdade }
-    return render(request, 'home/FACU_editar_faculdade.html', edt_faculdade)
+    faculdade = Faculdade.objects.get(id_faculdade=id_faculdade)
+    form = FaculdadeForm(instance = faculdade)
 
-@login_required(login_url="/login/")
-def atualizar_faculdade(request):
+    edt_faculdade = { 
+        'faculdade':faculdade, 
+        'form': form }
+    
     if request.method == 'POST':
-        id_faculdade = request.POST['id_faculdade']
-        fac = Faculdade.objects.get(pk=id_faculdade)
-        fac.nome_faculdade = request.POST['nome_faculdade']
-        fac.cnpj_faculdade = request.POST['cnpj_faculdade']
-        fac.nome_direitor_faculdade = request.POST['nome_direitor_faculdade']
-        fac.telefone_faculdade = request.POST['telefone_faculdade']
-        fac.campus_faculdade = request.POST['campus_faculdade']
+        form = FaculdadeForm(request.POST, instance = faculdade)
 
-        erros =[{"Erro": 'Nome da Faculdade', "Valido": isEmpty(fac.nome_faculdade), "Mensagem": "Nome Invalido"},
-                {"Erro": 'Cnpj da Faculdade', "Valido": isEmpty(fac.cnpj_faculdade), "Mensagem": "CNPJ Invalido"},
-                {"Erro": 'Direitor da Faculdade', "Valido": isEmpty(fac.nome_direitor_faculdade), "Mensagem": "Direitor Invalido"},
-                {"Erro": 'Campus da Faculdade', "Valido": isEmpty(fac.campus_faculdade), "Mensagem": "Campus Invalido"},
-                {"Erro": 'Telefone da Faculdade', "Valido": isEmpty( fac.telefone_faculdade), "Mensagem": "Telefone Invalido"}]
-        
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
+        if form.is_valid():
+            faculdade.save()
 
-        if len(list(ExisteErros))>0:
-            print("Existe erros")
-        else:
-            fac.save()
-            msg = 'Estagio Alterado com Sucesso!'
-        return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(msg))
+            msg = 'Faculdade Alterado com Sucesso!'
+            return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(form, msg))
+
+        msg = "Ocorreu um erro!"
+        return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(form, msg))
     else:
-        return redirect("home/FACU_criar_faculdade.html")
+        return render(request,"home/FACU_editar_faculdade.html", edt_faculdade)
 
-
-def cadastrado_faculdade(msg):
+def cadastrado_faculdade(form, msg):
     faculdades = Faculdade.objects.all()
     dados ={
         'faculdades': faculdades,
+        'form': form,
         'mensagem':msg
     }
     return dados

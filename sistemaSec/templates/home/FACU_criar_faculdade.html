@@ -37,31 +37,12 @@
                                     <h5>Criar Faculdade</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{% url 'criar_faculdade' %}" method="POST" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="" >
                                         {% csrf_token %}
-                                        <div class="form-group" >
-                                            <label>Nome da Faculdade</label>
-                                            <input type="text" class="form-control" name="nome_faculdade" placeholder="Nome da Faculdade" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                            <label>CNPJ</label>
-                                            <input type="text" class="form-control mask-cnpj" name="cnpj_faculdade" placeholder="cnpj da Faculdade" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                            <label>Nome do Direitor</label>
-                                            <input type="text" class="form-control" name="direitor_faculdade" placeholder="Nome do Direitor" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-
-                                            <label>Campus</label>
-                                            <input type="text" class="form-control" name="campus" placeholder="Campus" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-
-                                            <label>telefone</label>
-                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="Telefone" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                        </div>
-                                        <div  class="form-group"></div>
+                                        
+                                        {{ form }}
+                                        
+                                        <div  class="card"></div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                                     </form>
                                 </div>
