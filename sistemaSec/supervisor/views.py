@@ -73,12 +73,12 @@ def editar_supervisor(request,id_supervisor):
     if request.method == "POST":
         form = SupervisorForm(request.POST, instance=supervisor)
         if form.is_valid():
-            sede=Sede.objects.get(nome_sede=form.cleaned_data.get("sede_supervisor")[0])
-            sede_supervisor = form.cleaned_data.get("sede_supervisor")[0]
-            print(f"sede {sede}")
-            print(f"sede_supervisor {sede_supervisor}")
-            supervisor.sede_supervisor.add(sede)
-            supervisor.save()
+            sede = form.cleaned_data.get("sede_supervisor")
+            #sede=Sede.objects.get(nome_sede=form.cleaned_data.get("sede_supervisor"))
+            print(sede)
+            
+            supervisor.sede_supervisor.set(sede)
+            #supervisor.save()
             
             msg = 'Supervisor Alterado com Sucesso!'
             return render(request,"home/SUPE_dashboard.html",cadastrado_supervisor(form,msg))

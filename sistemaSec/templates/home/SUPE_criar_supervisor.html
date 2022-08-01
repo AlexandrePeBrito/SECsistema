@@ -40,21 +40,7 @@
                                     <form role="form" method="POST" action="">
                                         {% csrf_token %}
                                         
-                                        <div class="input-group mb-3">
-                                            {{ form.nome_supervisor }}
-                                        </div>
-                                        
-                                        <div class="input-group mb-3">
-                                            {{ form.email_supervisor }}
-                                        </div>
-
-                                        <div class="input-group mb-3" >
-                                            {{ form.telefone_supervisor }}
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                            {{ form.sede_supervisor }}
-                                        </div>
+                                        {{ form}}
                                             
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                                     </form>
