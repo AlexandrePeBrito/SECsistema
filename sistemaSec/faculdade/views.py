@@ -8,7 +8,7 @@ from .forms import FaculdadeForm
 
 @login_required(login_url="/login/")
 def criar_faculdade(request):
-    form = FaculdadeForm
+    form = FaculdadeForm(request.POST)
 
     if request.method == "GET":
         form = FaculdadeForm()
@@ -17,7 +17,6 @@ def criar_faculdade(request):
         
     else:
         if form.is_valid():
-
             nome_faculdade = form.cleaned_data.get('nome_faculdade')
             cnpj_faculdade = form.cleaned_data.get('cnpj_faculdade')
             direitor_faculdade = form.cleaned_data.get('nome_direitor_faculdade')
