@@ -4,28 +4,30 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from sistemaSec.curso.models import Curso
-
+from .forms import CursoForm
 
 @login_required(login_url="/login/")
 def criar_curso(request):
-    if request.method == "POST":
-        nome_curso = request.POST['nome_curso']
-        
-        erros =[{"Erro": 'Nome do Curso', "Valido": isEmpty(nome_curso), "Mensagem": "Nome Invalido"}]
-        
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
+    form = CursoForm(request.POST)
 
-        if len(list(ExisteErros))>0:
-            print("Existe erros")
-        else:
+    if request.method == "GET":
+        form = CursoForm()
+
+        return render(request, "home/CUSO_criar_curso.html", {"form": form})
+    
+    else:
+        if form.is_valid():
+            nome_curso = form.cleaned_data.get('nome_curso')
+        
             curso = Curso.objects.create(nome_curso = nome_curso)
         
             curso.save()
+
             msg = 'Curso Cadastrado com Sucesso!'
-        return render(request,"home/CUSO_dashboard.html",cadastrado_curso(msg))
-    else:
-        return redirect("sistemaSec/templates/home/CUSO_criar_curso.html")
+            return render(request,"home/CUSO_dashboard.html",cadastrado_curso(form, msg))
+
+        msg = 'Ocorreu um ERRO no Cadastro!'
+        return render(request,"home/CUSO_dashboard.html",cadastrado_curso(form, msg))
 
 @login_required(login_url="/login/")
 def consultar_curso(request):
@@ -53,37 +55,33 @@ def consultar_curso(request):
     
 @login_required(login_url="/login/")    
 def editar_curso(request,id_curso):
-    curso = get_object_or_404(Curso, pk=id_curso)
-    edt_curso = { 'curso':curso }
-    return render(request, 'home/CUSO_editar_curso.html', edt_curso)
+    curso = Curso.objects.get(id_curso = id_curso)
+    form = CursoForm(instance = curso)
 
-@login_required(login_url="/login/")
-def atualizar_curso(request):
-    if request.method == 'POST':
-        id_curso = request.POST['id_curso']
-        cs = Curso.objects.get(pk=id_curso)
-        cs.nome_curso = request.POST['nome_curso']
+    edt_curso = { 
+        'curso':curso, 
+        'form': form }
 
-        erros =[{"Erro": 'Nome do Curso', "Valido": isEmpty(cs.nome_curso), "Mensagem": "Nome Invalido"}]
-        
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
+    if request.method == "POST":
+        form = CursoForm(request.POST, instance = curso)
 
-        if len(list(ExisteErros))>0:
-            print("Existe erros")
-        else:
-            cs.save()
+        if form.is_valid():
+            curso.save()
 
-            msg = 'Curso Cadastrado com Sucesso!'
-        return render(request,"home/CUSO_dashboard.html",cadastrado_curso(msg))
+            msg = 'Curso Alterado com Sucesso!'
+            return render(request,"home/CUSO_dashboard.html",cadastrado_curso(form, msg))
+
+        msg = "Ocorreu um erro!"
+        return render(request,"home/CUSO_dashboard.html",cadastrado_curso(form, msg))
     else:
-        return redirect("home/CUSO_criar_curso.html")
+        return render(request, 'home/CUSO_editar_curso.html', edt_curso)
 
 
-def cadastrado_curso(msg):
+def cadastrado_curso(form, msg):
     curso = Curso.objects.all()
     dados ={
         'cursos': curso,
+        'form': form,
         'mensagem':msg
     }
     return dados

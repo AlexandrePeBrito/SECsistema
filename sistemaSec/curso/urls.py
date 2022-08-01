@@ -6,5 +6,4 @@ urlpatterns = [
     path("curso/buscar/", views.consultar_curso, name="consultar_curso"),
     path("curso/criar/", views.criar_curso, name="criar_curso"),
     path("curso/editar/<str:id_curso>", views.editar_curso, name="editar_curso"),
-    path("curso/atualizar/", views.atualizar_curso, name="atualizar_curso"),
 ]
