@@ -6,5 +6,4 @@ urlpatterns = [
     path("municipio/buscar/", views.consultar_municipio, name="consultar_municipio"),
     path("municipio/criar/", views.criar_municipio, name="criar_municipio"),
     path("municipio/editar/<str:id_municipio>", views.editar_municipio, name="editar_municipio"),
-    path("municipio/atualizar/", views.atualizar_municipio, name="atualizar_municipio"),
 ]

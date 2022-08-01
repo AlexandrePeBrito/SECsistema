@@ -37,23 +37,12 @@
                                     <h5>Atualizar Municipio</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{% url 'atualizar_municipio' %}" method="POST" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="">
                                         {% csrf_token %}
-                                        <div class="form-group" >
-                                            <label>Codigo do Municipio</label>
-                                            <input type="int" class="form-control" name="id_municipio" placeholder="Codigo do municipio" value="{{municipio.id_municipio}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                            <label>Nome do Municipio</label>
-                                            <input type="text" class="form-control" name="nome_municipio" placeholder="Nome do Municipio" value="{{municipio.nome_municipio}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
+                                           
+                                        {{ form }}
 
-                                            <label>Codigo do NTE</label>
-                                            <input type="text" class="form-control mask-matricula" name="id_nte_municipio" placeholder="Codigo do NTE" value="{{municipio.id_nte_municipio}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                        </div>
-
+                                        <div  class="card"></div>
                                         <button type="submit" class="btn btn-primary">Atualizar</button>
                                     </form>
                                 </div>
