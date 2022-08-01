@@ -4,28 +4,30 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from sistemaSec.programa.models import Programa
-
+from .forms import ProgramaForm
 
 @login_required(login_url="/login/")
 def criar_programa(request):
-    if request.method == "POST":
-        nome_programa = request.POST['nome_programa']
-        
-        erros =[{"Erro": 'Nome do Programa', "Valido": isEmpty(nome_programa), "Mensagem": "Nome Invalido"}]
-        
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
+    form = ProgramaForm(request.POST)
 
-        if len(list(ExisteErros))>0:
-            print("Existe erros")
-        else:
+    if request.method == "GET":
+        form = ProgramaForm()
+
+        return render(request,"home/PROG_criar_programa.html", {"form": form})
+    
+    else:
+        if form.is_valid():
+            nome_programa = form.cleaned_data.get('nome_programa')
+        
             programa = Programa.objects.create(nome_programa = nome_programa)
             
             programa.save()
             msg = 'Programa Cadastrado com Sucesso!'
-        return render(request,"home/PROG_dashboard.html",cadastrado_programa(msg))
-    else:
-        return redirect("sistemaSec/templates/home/PROG_criar_programa.html")
+
+            return render(request,"home/PROG_dashboard.html",cadastrado_programa(form, msg))
+
+        msg = 'Ocorreu um ERRO no Cadastro!'
+        return render(request,"home/PROG_dashboard.html",cadastrado_programa(form, msg))
 
 @login_required(login_url="/login/")
 def consultar_programa(request):
@@ -54,37 +56,31 @@ def consultar_programa(request):
     
 @login_required(login_url="/login/")    
 def editar_programa(request,id_programa):
-    programa = get_object_or_404(Programa, pk=id_programa)
-    edt_programa = { 'programa':programa }
-    return render(request, 'home/PROG_editar_programa.html', edt_programa)
+    programa = Programa.objects.get(id_programa=id_programa)
+    form = ProgramaForm(instance = programa)
 
-@login_required(login_url="/login/")
-def atualizar_programa(request):
-    if request.method == 'POST':
-        id_programa = request.POST['id_programa']
-        prog = Programa.objects.get(pk=id_programa)
-        prog.nome_programa = request.POST['nome_programa']
-
-        erros =[{"Erro": 'Nome do Programa', "Valido": isEmpty(prog.nome_programa), "Mensagem": "Nome Invalido"}]
-        
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
-
-        if len(list(ExisteErros))>0:
-            print("Existe erros")
-        else:
-            prog.save()
+    edt_programa = { 
+        'programa':programa, 
+        'form': form }
+    
+    if request.method == "POST":
+        form = ProgramaForm(request.POST, instance = programa)
+        if form.is_valid():
+            programa.save()
 
             msg = 'Programa Alterado com Sucesso!'
-        return render(request,"home/PROG_dashboard.html",cadastrado_programa(msg))
+            return render(request,"home/PROG_dashboard.html",cadastrado_programa(form, msg))
+
+        msg = "Ocorreu um erro!"
+        return render(request,"home/PROG_dashboard.html",cadastrado_programa(form, msg))
     else:
-        return redirect("home/PROG_criar_programa.html")
+        return render(request,"home/PROG_editar_programa.html", edt_programa)
 
-
-def cadastrado_programa(msg):
+def cadastrado_programa(form, msg):
     programa = Programa.objects.all()
     dados ={
         'programas': programa,
+        'form': form,
         'mensagem':msg
     }
     return dados

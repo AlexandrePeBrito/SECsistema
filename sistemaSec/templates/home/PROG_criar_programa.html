@@ -37,14 +37,12 @@
                                     <h5>Criar Programa</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{% url 'criar_programa' %}" method="POST" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="">
                                         {% csrf_token %}
-                                        <div class="form-group" >
-                                            <label>Nome do Programa</label>
-                                            <input type="text" class="form-control" name="nome_programa" placeholder="Nome do Programa" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                        </div>
-                                        <div  class="form-group"></div>
+                                        
+                                        {{ form }}
+
+                                        <div  class="card"></div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                                     </form>
                                 </div>
