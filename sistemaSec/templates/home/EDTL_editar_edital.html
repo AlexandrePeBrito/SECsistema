@@ -37,23 +37,12 @@
                                     <h5>Atualizar Edital</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{% url 'atualizar_edital' %}" method="POST" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="" >
                                         {% csrf_token %}
-                                        <div class="form-group" >
-                                            <label>Codigo do Edital</label>
-                                            <input type="int" class="form-control" name="id_edital" placeholder="Numero do edital" value="{{edital.id_edital}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                            <label>Quantidade de Vagas</label>
-                                            <input type="text" class="form-control" name="quantidade_vagas" placeholder="Quantidade Vagas" value="{{edital.quantidade_vagas_edital}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
 
-                                            <label>Programa</label>
-                                            <input type="text" class="form-control" name="programa" placeholder="Programa" value="{{edital.id_programa_edital}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                        </div>
+                                        {{ form }}
 
+                                        <div class="card"></div>
                                         <button type="submit" class="btn btn-primary">Atualizar</button>
                                     </form>
                                 </div>

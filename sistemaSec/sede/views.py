@@ -36,7 +36,7 @@ def criar_sede(request):
             msg = 'Sede Cadastrada com Sucesso!'
             return render(request,"home/SEDE_dashboard.html",cadastrado_sede(form, msg))
         
-        msg = 'Sede Cadastrada com Sucesso!'
+        msg = 'Ocorreu um Error!'
         return render(request,"home/SEDE_dashboard.html",cadastrado_sede(form, msg))
 
 @login_required(login_url="/login/")
