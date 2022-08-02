@@ -37,44 +37,12 @@
                                     <h5>Atualizar Sede</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{% url 'atualizar_sede' %}" method="POST" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="" >
                                         {% csrf_token %}
-                                        <div class="form-group" >
-                                            <label>Codigo da Sede</label>
-                                            <input type="int" class="form-control" name="id_sede" placeholder="Codigo da Sede" value="{{sede.id_sede}}">
-                                            
-                                            <label>Nome da Sede</label>
-                                            <input type="text" class="form-control" name="nome_sede" placeholder="Nome da Sede" value="{{sede.nome_sede}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
 
-                                            <label>Codigo do Inep</label>
-                                            <input type="text" class="form-control mask-matricula" name="codigo_inep_sede" placeholder="Codigo do Inep" value="{{sede.codigo_inep_sede}}">
+                                        {{ form }}
 
-                                            <label>Telefone</label>
-                                            <input type="text" class="form-control mask-telefone" name="telefone_sede" placeholder="Telefone" value="{{sede.telefone_sede}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-
-                                            <label>Nome do Responsavel</label>
-                                            <input type="text" class="form-control" name="nome_responsavel_sede" placeholder="Nome do Responsavel" value="{{sede.nome_responsavel_sede}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-
-                                            <label>Bairro</label>
-                                            <input type="text" class="form-control" name="bairro_sede" placeholder="Bairro" value="{{sede.bairro_sede}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-
-                                            <label>Email</label>
-                                            <input type="email" class="form-control" name="email_sede" placeholder="Email" value="{{sede.email_sede}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-
-                                            <label>Municipio</label>
-                                            <input type="text" class="form-control" name="id_municipio_sede" placeholder="Municipio" value="{{sede.id_municipio_sede}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                            <label>NTE</label>
-                                            <input type="text" class="form-control" name="id_nte_sede" placeholder="Codigo do NTE" value="{{sede.id_nte_sede}}" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                        </div>
-
+                                        <div class="card"></div>
                                         <button type="submit" class="btn btn-primary">Atualizar</button>
                                     </form>
                                 </div>
