@@ -37,26 +37,12 @@
                                     <h5>Criar Estagio</h5>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{% url 'criar_estagio' %}" method="POST" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="" >
                                         {% csrf_token %}
-                                        <div class="form-group" >
-                                            <label>Carga Horaria</label>
-                                            <input type="text" class="form-control mask-matricula" name="carga_horaria_estagio" placeholder="Carga Horaria" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                            <label>Area</label>
-                                            <input type="text" class="form-control" name="area_estagio" placeholder="Area" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                            <label>Edital</label>
-                                            <input type="text" class="form-control" name="id_edital_estagio" placeholder="Edital" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-
-                                            <label>Curso</label>
-                                            <input type="text" class="form-control" name="id_cursos_estagio" placeholder="Curso" required oninvalid = "this.setCustomValidity('Campo requerido')" 
-                                            onchange="try{setCustomValidity('')}catch(e){}">
-                                            
-                                        </div>
+                                        
+                                        {{ form }}
+                                        
+                                        <div  class="card"></div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                                     </form>
                                 </div>

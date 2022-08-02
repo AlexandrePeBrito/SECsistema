@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from sistemaSec.edital.models import Edital
-from sistemaSec.programa.models import Programa
 from .forms import EditalForm
 
 @login_required(login_url="/login/")
