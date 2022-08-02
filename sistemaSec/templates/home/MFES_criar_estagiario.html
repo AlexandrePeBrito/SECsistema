@@ -42,106 +42,12 @@
                                     </div>
                                 {% endif %}
                                 <div class="col-md-6">
-                                    <form action="{% url 'criar_estagiario_mais_futuro' %}" method="POST" enctype="multipart/form-data">
+                                    <form role="form" method="POST" action="" >
                                         {% csrf_token %}
-                                        <div class="form-group" >
-                                            <label>Nome do Estagiario</label>
-                                            <input type="text" class="form-control" name="nome_estagiario" placeholder="Nome Estagiario">
-                                            
-                                            <label>CPF</label>
-                                            <input type="text" class="form-control mask-cpf" name="cpf" placeholder="CPF">
-                                            
-                                            <label>RG</label>
-                                            <input type="text" class="form-control mask-rg" name="rg" placeholder="RG">
-                                            
-                                            <label>Turno</label>
-                                            <select class="form-control" name="turno">
-                                                <option value="0">Selecione</option>
-                                                <option value="Matutino">Matutino</option>
-                                                <option value="Vespertino">Vespertino</option>
-                                            </select>
-                                            
-                                            <label>Email</label>
-                                            <input type="email" class="form-control" name="email" placeholder="Exemplo@gmail.com">
-                                            
-                                            <label>Semestre</label>
-                                            <select class="form-control" name="semestre">
-                                                <option value="0">Selecione</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                            </select>
-                                            
-                                            <label>Nis</label>
-                                            <input type="text" class="form-control mask-nis" name="nis" placeholder="nis">
-                                            
-                                            <label>telefone</label>
-                                            <input type="text" class="form-control mask-telefone" name="telefone" placeholder="telefone">
-                                            
-                                            <label>responsavel</label>
-                                            <input type="text" class="form-control" name="responsavel" placeholder="responsavel">
-                                            
-                                            <label>nascimento</label>
-                                            <input type="text" class="form-control mask-data" name="nascimento" placeholder="nascimento">
-                                            
-                                            <label>genero</label>
-                                            <select class="form-control" name="genero">
-                                                <option value="0">Selecione</option>
-                                                <option value="Masculino">Masculino</option>
-                                                <option value="Feminino">Feminino</option>
-                                            </select>
-                                           
-                                            <label>raca</label>
-                                            <select class="form-control" name="raca">
-                                                <option value="0">Selecione</option>
-                                                <option value="Branca">Branca</option>
-                                                <option value="Parda">Parda</option>
-                                                <option value="Preta">Preta</option>
-                                                <option value="Amarela">Amarela</option>
-                                                <option value="Indigena">Indigena</option>
-                                            </select>
-                                                                                        
-                                            <label>bairro</label>
-                                            <input type="text" class="form-control" name="bairro" placeholder="bairro">
-                                            
-                                            <label>numero</label>
-                                            <input type="text" class="form-control" name="numero" placeholder="numero">
-                                            
-                                            <label>complemento</label>
-                                            <input type="text" class="form-control" name="complemento" placeholder="complemento">
-                                            
-                                            <label>Matricula</label>
-                                            <input type="text" class="form-control mask-matricula" name="Matricula" placeholder="Matricula">
-                                            
-                                            <label>Situaçao</label>
-                                            <select class="form-control" name="situaçao">
-                                                <option value="0">Selecione</option>
-                                                <option value="Ativo">Ativo</option>
-                                                <option value="Desligado">Desligado</option>
-                                                <option value="Desclassificado">Desclassificado</option>
-                                            </select>
-                                            
-                                            <label>Supervisor</label>
-                                            <input type="text" class="form-control" name="supervisor" placeholder="supervisor">
-
-                                            <label>Sede</label>
-                                            <input type="text" class="form-control" name="sede" placeholder="Sede">
-
-                                            <label>Faculdade</label>
-                                            <input type="text" class="form-control" name="faculdade" placeholder="Faculdade">
-
-                                            <label>Estagio</label>
-                                            <input type="text" class="form-control" name="estagio" placeholder="Estagio">
                                         
-                                        </div>
-                                        <div  class="form-group"></div>
+                                        {{ form }}
+                                        
+                                        <div  class="card"></div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                                     </form>
                                 </div>

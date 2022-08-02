@@ -18,54 +18,40 @@ from sistemaSec.supervisor.models import Supervisor
 from sistemaSec.sede.models import Sede
 from sistemaSec.estagio.models import Estagio
 from sistemaSec.faculdade.models import Faculdade
+from .forms import EstagiarioForm
 
 @login_required(login_url="/login/")
 def criar_estagiario_partiu_estagio(request):
-    if request.method == "POST":
-        nome_estagiario = request.POST['nome_estagiario']
-        cpf = request.POST['cpf']
-        rg = request.POST['rg']
-        turno = request.POST['turno']
-        email = request.POST['email']
-        semestre = request.POST['semestre']
-        nis = request.POST['nis']
-        telefone = request.POST['telefone']
-        responsavel = request.POST['responsavel']
-        nascimento = request.POST['nascimento']
-        genero = request.POST['genero']
-        raca = request.POST['raca']
-        bairro = request.POST['bairro']
-        numero = request.POST['numero']
-        complemento = request.POST['complemento']
-        Matricula = request.POST['Matricula']
-        situaçao = request.POST['situaçao']
-        supervisor = request.POST['supervisor']
-        sede = request.POST['sede']
-        faculdade = request.POST['faculdade']
-        estagio = request.POST['estagio']
+    form = EstagiarioForm(request.POST)
 
-        #validacao de error
-        erros = [{"Erro": 'CPF', "Valido": True, "Mensagem": "CPF Invalido"},
-                 {"Erro": 'Rg', "Valido": True, "Mensagem": "Preencher RG"},
-                 {"Erro": 'Nome', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Turno', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Email', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Telefone', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Semestre', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Nascimento', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Genero', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Raca', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Situacao', "Valido": True, "Mensagem": "Preencher Nome"}]
+    if request.method == "GET":
+        form = EstagiarioForm()
 
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
-        if len(list(ExisteErros))>0:
-            print("existe erros")
-        else:
-            sedeObj = Sede.objects.get(id_sede=sede)
-            faculdadeObj = Faculdade.objects.get(id_faculdade=faculdade)
-            estagioObj = Estagio.objects.get(id_estagio=estagio)
-            supervisorObj = Supervisor.objects.get(id_supervisor = supervisor)
+        return render(request,'home/PAES_criar_estagiario.html', {'form': form})
+    else:
+        if form.is_valid():
+            nome_estagiario = form.cleaned_data.get('nome_estagiario')
+            cpf = form.cleaned_data.get('cpf_estagiario')
+            rg = form.cleaned_data.get('rg_estagiario')
+            turno = form.cleaned_data.get('turno_estagiario')
+            email = form.cleaned_data.get('email_estagiario')
+            semestre = form.cleaned_data.get('semestre_estagiario')
+            nis = form.cleaned_data.get('nis_pis_estagiario')
+            telefone = form.cleaned_data.get('telefone_estagiario')
+            responsavel = form.cleaned_data.get('nome_responsavel_estagiario')
+            nascimento = form.cleaned_data.get('data_nascimento_estagiario')
+            genero = form.cleaned_data.get('genero_estagiario')
+            raca = form.cleaned_data.get('raca_estagiario')
+            bairro = form.cleaned_data.get('bairro_estagiario')
+            numero = form.cleaned_data.get('numero_estagiario')
+            complemento = form.cleaned_data.get('complemento_estagiario')
+            Matricula = form.cleaned_data.get('matricula_estagiario')
+            situaçao = form.cleaned_data.get('situacao_estagiario')
+            supervisor = form.cleaned_data.get('supervisor_estagiario')
+            sede = form.cleaned_data.get('sede_estagiario')
+            faculdade = form.cleaned_data.get('faculdade_estagiario')
+            estagio = form.cleaned_data.get('estagio_estagiario')
+
             estagiario = Estagiario.objects.create(cpf_estagiario = cpf,
                 nome_estagiario = nome_estagiario, rg_estagiario = rg,
                 turno_estagiario = turno, email_estagiario = email,
@@ -75,15 +61,18 @@ def criar_estagiario_partiu_estagio(request):
                 genero_estagiario = genero, raca_estagiario = raca,
                 bairro_estagiario = bairro, numero_estagiario = numero,
                 complemento_estagiario = complemento, matricula_estagiario = Matricula,
-                situacao_estagiario = situaçao, supervisor_estagiario = supervisorObj,
-                sede_estagiario = sedeObj, faculdade_estagiario = faculdadeObj,
-                estagio_estagiario = estagioObj)
+                situacao_estagiario = situaçao, supervisor_estagiario = supervisor,
+                sede_estagiario = sede, faculdade_estagiario = faculdade,
+                estagio_estagiario = estagio)
             
             estagiario.save()
             msg = 'Estagiario Cadastrado com Sucesso!'
-        return render(request,"home/PAES_dashboard.html",cadastrado_estagiario_partiu_estagio(msg))
-    else:
-        return redirect("sistemaSec/templates/home/PAES_criar_estagiario.html")
+            return render(request,"home/PAES_dashboard.html",cadastrado_estagiario_partiu_estagio(form, msg))
+        
+        print(form.errors)
+        msg = 'Ocorreu um Error!'
+        return render(request,"home/PAES_dashboard.html",cadastrado_estagiario_partiu_estagio(form, msg))
+
 
 @login_required(login_url="/login/")
 def consultar_estagiario_partiu_estagio(request):
@@ -130,70 +119,27 @@ def consultar_estagiario_partiu_estagio(request):
     
 @login_required(login_url="/login/")    
 def editar_estagiario_partiu_estagio(request,cpf_estagiario):
-    print(cpf_estagiario)
-    estagiario = get_object_or_404(Estagiario, pk=cpf_estagiario)
+    estagiario = Estagiario.objects.get(cpf_estagiario=cpf_estagiario)
+    form = EstagiarioForm(instance = estagiario)
 
-    editar_estagiario_partiu_estagio = { 'estagiario':estagiario }
+    editar_estagiario_partiu_estagio = { 
+        'estagiario':estagiario,
+        'form': form }
 
-    return render(request, 'home/PAES_editar_estagiario.html', editar_estagiario_partiu_estagio)
+    if request.method == "POST":
+        form = EstagiarioForm(request.POST, instance = estagiario)
 
-@login_required(login_url="/login/")
-def atualizar_estagiario_partiu_estagio(request):
-    if request.method == 'POST':
-        cpf = request.POST['cpf']
-        est = Estagiario.objects.get(pk=cpf)
-        est.nome_estagiario = request.POST['nome_estagiario']
-        est.cpf_estagiario = cpf
-        est.rg_estagiario = request.POST['rg']
-        est.turno_estagiario = request.POST['turno']
-        est.email_estagiario = request.POST['email']
-        est.semestre_estagiario = request.POST['semestre']
-        est.nis_pis_estagiario = request.POST['nis']
-        est.telefone_estagiario = request.POST['telefone']
-        est.nome_responsavel_estagiario = request.POST['responsavel']
-        est.data_nascimento_estagiario = request.POST['nascimento']
-        est.genero_estagiario = request.POST['genero']
-        est.raca_estagiario = request.POST['raca']
-        est.bairro_estagiario = request.POST['bairro']
-        est.numero_estagiario = request.POST['numero']
-        est.complemento_estagiario = request.POST['complemento']
-        est.matricula_estagiario = request.POST['Matricula']
-        est.situacao_estagiario = request.POST['situaçao']
-        supervisor = request.POST['supervisor']
-        sede = request.POST['sede']
-        faculdade = request.POST['faculdade']
-        estagio = request.POST['Estagio']
-        erros = [{"Erro": 'CPF', "Valido": True, "Mensagem": "CPF Invalido"},
-                 {"Erro": 'Rg', "Valido": True, "Mensagem": "Preencher RG"},
-                 {"Erro": 'Nome', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Turno', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Email', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Telefone', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Semestre', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Nascimento', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Genero', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Raca', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Situacao', "Valido": True, "Mensagem": "Preencher Nome"}]
+        if form.is_valid():
+            estagiario.save()
 
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
-        if len(list(ExisteErros))>0:
-            print("existe erros")
-        else:
-            supervisorObj = Supervisor.objects.get(id_supervisor=supervisor)
-            sedeObj = Sede.objects.get(id_sede=sede)
-            faculdadeObj = Faculdade.objects.get(id_faculdade=faculdade)
-            estagioObj = Estagio.objects.get(id_estagio=estagio)
-            est.supervisor_estagiario = supervisorObj
-            est.sede_estagiario = sedeObj
-            est.faculdade_estagiario = faculdadeObj
-            est.estagio_estagiario = estagioObj
-            est.save()
-            print(estagio)
-            msg = 'Estagiario Atualizado com Sucesso!'
-        return render(request,"home/PAES_dashboard.html",cadastrado_estagiario_partiu_estagio(msg))
-    else:
-        return redirect("home/PAES_criar_estagiario.html")
+            msg = 'Estagiario Alterado com sucesso!'
+            return render(request,"home/PAES_dashboard.html",cadastrado_estagiario_partiu_estagio(form, msg))
+        
+        print(form.errors)
+        msg = 'Ocorreu um Erro'
+        return render(request, 'home/PAES_dashboard.html', cadastrado_estagiario_partiu_estagio(form, msg))
+    else:    
+        return render(request, 'home/PAES_editar_estagiario.html', editar_estagiario_partiu_estagio)
 
 
 
@@ -268,7 +214,7 @@ def isChoiceEmpty(campo):
     else:
         return True
 
-def cadastrado_estagiario_partiu_estagio(msg):
+def cadastrado_estagiario_partiu_estagio(form, msg):
     programa_consulta = get_object_or_404(Programa,id_programa=1)
     sede_consulta = Edital.objects.filter(id_programa_edital_id=programa_consulta)
     estagio = Estagio.objects.filter(id_edital_estagio_id__in=sede_consulta)
@@ -276,13 +222,14 @@ def cadastrado_estagiario_partiu_estagio(msg):
     
     dados ={
         'estagiarios': estagiario,
+        'form': form,
         'mensagem':msg
     }
    
     return dados
 
 
-def cadastrado_estagiario_mais_futuro(msg):
+def cadastrado_estagiario_mais_futuro(form, msg):
     programa_consulta = get_object_or_404(Programa,id_programa=2)
     sede_consulta = Edital.objects.filter(id_programa_edital_id=programa_consulta)
     estagio = Estagio.objects.filter(id_edital_estagio_id__in=sede_consulta)
@@ -290,6 +237,7 @@ def cadastrado_estagiario_mais_futuro(msg):
     
     dados ={
         'estagiarios': estagiario,
+        'form': form,
         'mensagem':msg
     }
    
@@ -297,51 +245,36 @@ def cadastrado_estagiario_mais_futuro(msg):
 
 @login_required(login_url="/login/")
 def criar_estagiario_mais_futuro(request):
-    if request.method == "POST":
-        nome_estagiario = request.POST['nome_estagiario']
-        cpf = request.POST['cpf']
-        rg = request.POST['rg']
-        turno = request.POST['turno']
-        email = request.POST['email']
-        semestre = request.POST['semestre']
-        nis = request.POST['nis']
-        telefone = request.POST['telefone']
-        responsavel = request.POST['responsavel']
-        nascimento = request.POST['nascimento']
-        genero = request.POST['genero']
-        raca = request.POST['raca']
-        bairro = request.POST['bairro']
-        numero = request.POST['numero']
-        complemento = request.POST['complemento']
-        Matricula = request.POST['Matricula']
-        situaçao = request.POST['situaçao']
-        supervisor = request.POST['supervisor']
-        sede = request.POST['sede']
-        faculdade = request.POST['faculdade']
-        estagio = request.POST['estagio']
+    form = EstagiarioForm(request.POST)
 
-        #validacao de error
-        erros = [{"Erro": 'CPF', "Valido": True, "Mensagem": "CPF Invalido"},
-                 {"Erro": 'Rg', "Valido": True, "Mensagem": "Preencher RG"},
-                 {"Erro": 'Nome', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Turno', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Email', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Telefone', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Semestre', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Nascimento', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Genero', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Raca', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Situacao', "Valido": True, "Mensagem": "Preencher Nome"}]
+    if request.method == "GET":
+        form = EstagiarioForm()
 
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
-        if len(list(ExisteErros))>0:
-            print("existe erros")
-        else:
-            sedeObj = Sede.objects.get(id_sede=sede)
-            faculdadeObj = Faculdade.objects.get(id_faculdade=faculdade)
-            estagioObj = Estagio.objects.get(id_estagio=estagio)
-            supervisorObj = Supervisor.objects.get(id_supervisor = supervisor)
+        return render(request,'home/MFES_criar_estagiario.html', {'form': form})
+    else:
+        if form.is_valid():
+            nome_estagiario = form.cleaned_data.get('nome_estagiario')
+            cpf = form.cleaned_data.get('cpf_estagiario')
+            rg = form.cleaned_data.get('rg_estagiario')
+            turno = form.cleaned_data.get('turno_estagiario')
+            email = form.cleaned_data.get('email_estagiario')
+            semestre = form.cleaned_data.get('semestre_estagiario')
+            nis = form.cleaned_data.get('nis_pis_estagiario')
+            telefone = form.cleaned_data.get('telefone_estagiario')
+            responsavel = form.cleaned_data.get('nome_responsavel_estagiario')
+            nascimento = form.cleaned_data.get('data_nascimento_estagiario')
+            genero = form.cleaned_data.get('genero_estagiario')
+            raca = form.cleaned_data.get('raca_estagiario')
+            bairro = form.cleaned_data.get('bairro_estagiario')
+            numero = form.cleaned_data.get('numero_estagiario')
+            complemento = form.cleaned_data.get('complemento_estagiario')
+            Matricula = form.cleaned_data.get('matricula_estagiario')
+            situaçao = form.cleaned_data.get('situacao_estagiario')
+            supervisor = form.cleaned_data.get('supervisor_estagiario')
+            sede = form.cleaned_data.get('sede_estagiario')
+            faculdade = form.cleaned_data.get('faculdade_estagiario')
+            estagio = form.cleaned_data.get('estagio_estagiario')
+
             estagiario = Estagiario.objects.create(cpf_estagiario = cpf,
                 nome_estagiario = nome_estagiario, rg_estagiario = rg,
                 turno_estagiario = turno, email_estagiario = email,
@@ -351,15 +284,17 @@ def criar_estagiario_mais_futuro(request):
                 genero_estagiario = genero, raca_estagiario = raca,
                 bairro_estagiario = bairro, numero_estagiario = numero,
                 complemento_estagiario = complemento, matricula_estagiario = Matricula,
-                situacao_estagiario = situaçao, supervisor_estagiario = supervisorObj,
-                sede_estagiario = sedeObj, faculdade_estagiario = faculdadeObj,
-                estagio_estagiario = estagioObj)
+                situacao_estagiario = situaçao, supervisor_estagiario = supervisor,
+                sede_estagiario = sede, faculdade_estagiario = faculdade,
+                estagio_estagiario = estagio)
             
             estagiario.save()
             msg = 'Estagiario Cadastrado com Sucesso!'
-        return render(request,"home/MFES_dashboard.html",cadastrado_estagiario_mais_futuro(msg))
-    else:
-        return redirect("sistemaSec/templates/home/MFES_criar_estagiario.html")
+            return render(request,"home/MFES_dashboard.html",cadastrado_estagiario_mais_futuro(form, msg))
+        
+        print(form.errors)
+        msg = 'Ocorreu um Error!'
+        return render(request,"home/MFES_dashboard.html",cadastrado_estagiario_mais_futuro(form, msg))
 
 @login_required(login_url="/login/")
 def consultar_estagiario_mais_futuro(request):
@@ -405,67 +340,27 @@ def consultar_estagiario_mais_futuro(request):
     
 @login_required(login_url="/login/")    
 def editar_estagiario_mais_futuro(request,cpf_estagiario):
-    estagiario = get_object_or_404(Estagiario, pk=cpf_estagiario)
+    estagiario = Estagiario.objects.get(cpf_estagiario=cpf_estagiario)
+    form = EstagiarioForm(instance = estagiario)
 
-    editar_estagiario_mais_futuro = { 'estagiario':estagiario }
+    editar_estagiario_partiu_estagio = { 
+        'estagiario':estagiario,
+        'form': form }
+
+    if request.method == "POST":
+        form = EstagiarioForm(request.POST, instance = estagiario)
+
+        if form.is_valid():
+            estagiario.save()
+
+            msg = 'Estagiario Alterado com sucesso!'
+            return render(request,"home/MFES_dashboard.html",cadastrado_estagiario_mais_futuro(form, msg))
+        
+        print(form.errors)
+        msg = 'Ocorreu um Erro'
+        return render(request, 'home/MFES_dashboard.html', cadastrado_estagiario_mais_futuro(form, msg))
+    else:    
+        return render(request, 'home/MFES_editar_estagiario.html', editar_estagiario_partiu_estagio)
     
-    return render(request, 'home/MFES_editar_estagiario.html', editar_estagiario_mais_futuro)
-
-@login_required(login_url="/login/")
-def atualizar_estagiario_mais_futuro(request):
-    if request.method == 'POST':
-        cpf = request.POST['cpf']
-        est = Estagiario.objects.get(pk=cpf)
-        est.nome_estagiario = request.POST['nome_estagiario']
-        est.cpf_estagiario = cpf
-        est.rg_estagiario = request.POST['rg']
-        est.turno_estagiario = request.POST['turno']
-        est.email_estagiario = request.POST['email']
-        est.semestre_estagiario = request.POST['semestre']
-        est.nis_pis_estagiario = request.POST['nis']
-        est.telefone_estagiario = request.POST['telefone']
-        est.nome_responsavel_estagiario = request.POST['responsavel']
-        est.data_nascimento_estagiario = request.POST['nascimento']
-        est.genero_estagiario = request.POST['genero']
-        est.raca_estagiario = request.POST['raca']
-        est.bairro_estagiario = request.POST['bairro']
-        est.numero_estagiario = request.POST['numero']
-        est.complemento_estagiario = request.POST['complemento']
-        est.matricula_estagiario = request.POST['Matricula']
-        est.situacao_estagiario = request.POST['situaçao']
-        supervisor = request.POST['supervisor']
-        sede = request.POST['sede']
-        faculdade = request.POST['faculdade']
-        estagio = request.POST['Estagio']
-        erros = [{"Erro": 'CPF', "Valido": True, "Mensagem": "CPF Invalido"},
-                 {"Erro": 'Rg', "Valido": True, "Mensagem": "Preencher RG"},
-                 {"Erro": 'Nome', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Turno', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Email', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Telefone', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Semestre', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Nascimento', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Genero', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Raca', "Valido": True, "Mensagem": "Preencher Nome"},
-                 {"Erro": 'Situacao', "Valido": True, "Mensagem": "Preencher Nome"}]
-
-        err = filter(lambda x: x['Valido'] == False, erros)
-        ExisteErros = map(lambda x: x['Erro'], err)
-        if len(list(ExisteErros))>0:
-            print("existe erros")
-        else:
-            supervisorObj = Supervisor.objects.get(id_supervisor=supervisor)
-            sedeObj = Sede.objects.get(id_sede=sede)
-            faculdadeObj = Faculdade.objects.get(id_faculdade=faculdade)
-            estagioObj = Estagio.objects.get(id_estagio=estagio)
-            est.supervisor_estagiario = supervisorObj
-            est.sede_estagiario = sedeObj
-            est.faculdade_estagiario = faculdadeObj
-            est.estagio_estagiario = estagioObj
-            est.save()
-            msg = 'Estagiario Atualizado com Sucesso!'
-        return render(request,"home/index.html",cadastrado_estagiario_mais_futuro(msg))
-    else:
-        return redirect("home/MFES_criar_estagiario.html")
 
 
