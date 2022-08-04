@@ -16,7 +16,7 @@ class MunicipioForm(forms.ModelForm):
     
     class Meta:
         model = Municipio
-        fields = '__all__'
+        fields = "__all__"
 
     nome_municipio = forms.CharField(
         widget = forms.TextInput(

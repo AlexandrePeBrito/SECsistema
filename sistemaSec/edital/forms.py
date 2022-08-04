@@ -16,7 +16,7 @@ class EditalForm(forms.ModelForm):
     
     class Meta:
         model = Edital
-        fields = '__all__'
+        fields = "__all__"
 
     id_edital = forms.CharField(
         widget = forms.TextInput(

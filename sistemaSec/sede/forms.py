@@ -17,7 +17,7 @@ class SedeForm(forms.ModelForm):
     
     class Meta:
         model = Sede
-        fields = '__all__'
+        fields = "__all__"
 #id_sede, nome_sede, codigo_inep_sede, telefone_sede, nome_responsavel_sede, bairro_sede, email_sede, id_nte_sede, id_municipio_sede
     nome_sede = forms.CharField(
         widget = forms.TextInput(

@@ -6,7 +6,7 @@ from sistemaSec.nte.models import NTE
 from .forms import MunicipioForm
 from django.forms.models import model_to_dict
 
-@login_required(login_url="/login/")
+@login_required(login_url = "/login/")
 def criar_municipio(request):
     form = MunicipioForm(request.POST)
 
@@ -16,27 +16,27 @@ def criar_municipio(request):
         return render(request,"home/MUNI_criar_municipio.html", {"form": form})
     else:
         if form.is_valid():
-            nome_municipio = form.cleaned_data.get('nome_municipio')
-            nte = form.cleaned_data.get('id_nte_municipio')
+            nome_municipio = form.cleaned_data.get("nome_municipio")
+            nte = form.cleaned_data.get("id_nte_municipio")
             
             municipio = Municipio.objects.create(nome_municipio = nome_municipio,
                     id_nte_municipio = nte)
                 
             municipio.save()
-            msg = 'Municipio Cadastrado com Sucesso!'
+            msg = "Municipio Cadastrado com Sucesso!"
             return render(request,"home/MUNI_dashboard.html",cadastrado_municipio(form, msg))
         
-        msg = 'Ocorreu um ERRO no Cadastro!'
+        msg = "Ocorreu um ERRO no Cadastro!"
         return render(request,"home/MUNI_dashboard.html",cadastrado_municipio(form, msg))
 
-@login_required(login_url="/login/")
+@login_required(login_url ="/login/")
 def consultar_municipio(request):
-    lista_por_municipio=None
+    lista_por_municipio = None
     muncipio = Municipio.objects.all()
     
-    if 'buscar_municipio' in request.GET:
-        municipio_consulta=request.GET['buscar_municipio']
-        nte_consulta=request.GET['buscar_nte']
+    if "buscar_municipio" in request.GET:
+        municipio_consulta = request.GET["buscar_municipio"]
+        nte_consulta = request.GET["buscar_nte"]
         if consultar_municipio:
             lista_por_municipio = muncipio.filter(Q(nome_municipio__icontains = municipio_consulta))
             listar_por_nte = lista_por_municipio.filter(Q(id_nte_municipio__id_NTE__icontains = nte_consulta))
@@ -55,22 +55,22 @@ def consultar_municipio(request):
         }
     return render(request,"home/MUNI_dashboard.html",dados)
     
-@login_required(login_url="/login/")    
+@login_required(login_url = "/login/")    
 def editar_municipio(request,id_municipio):
-    municipio = Municipio.objects.get(id_municipio=id_municipio)
+    municipio = Municipio.objects.get(id_municipio = id_municipio)
     form = MunicipioForm(initial = model_to_dict(municipio))
 
     edt_municipio = { 
-        'municipio':municipio,
-        'form': form }
+        "municipio":municipio,
+        "form": form }
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = MunicipioForm(request.POST, instance = municipio)
 
         if form.is_valid():
             municipio.save()
 
-            msg = 'Municipio Alterado com Sucesso!'
+            msg = "Municipio Alterado com Sucesso!"
             return render(request,"home/MUNI_dashboard.html",cadastrado_municipio(form, msg))
 
         msg = "Ocorreu um erro!"
@@ -80,10 +80,10 @@ def editar_municipio(request,id_municipio):
 
 def cadastrado_municipio(form, msg):
     municipios = Municipio.objects.all()
-    dados ={
-        'municipios': municipios,
-        'form': form,
-        'mensagem':msg
+    dados = {
+        "municipios": municipios,
+        "form": form,
+        "mensagem":msg
     }
     return dados
 

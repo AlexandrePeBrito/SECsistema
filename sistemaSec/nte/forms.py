@@ -15,7 +15,7 @@ class NTEForm(forms.ModelForm):
     
     class Meta:
         model = NTE
-        fields = '__all__'
+        fields = "__all__"
 
     nome_direitor_NTE =  forms.CharField(
         widget = forms.TextInput(

@@ -17,7 +17,7 @@ class EstagioForm(forms.ModelForm):
     
     class Meta:
         model = Estagio
-        fields = '__all__'
+        fields = "__all__"
 
     carga_horaria_estagio = forms.CharField(
         widget = forms.TextInput(

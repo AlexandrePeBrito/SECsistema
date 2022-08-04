@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from sistemaSec.curso.models import Curso
 from .forms import CursoForm
 
-@login_required(login_url="/login/")
+@login_required(login_url = "/login/")
 def criar_curso(request):
     form = CursoForm(request.POST)
 
@@ -17,27 +17,27 @@ def criar_curso(request):
     
     else:
         if form.is_valid():
-            nome_curso = form.cleaned_data.get('nome_curso')
+            nome_curso = form.cleaned_data.get("nome_curso")
         
             curso = Curso.objects.create(nome_curso = nome_curso)
         
             curso.save()
 
-            msg = 'Curso Cadastrado com Sucesso!'
+            msg = "Curso Cadastrado com Sucesso!"
             return render(request,"home/CUSO_dashboard.html",cadastrado_curso(form, msg))
 
-        msg = 'Ocorreu um ERRO no Cadastro!'
+        msg = "Ocorreu um ERRO no Cadastro!"
         return render(request,"home/CUSO_dashboard.html",cadastrado_curso(form, msg))
 
-@login_required(login_url="/login/")
+@login_required(login_url = "/login/")
 def consultar_curso(request):
-    lista_por_curso=None
+    lista_por_curso = None
     curso = Curso.objects.all()
     
-    if 'buscar_curso' in request.GET:
-        curso_consulta=request.GET['buscar_curso']
+    if "buscar_curso" in request.GET:
+        curso_consulta = request.GET["buscar_curso"]
         if consultar_curso:
-            lista_por_curso= curso.filter(Q(nome_curso__icontains=curso_consulta))
+            lista_por_curso= curso.filter(Q(nome_curso__icontains = curso_consulta))
     
     if lista_por_curso:
         dados = {
@@ -53,14 +53,14 @@ def consultar_curso(request):
         }
     return render(request,"home/CUSO_dashboard.html",dados)
     
-@login_required(login_url="/login/")    
+@login_required(login_url = "/login/")    
 def editar_curso(request,id_curso):
     curso = Curso.objects.get(id_curso = id_curso)
     form = CursoForm(instance = curso)
 
     edt_curso = { 
-        'curso':curso, 
-        'form': form }
+        "curso":curso, 
+        "form": form }
 
     if request.method == "POST":
         form = CursoForm(request.POST, instance = curso)
@@ -68,20 +68,20 @@ def editar_curso(request,id_curso):
         if form.is_valid():
             curso.save()
 
-            msg = 'Curso Alterado com Sucesso!'
+            msg = "Curso Alterado com Sucesso!"
             return render(request,"home/CUSO_dashboard.html",cadastrado_curso(form, msg))
 
         msg = "Ocorreu um erro!"
         return render(request,"home/CUSO_dashboard.html",cadastrado_curso(form, msg))
     else:
-        return render(request, 'home/CUSO_editar_curso.html', edt_curso)
+        return render(request, "home/CUSO_editar_curso.html", edt_curso)
 
 def cadastrado_curso(form, msg):
     curso = Curso.objects.all()
-    dados ={
-        'cursos': curso,
-        'form': form,
-        'mensagem':msg
+    dados = {
+        "cursos": curso,
+        "form": form,
+        "mensagem":msg
     }
     return dados
 

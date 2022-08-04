@@ -15,7 +15,7 @@ class CursoForm(forms.ModelForm):
     
     class Meta:
         model = Curso
-        fields = '__all__'
+        fields = "__all__"
 
     nome_curso = forms.CharField(
         widget = forms.TextInput(

@@ -18,7 +18,7 @@ class EstagiarioForm(forms.ModelForm):
     
     class Meta:
         model = Estagiario
-        fields = '__all__'
+        fields = "__all__"
 
     cpf_estagiario = forms.CharField(
         widget = forms.TextInput(

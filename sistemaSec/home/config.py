@@ -7,5 +7,5 @@ from django.apps import AppConfig
 
 
 class MyConfig(AppConfig):
-    name = 'sistemaSec.home'
-    label = 'sistemaSec_home'
+    name = "sistemaSec.home"
+    label = "sistemaSec_home"

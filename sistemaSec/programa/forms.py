@@ -15,7 +15,7 @@ class ProgramaForm(forms.ModelForm):
     
     class Meta:
         model = Programa
-        fields = '__all__'
+        fields = "__all__"
 
     nome_programa = forms.CharField(
         widget = forms.TextInput(

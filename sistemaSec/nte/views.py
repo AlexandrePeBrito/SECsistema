@@ -26,11 +26,11 @@ def criar_nte(request):
                 email_NTE = email, telefone_NTE = telefone)
             
             nte.save()
-            msg = 'NTE Cadastrado com Sucesso!'
+            msg = "NTE Cadastrado com Sucesso!"
 
             return render(request,"home/NTE_dashboard.html",cadastrado_nte(form, msg))
 
-        msg = 'Ocorreu um ERRO no Cadastro!'
+        msg = "Ocorreu um ERRO no Cadastro!"
         return render(request,"home/NTE_dashboard.html",cadastrado_nte(form, msg))
 
 @login_required(login_url="/login/")
@@ -38,8 +38,8 @@ def consultar_nte(request):
     lista_por_nte=None
     nte = NTE.objects.all()
     
-    if 'buscar_nte' in request.GET:
-        nte_consulta=request.GET['buscar_nte']
+    if "buscar_nte" in request.GET:
+        nte_consulta=request.GET["buscar_nte"]
         if consultar_nte:
             lista_por_nte= nte.filter(Q(id_NTE__icontains=nte_consulta))
     
@@ -64,29 +64,29 @@ def editar_nte(request,id_NTE):
     form = NTEForm(initial = model_to_dict(nte))
 
     edt_nte = { 
-        'nte':nte,
-        'form': form  }
+        "nte":nte,
+        "form": form  }
 
     if request.method == "POST":
         form = NTEForm(request.POST, instance = nte)
         if form.is_valid():
             nte.save()
 
-            msg = 'NTE Alterado com Sucesso!'
+            msg = "NTE Alterado com Sucesso!"
             return render(request,"home/NTE_dashboard.html",cadastrado_nte(form, msg))
 
         msg = "Ocorreu um erro!"
         return render(request,"home/NTE_dashboard.html",cadastrado_nte(form, msg))
     else:
-        return render(request, 'home/NTE_editar_nte.html', edt_nte)
+        return render(request, "home/NTE_editar_nte.html", edt_nte)
 
 
 def cadastrado_nte(form, msg):
     nte = NTE.objects.all()
     dados ={
-        'NTEs': nte,
-        'form': form,
-        'mensagem':msg
+        "NTEs": nte,
+        "form": form,
+        "mensagem":msg
     }
     return dados
 

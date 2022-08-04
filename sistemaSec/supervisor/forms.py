@@ -15,7 +15,7 @@ class SupervisorForm(forms.ModelForm):
     
     class Meta:
         model = Supervisor
-        fields = '__all__'
+        fields = "__all__"
 
     nome_supervisor = forms.CharField(
         widget = forms.TextInput(

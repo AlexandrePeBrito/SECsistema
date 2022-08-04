@@ -15,7 +15,7 @@ class FaculdadeForm(forms.ModelForm):
     
     class Meta:
         model = Faculdade
-        fields = '__all__'
+        fields = "__all__"
 
     nome_faculdade = forms.CharField(
         widget = forms.TextInput(

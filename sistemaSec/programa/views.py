@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from sistemaSec.programa.models import Programa
 from .forms import ProgramaForm
 
-@login_required(login_url="/login/")
+@login_required(login_url = "/login/")
 def criar_programa(request):
     form = ProgramaForm(request.POST)
 
@@ -17,27 +17,27 @@ def criar_programa(request):
     
     else:
         if form.is_valid():
-            nome_programa = form.cleaned_data.get('nome_programa')
+            nome_programa = form.cleaned_data.get("nome_programa")
         
             programa = Programa.objects.create(nome_programa = nome_programa)
             
             programa.save()
-            msg = 'Programa Cadastrado com Sucesso!'
+            msg = "Programa Cadastrado com Sucesso!"
 
             return render(request,"home/PROG_dashboard.html",cadastrado_programa(form, msg))
 
-        msg = 'Ocorreu um ERRO no Cadastro!'
+        msg = "Ocorreu um ERRO no Cadastro!"
         return render(request,"home/PROG_dashboard.html",cadastrado_programa(form, msg))
 
-@login_required(login_url="/login/")
+@login_required(login_url = "/login/")
 def consultar_programa(request):
-    lista_por_programa=None
+    lista_por_programa = None
     programa = Programa.objects.all()
     
-    if 'buscar_programa' in request.GET:
-        programa_consulta=request.GET['buscar_programa']
+    if "buscar_programa" in request.GET:
+        programa_consulta = request.GET["buscar_programa"]
         if consultar_programa:
-            lista_por_programa= programa.filter(Q(nome_programa__icontains=programa_consulta))
+            lista_por_programa = programa.filter(Q(nome_programa__icontains = programa_consulta))
     
     if lista_por_programa:
         dados = {
@@ -54,21 +54,21 @@ def consultar_programa(request):
 
     return render(request,"home/PROG_dashboard.html",dados)
     
-@login_required(login_url="/login/")    
+@login_required(login_url = "/login/")    
 def editar_programa(request,id_programa):
-    programa = Programa.objects.get(id_programa=id_programa)
+    programa = Programa.objects.get(id_programa = id_programa)
     form = ProgramaForm(instance = programa)
 
     edt_programa = { 
-        'programa':programa, 
-        'form': form }
+        "programa":programa, 
+        "form": form }
     
     if request.method == "POST":
         form = ProgramaForm(request.POST, instance = programa)
         if form.is_valid():
             programa.save()
 
-            msg = 'Programa Alterado com Sucesso!'
+            msg = "Programa Alterado com Sucesso!"
             return render(request,"home/PROG_dashboard.html",cadastrado_programa(form, msg))
 
         msg = "Ocorreu um erro!"
@@ -78,10 +78,10 @@ def editar_programa(request,id_programa):
 
 def cadastrado_programa(form, msg):
     programa = Programa.objects.all()
-    dados ={
-        'programas': programa,
-        'form': form,
-        'mensagem':msg
+    dados = {
+        "programas": programa,
+        "form": form,
+        "mensagem":msg
     }
     return dados
 

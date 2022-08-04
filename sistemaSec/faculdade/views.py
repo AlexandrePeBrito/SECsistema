@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from sistemaSec.faculdade.models import Faculdade
 from .forms import FaculdadeForm
 
-@login_required(login_url="/login/")
+@login_required(login_url = "/login/")
 def criar_faculdade(request):
     form = FaculdadeForm(request.POST)
 
@@ -17,11 +17,11 @@ def criar_faculdade(request):
         
     else:
         if form.is_valid():
-            nome_faculdade = form.cleaned_data.get('nome_faculdade')
-            cnpj_faculdade = form.cleaned_data.get('cnpj_faculdade')
-            direitor_faculdade = form.cleaned_data.get('nome_direitor_faculdade')
-            campus = form.cleaned_data.get('campus_faculdade')
-            telefone = form.cleaned_data.get('telefone_faculdade')
+            nome_faculdade = form.cleaned_data.get("nome_faculdade")
+            cnpj_faculdade = form.cleaned_data.get("cnpj_faculdade")
+            direitor_faculdade = form.cleaned_data.get("nome_direitor_faculdade")
+            campus = form.cleaned_data.get("campus_faculdade")
+            telefone = form.cleaned_data.get("telefone_faculdade")
 
         
             faculdade = Faculdade.objects.create(nome_faculdade = nome_faculdade,
@@ -29,22 +29,22 @@ def criar_faculdade(request):
             telefone_faculdade = telefone, campus_faculdade = campus)
         
             faculdade.save()
-            msg = 'Faculdade Cadastrada com Sucesso!'
+            msg = "Faculdade Cadastrada com Sucesso!"
             return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(form, msg))
         
-        msg = 'Ocorreu um ERRO no Cadastro!'
+        msg = "Ocorreu um ERRO no Cadastro!"
         return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(form, msg))
 
-@login_required(login_url="/login/")
+@login_required(login_url = "/login/")
 def consultar_faculdade(request):
-    lista_por_nome=None
+    lista_por_nome = None
     faculdade = Faculdade.objects.all()
     
-    if 'buscar_faculdade' in request.GET:
-        nome_consulta=request.GET['buscar_faculdade']
+    if "buscar_faculdade" in request.GET:
+        nome_consulta = request.GET["buscar_faculdade"]
 
         if consultar_faculdade:
-            lista_por_nome = faculdade.filter(Q(nome_faculdade__icontains=nome_consulta))
+            lista_por_nome = faculdade.filter(Q(nome_faculdade__icontains = nome_consulta))
             
     if lista_por_nome:
         dados = {
@@ -60,22 +60,22 @@ def consultar_faculdade(request):
         }
     return render(request,"home/FACU_dashboard.html",dados)
     
-@login_required(login_url="/login/")    
+@login_required(login_url = "/login/")    
 def editar_faculdade(request,id_faculdade):
-    faculdade = Faculdade.objects.get(id_faculdade=id_faculdade)
+    faculdade = Faculdade.objects.get(id_faculdade = id_faculdade)
     form = FaculdadeForm(instance = faculdade)
 
     edt_faculdade = { 
-        'faculdade':faculdade, 
-        'form': form }
+        "faculdade":faculdade, 
+        "form": form }
     
-    if request.method == 'POST':
+    if request.method == "POST":
         form = FaculdadeForm(request.POST, instance = faculdade)
 
         if form.is_valid():
             faculdade.save()
 
-            msg = 'Faculdade Alterado com Sucesso!'
+            msg = "Faculdade Alterado com Sucesso!"
             return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(form, msg))
 
         msg = "Ocorreu um erro!"
@@ -85,10 +85,10 @@ def editar_faculdade(request,id_faculdade):
 
 def cadastrado_faculdade(form, msg):
     faculdades = Faculdade.objects.all()
-    dados ={
-        'faculdades': faculdades,
-        'form': form,
-        'mensagem':msg
+    dados = {
+        "faculdades": faculdades,
+        "form": form,
+        "mensagem":msg
     }
     return dados
 
