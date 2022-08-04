@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from sistemaSec.estagio.models import Estagio
 from .forms import EstagioForm
+from django.forms.models import model_to_dict
 
 @login_required(login_url="/login/")
 def criar_estagio(request):
@@ -65,7 +66,7 @@ def consultar_estagio(request):
 @login_required(login_url="/login/")    
 def editar_estagio(request,id_estagio):
     estagio = Estagio.objects.get(id_estagio=id_estagio)
-    form = EstagioForm(instance = estagio)
+    form = EstagioForm(initial = model_to_dict(estagio))
 
     editar_estagio = { 
         'estagio':estagio,

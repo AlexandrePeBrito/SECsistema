@@ -9,6 +9,8 @@ from django.contrib.admin.widgets import AutocompleteSelect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from sistemaSec.estagio.models import Estagio
+from sistemaSec.edital.models import Edital
+from sistemaSec.curso.models import Curso
 
 
 class EstagioForm(forms.ModelForm):
@@ -30,6 +32,22 @@ class EstagioForm(forms.ModelForm):
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Setor do Estagio",
+                "class": "form-control",
+                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+            }
+        ))
+
+    id_edital_estagio = forms.ModelChoiceField(queryset=Edital.objects.all(), 
+        widget = forms.Select(
+            attrs = {
+                "class": "form-control",
+                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+            }
+        ))
+    
+    id_cursos_estagio = forms.ModelChoiceField(queryset=Curso.objects.all(), 
+        widget = forms.Select(
+            attrs = {
                 "class": "form-control",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }

@@ -19,6 +19,7 @@ from sistemaSec.sede.models import Sede
 from sistemaSec.estagio.models import Estagio
 from sistemaSec.faculdade.models import Faculdade
 from .forms import EstagiarioForm
+from django.forms.models import model_to_dict
 
 @login_required(login_url="/login/")
 def criar_estagiario_partiu_estagio(request):
@@ -120,7 +121,7 @@ def consultar_estagiario_partiu_estagio(request):
 @login_required(login_url="/login/")    
 def editar_estagiario_partiu_estagio(request,cpf_estagiario):
     estagiario = Estagiario.objects.get(cpf_estagiario=cpf_estagiario)
-    form = EstagiarioForm(instance = estagiario)
+    form = EstagiarioForm(initial = model_to_dict(estagiario))
 
     editar_estagiario_partiu_estagio = { 
         'estagiario':estagiario,
@@ -341,7 +342,7 @@ def consultar_estagiario_mais_futuro(request):
 @login_required(login_url="/login/")    
 def editar_estagiario_mais_futuro(request,cpf_estagiario):
     estagiario = Estagiario.objects.get(cpf_estagiario=cpf_estagiario)
-    form = EstagiarioForm(instance = estagiario)
+    form = EstagiarioForm(initial = model_to_dict(estagiario))
 
     editar_estagiario_partiu_estagio = { 
         'estagiario':estagiario,

@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from sistemaSec.edital.models import Edital
 from .forms import EditalForm
+from django.forms.models import model_to_dict
 
 @login_required(login_url="/login/")
 def criar_edital(request):
@@ -60,7 +61,7 @@ def consultar_edital(request):
 @login_required(login_url="/login/")    
 def editar_edital(request,id_edital):
     edital = Edital.objects.get(id_edital=id_edital)
-    form = EditalForm(instance = edital)
+    form = EditalForm(initial = model_to_dict(edital))
 
     edt_edital = { 
         'edital':edital, 

@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from sistemaSec.nte.models import NTE
 from .forms import NTEForm
+from django.forms.models import model_to_dict
 
 @login_required(login_url="/login/")
 def criar_nte(request):
@@ -60,7 +61,7 @@ def consultar_nte(request):
 @login_required(login_url="/login/")    
 def editar_nte(request,id_NTE):
     nte = NTE.objects.get(id_NTE=id_NTE)
-    form = NTEForm(instance = nte)
+    form = NTEForm(initial = model_to_dict(nte))
 
     edt_nte = { 
         'nte':nte,

@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from sistemaSec.sede.models import Sede
 from .forms import SedeForm
-
+from django.forms.models import model_to_dict
 
 @login_required(login_url="/login/")
 def criar_sede(request):
@@ -71,7 +71,7 @@ def consultar_sede(request):
 @login_required(login_url="/login/")    
 def editar_sede(request,id_sede):
     sede = Sede.objects.get(id_sede=id_sede)
-    form = SedeForm(instance = sede)
+    form = SedeForm(initial = model_to_dict(sede))
 
     edt_sede = { 
         'sede':sede,

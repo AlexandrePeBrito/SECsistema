@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from sistemaSec.municipio.models import Municipio
 from sistemaSec.nte.models import NTE
 from .forms import MunicipioForm
+from django.forms.models import model_to_dict
 
 @login_required(login_url="/login/")
 def criar_municipio(request):
@@ -57,7 +58,7 @@ def consultar_municipio(request):
 @login_required(login_url="/login/")    
 def editar_municipio(request,id_municipio):
     municipio = Municipio.objects.get(id_municipio=id_municipio)
-    form = MunicipioForm(instance = municipio)
+    form = MunicipioForm(initial = model_to_dict(municipio))
 
     edt_municipio = { 
         'municipio':municipio,

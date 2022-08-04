@@ -9,7 +9,10 @@ from django.contrib.admin.widgets import AutocompleteSelect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from sistemaSec.estagiario.models import Estagiario
-
+from sistemaSec.supervisor.models import Supervisor
+from sistemaSec.estagio.models import Estagio
+from sistemaSec.faculdade.models import Faculdade
+from sistemaSec.sede.models import Sede
 
 class EstagiarioForm(forms.ModelForm):
     
@@ -189,3 +192,34 @@ class EstagiarioForm(forms.ModelForm):
             }
         ))
    
+    supervisor_estagiario = forms.ModelChoiceField(queryset=Supervisor.objects.all(), 
+        widget = forms.Select(
+            attrs = {
+                "class": "form-control",
+                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+            }
+        ))
+
+    sede_estagiario = forms.ModelChoiceField(queryset=Sede.objects.all(), 
+        widget = forms.Select(
+            attrs = {
+                "class": "form-control",
+                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+            }
+        ))
+    
+    faculdade_estagiario = forms.ModelChoiceField(queryset=Faculdade.objects.all(), 
+        widget = forms.Select(
+            attrs = {
+                "class": "form-control",
+                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+            }
+        ))
+    
+    estagio_estagiario = forms.ModelChoiceField(queryset=Estagio.objects.all(), 
+        widget = forms.Select(
+            attrs = {
+                "class": "form-control",
+                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+            }
+        ))

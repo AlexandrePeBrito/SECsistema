@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from sistemaSec.supervisor.models import Supervisor
-from sistemaSec.sede.models import Sede
 from .forms import SupervisorForm
+from django.forms.models import model_to_dict
 
 @login_required(login_url="/login/")
 def criar_supervisor(request):
@@ -65,7 +65,7 @@ def consultar_supervisor(request):
 def editar_supervisor(request,id_supervisor):
     supervisor = Supervisor.objects.get(id_supervisor=id_supervisor)
     
-    form = SupervisorForm(instance=supervisor)
+    form = SupervisorForm(initial=model_to_dict(supervisor))
     editar_supervisor = { 
         "supervisor": supervisor,
         "form": form }
