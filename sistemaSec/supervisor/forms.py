@@ -43,13 +43,13 @@ class SupervisorForm(forms.ModelForm):
             }
         ))
     
-    sede_supervisor = forms.ModelChoiceField(queryset=Sede.objects.all(), 
+    """ sede_supervisor = forms.ModelChoiceField(queryset=Sede.objects.all(), 
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
-        )) 
+        ))  """
     
         
    
