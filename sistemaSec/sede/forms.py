@@ -18,11 +18,11 @@ class SedeForm(forms.ModelForm):
     class Meta:
         model = Sede
         fields = "__all__"
-#id_sede, nome_sede, codigo_inep_sede, telefone_sede, nome_responsavel_sede, bairro_sede, email_sede, id_nte_sede, id_municipio_sede
+
     nome_sede = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Nome do Municipio",
+                "placeholder": "Nome da Sede",
                 "class": "form-control",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
@@ -31,7 +31,7 @@ class SedeForm(forms.ModelForm):
     nome_responsavel_sede = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Nome do Responsavel da Sede",
+                "placeholder": "Nome do Responsável da Sede",
                 "class": "form-control",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
@@ -67,9 +67,8 @@ class SedeForm(forms.ModelForm):
     codigo_inep_sede = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Codigo do Inep da Sede",
+                "placeholder": "Código do Inep da Sede",
                 "class": "form-control mask-matricula",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
         ))
     
