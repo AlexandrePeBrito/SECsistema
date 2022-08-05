@@ -40,7 +40,18 @@
                                     <form role="form" method="POST" action="">
                                         {% csrf_token %}
                                            
-                                        {{ form }}
+                                        <label>Nome do Municipio</label>
+                                        <div>{{ form.nome_municipio }}</div>
+
+                                        <div id="linhaForms"> 
+                                            <div class="unidade">
+                                                <label>NTE</label>
+                                                <div>{{ form.id_nte_municipio }}</div>
+                                            </div>
+                                            <div>
+                                        </div>
+                                        
+                                        <div  class="card"></div>
 
                                         <div  class="card"></div>
                                         <button type="submit" class="btn btn-primary">Atualizar</button>

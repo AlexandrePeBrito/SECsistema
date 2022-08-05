@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from sistemaSec.supervisor.models import Supervisor
+from sistemaSec.sede.models import Sede
 from .forms import SupervisorForm
 from django.forms.models import model_to_dict
 
@@ -72,9 +73,10 @@ def editar_supervisor(request,id_supervisor):
 
     if request.method == "POST":
         form = SupervisorForm(request.POST, instance = supervisor)
+        sedes = Sede.objects.all()
         if form.is_valid():
-            sede = form.cleaned_data.get("sede_supervisor")
-                       
+            sede_nome = form.cleaned_data.get("sede_supervisor")
+            sede = sedes.filter(Q(nome_sede__icontains = sede_nome))
             supervisor.sede_supervisor.set(sede)
             supervisor.save()
             

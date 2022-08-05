@@ -12,4 +12,4 @@ class Estagio(models.Model):
     id_cursos_estagio = models.ForeignKey(Curso, on_delete=models.PROTECT, related_name="estagios")
     
     def __str__(self):
-        return str(self.id_estagio)
+        return self.area_estagio

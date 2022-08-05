@@ -40,7 +40,8 @@
                                     <form role="form" method="POST" action="" >
                                         {% csrf_token %}
 
-                                        {{ form }}
+                                        <label>Nome do Programa</label>
+                                        <div>{{ form.nome_programa }}</div>
                                         
                                         <div  class="card"></div>
                                         <button type="submit" class="btn btn-primary">Atualizar</button>

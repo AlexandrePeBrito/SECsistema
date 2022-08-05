@@ -40,7 +40,18 @@
                                     <form role="form" method="POST" action="">
                                         {% csrf_token %}
 
-                                        {{ form }}
+                                        <label>Nome do Direitor do NTE</label>
+                                        <div>{{ form.nome_direitor_NTE }}</div>
+
+                                        <label>Email do NTE</label>
+                                        <div>{{ form.email_NTE }}</div>
+
+                                        <div id="linhaForms"> 
+                                            <div class="unidade">
+                                                <label>Telefone do NTE</label>
+                                                <div>{{ form.telefone_NTE }}</div>
+                                            </div>
+                                        </div>
                                         
                                         <div class="card"></div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>

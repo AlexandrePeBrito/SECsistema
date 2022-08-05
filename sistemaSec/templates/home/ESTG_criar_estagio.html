@@ -40,7 +40,27 @@
                                     <form role="form" method="POST" action="" >
                                         {% csrf_token %}
                                         
-                                        {{ form }}
+                                        <div id="linhaForms"> 
+                                            <div class="unidade">
+                                                <label>Carga Horaria do Estagio</label>
+                                                <div>{{ form.carga_horaria_estagio }}</div>
+                                            </div>
+                                            <div>
+                                                <label>Area do Estagio</label>
+                                                <div>{{ form.area_estagio }}</div>
+                                            </div>
+                                        </div>
+
+                                        <div id="linhaForms"> 
+                                            <div class="unidade">
+                                                <label>Edital do Estagio</label>
+                                                <div>{{ form.id_edital_estagio }}</div>
+                                            </div>
+                                            <div>
+                                                <label>Curso do Estagio</label>
+                                                <div>{{ form.id_cursos_estagio }}</div>
+                                            </div>
+                                        </div>
                                         
                                         <div  class="card"></div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>
