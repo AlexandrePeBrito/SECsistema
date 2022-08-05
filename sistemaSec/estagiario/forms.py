@@ -23,7 +23,7 @@ class EstagiarioForm(forms.ModelForm):
     cpf_estagiario = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "CPF do Estagiario",
+                "placeholder": "CPF do Estagiário",
                 "class": "form-control mask-cpf",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
@@ -32,7 +32,7 @@ class EstagiarioForm(forms.ModelForm):
     nome_estagiario = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Nome do Estagiario",
+                "placeholder": "Nome do Estagiário",
                 "class": "form-control",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
@@ -41,14 +41,14 @@ class EstagiarioForm(forms.ModelForm):
     rg_estagiario = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "RG do Estagiario",
+                "placeholder": "RG do Estagiário",
                 "class": "form-control mask-rg",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
         ))
     
     turno = (
-        ("------","------"),
+        ("0","Selecione"),
         ("Matutino","Matutino"),
         ("Vespertino","Vespertino"))
     turno_estagiario = forms.ChoiceField(choices=turno, 
@@ -62,14 +62,14 @@ class EstagiarioForm(forms.ModelForm):
     email_estagiario = forms.EmailField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Email do Estagiario",
+                "placeholder": "Email do Estagiário",
                 "class": "form-control",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
         ))
 
     semestres = (
-        ("------","------"),
+        ("0","Selecione"),
         ("1","1"),("2","2"),
         ("3","3"),("4","4"),
         ("5","5"),("6","6"),
@@ -87,16 +87,15 @@ class EstagiarioForm(forms.ModelForm):
     nis_pis_estagiario = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "NIS do Estagiario",
+                "placeholder": "NIS do Estagiário",
                 "class": "form-control mask-nis",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
         ))
 
     telefone_estagiario = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Telefone do Estagiario",
+                "placeholder": "Telefone do Estagiário",
                 "class": "form-control mask-telefone",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
@@ -105,7 +104,7 @@ class EstagiarioForm(forms.ModelForm):
     nome_responsavel_estagiario = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Nome do Responsavel",
+                "placeholder": "Nome do Responsável",
                 "class": "form-control",
             }
         ))
@@ -120,7 +119,7 @@ class EstagiarioForm(forms.ModelForm):
         ))
 
     genero = (
-        ("------","------"),
+        ("0","Selecione"),
         ('Masculino','Masculino'),
         ('Feminino','Feminino'))
     genero_estagiario = forms.ChoiceField(choices=genero, 
@@ -132,7 +131,7 @@ class EstagiarioForm(forms.ModelForm):
         ))
     
     raca = (
-        ("------","------"),
+        ("0","Selecione"),
         ("Branca","Branca"),
         ("Preta","Preta"),
         ("Parda","Parda"),
@@ -158,7 +157,7 @@ class EstagiarioForm(forms.ModelForm):
     numero_estagiario = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Numero",
+                "placeholder": "Número",
                 "class": "form-control mask-matricula",
             }
         ))
@@ -174,13 +173,13 @@ class EstagiarioForm(forms.ModelForm):
     matricula_estagiario = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Matricula do Estagiario",
+                "placeholder": "Matrícula do Estagiário",
                 "class": "form-control mask-matricula",
             }
         ))
 
     situacao = (
-        ("------","------"),
+        ("0","Selecione"),
         ("Ativo","Ativo"),
         ("Desligado","Desligado"),
         ("Desclassificado","Desclassificado"))
