@@ -22,7 +22,7 @@ class EstagioForm(forms.ModelForm):
     carga_horaria_estagio = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Carga Horaria do Estágio",
+                "placeholder": "Carga Horária do Estágio",
                 "class": "form-control mask-matricula",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
@@ -31,7 +31,7 @@ class EstagioForm(forms.ModelForm):
     area_estagio = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Setor do Estagio",
+                "placeholder": "Setor do Estágio",
                 "class": "form-control",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
