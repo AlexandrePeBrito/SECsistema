@@ -21,7 +21,7 @@ class EditalForm(forms.ModelForm):
     id_edital = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Codigo do Edital",
+                "placeholder": "Código do Edital",
                 "class": "form-control",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
@@ -29,7 +29,7 @@ class EditalForm(forms.ModelForm):
     quantidade_vagas_edital = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Quantidade de Vagas do Edital",
+                "placeholder": "Quantidade de Vagas",
                 "class": "form-control mask-matricula",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
