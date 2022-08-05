@@ -50,22 +50,29 @@
                                 {% endif %}
                                 <div class="card-body">
                                     <div>
-                                        <a href="{% url 'criar_sede' %}" type="button" class="btn btn-success" style="margin-left: 85%;">+ Criar Sede</a>
+                                        <a href="{% url 'criar_sede' %}" id="criar-sede" type="button" class="btn btn-success">+ Criar Sede</a>
                                     </div>
                                     <form action="{% url 'consultar_sede' %}" enctype="multipart/form-data">
                                         {% csrf_token %}
-                                        <div class="form-group">
-                                            <label for="nome">Consultar</label>
-                                            <input type="text" class="form-control" name="buscar_sede" placeholder="Nome do sede">
+                                        
+                                        
+                                        <h5 class="m-b-10">Consultar</h5>
+                                        <input type="text" class="form-control nome-consultar" name="buscar_sede" placeholder="Nome do sede">
+                                        
+                                        
                                             
+                                        
+                                        
+                                        <div id="linhaForms">
+                                            <div>
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 25px;" name="buscar_bairro" placeholder="Bairro">
+                                            </div>
+                                            <div>
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 3px;" name="buscar_municipio" placeholder="Municipio">
+                                            </div>
                                         </div>
-                                        <div>
-                                            <input type="text" class="form-control" name="buscar_bairro" placeholder="Bairro">
-                                        </div>
-                                        <div>
-                                            <input type="text" class="form-control" name="buscar_municipio" placeholder="Municipio">
-                                        </div>                                            
-                                        <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-left: 45%;">Consultar</button>
+                                                                                    
+                                        <button type="submit" id="btn-consultar" class="btn btn-primary">Consultar</button>
                                     </form>
 
                                     {% if sedes %}

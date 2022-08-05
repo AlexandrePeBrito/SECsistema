@@ -6905,6 +6905,20 @@ pre[class*=language-]:after, pre[class*=language-]:before {
   font-size: 14px;
 }
 
+#criar-sede{
+  margin-left: 736px;
+}
+
+.nome-consultar{
+  margin-left: 25px;
+  width: 833px;
+}
+
+#btn-consultar{
+  margin-top: 10px;
+  margin-left: 752px;
+}
+
 #linhaForms {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -6912,6 +6926,10 @@ pre[class*=language-]:after, pre[class*=language-]:before {
 
 #linhaForms .unidade {
   margin-right: 14px;
+}
+
+#linhaForms .campo-duplo-consulta {
+  width: 410px;
 }
 
 .custom-select:focus,
