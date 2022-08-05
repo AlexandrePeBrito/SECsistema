@@ -20,7 +20,7 @@ class NTEForm(forms.ModelForm):
     nome_direitor_NTE =  forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Nome do Direitor",
+                "placeholder": "Nome do Diretor",
                 "class": "form-control",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
