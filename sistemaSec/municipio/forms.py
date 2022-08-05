@@ -21,7 +21,7 @@ class MunicipioForm(forms.ModelForm):
     nome_municipio = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Nome do Municipio",
+                "placeholder": "Nome do Município",
                 "class": "form-control",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
