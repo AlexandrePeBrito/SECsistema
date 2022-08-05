@@ -30,14 +30,13 @@ class FaculdadeForm(forms.ModelForm):
             attrs = {
                 "placeholder": "CNPJ da Faculdade",
                 "class": "form-control mask-cnpj",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
         ))
 
     nome_direitor_faculdade = forms.CharField(
         widget = forms.TextInput(
             attrs = {
-                "placeholder": "Nome do Direitor da Faculdade",
+                "placeholder": "Nome do Diretor da Faculdade",
                 "class": "form-control",
                 "required oninvalid" : "this.setCustomValidity('Campo requerido')"
             }
