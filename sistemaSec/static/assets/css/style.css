@@ -1699,9 +1699,6 @@ p.text-muted {
 .pcoded-header .input-group .input-group-text {
   margin-right: 0;
 }
-.pcoded-header .input-group {
-  background: transparent;
-}
 .pcoded-header .input-group .input-group-text,
 .pcoded-header a,
 .pcoded-header dropdown-toggle {
