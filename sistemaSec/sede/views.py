@@ -7,6 +7,10 @@ from sistemaSec.sede.models import Sede
 from .forms import SedeForm
 from django.forms.models import model_to_dict
 
+url_criar_sede ="home/SEDE_criar_sede.html"
+url_dashboard_sede = "home/SEDE_dashboard.html"
+url_editar_sede = "home/SEDE_editar_sede.html"
+
 @login_required(login_url = "/login/")
 def criar_sede(request):
     form = SedeForm(request.POST)
@@ -14,7 +18,7 @@ def criar_sede(request):
     if request.method == "GET":
         form = SedeForm()
 
-        return render(request,"home/Sede_criar_sede.html", {"form": form})
+        return render(request, url_criar_sede, {"form": form})
     else:
         if form.is_valid():    
             nome_sede = form.cleaned_data.get("nome_sede")
@@ -34,10 +38,10 @@ def criar_sede(request):
                 
             sede.save()
             msg = "Sede Cadastrada com Sucesso!"
-            return render(request,"home/SEDE_dashboard.html",cadastrado_sede(form, msg))
+            return render(request, url_dashboard_sede,cadastrado_sede(form, msg))
         
         msg = "Ocorreu um Error!"
-        return render(request,"home/SEDE_dashboard.html",cadastrado_sede(form, msg))
+        return render(request, url_dashboard_sede,cadastrado_sede(form, msg))
 
 @login_required(login_url = "/login/")
 def consultar_sede(request):
@@ -66,7 +70,7 @@ def consultar_sede(request):
             "mensagem": "Nenhuma Sede Localizada!"
         }
 
-    return render(request,"home/SEDE_dashboard.html", dados)
+    return render(request, url_dashboard_sede, dados)
     
 @login_required(login_url = "/login/")    
 def editar_sede(request,id_sede):
@@ -84,12 +88,12 @@ def editar_sede(request,id_sede):
             sede.save()
 
             msg = "Sede Alterada com Sucesso!"
-            return render(request,"home/SEDE_dashboard.html",cadastrado_sede(form, msg))
+            return render(request, url_dashboard_sede,cadastrado_sede(form, msg))
 
         msg = "Ocorreu um erro!"
-        return render(request,"home/SEDE_dashboard.html",cadastrado_sede(form, msg))
+        return render(request, url_dashboard_sede,cadastrado_sede(form, msg))
     else:        
-        return render(request, "home/SEDE_editar_sede.html", edt_sede)
+        return render(request, url_editar_sede, edt_sede)
 
 def cadastrado_sede(form, msg):
     sede = Sede.objects.all()

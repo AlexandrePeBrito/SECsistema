@@ -21,6 +21,10 @@ from sistemaSec.faculdade.models import Faculdade
 from .forms import EstagiarioForm
 from django.forms.models import model_to_dict
 
+url_criar_estagiario_partiu_estagio = "home/PAES_criar_estagiario.html"
+url_dashboard_estagiario_partiu_estagio = "home/PAES_dashboard.html"
+url_editar_estagiario_partiu_estagio = "home/PAES_editar_estagiario.html"
+
 @login_required(login_url = "/login/")
 def criar_estagiario_partiu_estagio(request):
     form = EstagiarioForm(request.POST)
@@ -28,7 +32,7 @@ def criar_estagiario_partiu_estagio(request):
     if request.method == "GET":
         form = EstagiarioForm()
 
-        return render(request,"home/PAES_criar_estagiario.html", {"form": form})
+        return render(request, url_criar_estagiario_partiu_estagio, {"form": form})
     else:
         if form.is_valid():
             nome_estagiario = form.cleaned_data.get("nome_estagiario")
@@ -68,12 +72,11 @@ def criar_estagiario_partiu_estagio(request):
             
             estagiario.save()
             msg = "Estagiario Cadastrado com Sucesso!"
-            return render(request,"home/PAES_dashboard.html",cadastrado_estagiario_partiu_estagio(form, msg))
+            return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg))
         
         print(form.errors)
         msg = "Ocorreu um Error!"
-        return render(request,"home/PAES_dashboard.html",cadastrado_estagiario_partiu_estagio(form, msg))
-
+        return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg))
 
 @login_required(login_url = "/login/")
 def consultar_estagiario_partiu_estagio(request):
@@ -116,7 +119,7 @@ def consultar_estagiario_partiu_estagio(request):
             "mensagem": "Nenhum Estagiario Localizado!"
         }
     
-    return render(request,"home/PAES_dashboard.html",dados)
+    return render(request, url_dashboard_estagiario_partiu_estagio, dados)
     
 @login_required(login_url = "/login/")    
 def editar_estagiario_partiu_estagio(request, cpf_estagiario):
@@ -134,13 +137,13 @@ def editar_estagiario_partiu_estagio(request, cpf_estagiario):
             estagiario.save()
 
             msg = "Estagiario Alterado com sucesso!"
-            return render(request,"home/PAES_dashboard.html",cadastrado_estagiario_partiu_estagio(form, msg))
+            return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg))
         
         print(form.errors)
         msg = "Ocorreu um Erro"
-        return render(request, "home/PAES_dashboard.html", cadastrado_estagiario_partiu_estagio(form, msg))
+        return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg))
     else:    
-        return render(request, "home/PAES_editar_estagiario.html", editar_estagiario_partiu_estagio)
+        return render(request, url_editar_estagiario_partiu_estagio, editar_estagiario_partiu_estagio)
 
 
 
@@ -244,6 +247,11 @@ def cadastrado_estagiario_mais_futuro(form, msg):
    
     return dados
 
+url_criar_estagiario_mais_futuro = "home/MFES_criar_estagiario.html"
+url_dashboard_estagiario_mais_futuro = "home/MFES_dashboard.html"
+url_editar_estagiario_mais_futuro = "home/MFES_editar_estagiario.html"
+
+
 @login_required(login_url="/login/")
 def criar_estagiario_mais_futuro(request):
     form = EstagiarioForm(request.POST)
@@ -251,7 +259,7 @@ def criar_estagiario_mais_futuro(request):
     if request.method == "GET":
         form = EstagiarioForm()
 
-        return render(request,"home/MFES_criar_estagiario.html", {"form": form})
+        return render(request, url_criar_estagiario_mais_futuro, {"form": form})
     else:
         if form.is_valid():
             nome_estagiario = form.cleaned_data.get("nome_estagiario")
@@ -291,11 +299,11 @@ def criar_estagiario_mais_futuro(request):
             
             estagiario.save()
             msg = "Estagiario Cadastrado com Sucesso!"
-            return render(request,"home/MFES_dashboard.html",cadastrado_estagiario_mais_futuro(form, msg))
+            return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg))
         
         print(form.errors)
         msg = "Ocorreu um Error!"
-        return render(request,"home/MFES_dashboard.html",cadastrado_estagiario_mais_futuro(form, msg))
+        return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg))
 
 @login_required(login_url="/login/")
 def consultar_estagiario_mais_futuro(request):
@@ -337,7 +345,7 @@ def consultar_estagiario_mais_futuro(request):
             "mensagem": "Nenhum Estagiario Localizado!"
         }
 
-    return render(request,"home/MFES_dashboard.html",dados)
+    return render(request, url_dashboard_estagiario_mais_futuro, dados)
     
 @login_required(login_url="/login/")    
 def editar_estagiario_mais_futuro(request,cpf_estagiario):
@@ -355,13 +363,13 @@ def editar_estagiario_mais_futuro(request,cpf_estagiario):
             estagiario.save()
 
             msg = "Estagiario Alterado com sucesso!"
-            return render(request,"home/MFES_dashboard.html",cadastrado_estagiario_mais_futuro(form, msg))
-        
+            return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg))
+        u
         print(form.errors)
         msg = "Ocorreu um Erro"
-        return render(request, "home/MFES_dashboard.html", cadastrado_estagiario_mais_futuro(form, msg))
+        return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg))
     else:    
-        return render(request, "home/MFES_editar_estagiario.html", editar_estagiario_partiu_estagio)
+        return render(request, url_editar_estagiario_mais_futuro, editar_estagiario_partiu_estagio)
     
 
 

@@ -6,6 +6,10 @@ from django.contrib.auth.decorators import login_required
 from sistemaSec.curso.models import Curso
 from .forms import CursoForm
 
+url_criar_curso = "home/CUSO_criar_curso.html"
+url_dashboard_curso = "home/CUSO_dashboard.html"
+url_editar_curso = "home/CUSO_editar_curso.html"
+
 @login_required(login_url = "/login/")
 def criar_curso(request):
     form = CursoForm(request.POST)
@@ -13,7 +17,7 @@ def criar_curso(request):
     if request.method == "GET":
         form = CursoForm()
 
-        return render(request, "home/CUSO_criar_curso.html", {"form": form})
+        return render(request, url_criar_curso, {"form": form})
     
     else:
         if form.is_valid():
@@ -24,10 +28,10 @@ def criar_curso(request):
             curso.save()
 
             msg = "Curso Cadastrado com Sucesso!"
-            return render(request,"home/CUSO_dashboard.html",cadastrado_curso(form, msg))
+            return render(request, url_dashboard_curso, cadastrado_curso(form, msg))
 
         msg = "Ocorreu um ERRO no Cadastro!"
-        return render(request,"home/CUSO_dashboard.html",cadastrado_curso(form, msg))
+        return render(request, url_dashboard_curso, cadastrado_curso(form, msg))
 
 @login_required(login_url = "/login/")
 def consultar_curso(request):
@@ -51,7 +55,7 @@ def consultar_curso(request):
             "error": True,
             "mensagem": "Nenhum Curso Localizado!"
         }
-    return render(request,"home/CUSO_dashboard.html",dados)
+    return render(request, url_dashboard_curso, dados)
     
 @login_required(login_url = "/login/")    
 def editar_curso(request,id_curso):
@@ -69,12 +73,12 @@ def editar_curso(request,id_curso):
             curso.save()
 
             msg = "Curso Alterado com Sucesso!"
-            return render(request,"home/CUSO_dashboard.html",cadastrado_curso(form, msg))
+            return render(request, url_dashboard_curso, cadastrado_curso(form, msg))
 
         msg = "Ocorreu um erro!"
-        return render(request,"home/CUSO_dashboard.html",cadastrado_curso(form, msg))
+        return render(request, url_dashboard_curso, cadastrado_curso(form, msg))
     else:
-        return render(request, "home/CUSO_editar_curso.html", edt_curso)
+        return render(request, url_editar_curso, edt_curso)
 
 def cadastrado_curso(form, msg):
     curso = Curso.objects.all()

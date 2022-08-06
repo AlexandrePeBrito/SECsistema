@@ -7,6 +7,10 @@ from sistemaSec.edital.models import Edital
 from .forms import EditalForm
 from django.forms.models import model_to_dict
 
+url_criar_edital = "home/EDTL_criar_edital.html"
+url_dashboard_edital = "home/EDTL_dashboard.html"
+url_editar_edital = "home/EDTL_editar_edital.html"
+
 @login_required(login_url = "/login/")
 def criar_edital(request):
     form = EditalForm(request.POST)
@@ -14,7 +18,7 @@ def criar_edital(request):
     if request.method == "GET":
         form = EditalForm()
 
-        return render(request, "home/EDTL_criar_edital.html", {"form": form})
+        return render(request, url_criar_edital, {"form": form})
     else:
         if form.is_valid():
             id_edital = form.cleaned_data.get("id_edital")
@@ -27,10 +31,10 @@ def criar_edital(request):
             
             edital.save()
             msg = "Edital Cadastrado com Sucesso!"
-            return render(request,"home/EDTL_dashboard.html",cadastrado_edital(form, msg))
+            return render(request, url_dashboard_edital, cadastrado_edital(form, msg))
 
         msg = "Ocorreu um Error!"
-        return render(request,"home/EDTL_dashboard.html",cadastrado_edital(form, msg))
+        return render(request, url_dashboard_edital, cadastrado_edital(form, msg))
 
 @login_required(login_url = "/login/")
 def consultar_edital(request):
@@ -56,7 +60,7 @@ def consultar_edital(request):
             "error": True,
             "mensagem": "Nenhum Edital Localizado!"
         }
-    return render(request,"home/EDTL_dashboard.html",dados)
+    return render(request, url_dashboard_edital, dados)
     
 @login_required(login_url = "/login/")    
 def editar_edital(request,id_edital):
@@ -74,12 +78,12 @@ def editar_edital(request,id_edital):
             edital.save()
 
             msg = "Edital Alterado com sucesso!"
-            return render(request,"home/EDTL_dashboard.html",cadastrado_edital(form, msg))
+            return render(request, url_dashboard_edital, cadastrado_edital(form, msg))
         
         msg = "Ocorreu um Erro"
-        return render(request,"home/EDTL_dashboard.html",cadastrado_edital(form, msg))
+        return render(request, url_dashboard_edital, cadastrado_edital(form, msg))
     else:
-        return render(request, "home/EDTL_editar_edital.html", edt_edital)
+        return render(request, url_editar_edital, edt_edital)
 
 def cadastrado_edital(form, msg):
     editais = Edital.objects.all()

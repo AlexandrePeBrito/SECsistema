@@ -7,6 +7,10 @@ from sistemaSec.estagio.models import Estagio
 from .forms import EstagioForm
 from django.forms.models import model_to_dict
 
+url_criar_estagio = "home/ESTG_criar_estagio.html"
+url_dashboard_estagio = "home/ESTG_dashboard.html"
+url_editar_estagio = "home/ESTG_editar_estagio.html"
+
 @login_required(login_url = "/login/")
 def criar_estagio(request):
     form = EstagioForm(request.POST)
@@ -14,7 +18,7 @@ def criar_estagio(request):
     if request.method == "GET":
         form = EstagioForm()
 
-        return render(request, "home/ESTG_criar_estagio.html", {"form": form})
+        return render(request, url_criar_estagio, {"form": form})
     else:
         if form.is_valid():
             carga_horaria_estagio = form.cleaned_data.get("carga_horaria_estagio")
@@ -27,10 +31,10 @@ def criar_estagio(request):
         
             estagio.save()
             msg = "Estagio Cadastrado com Sucesso!"
-            return render(request,"home/ESTG_dashboard.html",cadastrado_estagio(form, msg))
+            return render(request, url_dashboard_estagio, cadastrado_estagio(form, msg))
         
         msg = "Ocorreu um Error!"
-        return render(request,"home/ESTG_dashboard.html",cadastrado_estagio(form, msg))
+        return render(request, url_dashboard_estagio, cadastrado_estagio(form, msg))
 
 @login_required(login_url = "/login/")
 def consultar_estagio(request):
@@ -61,7 +65,7 @@ def consultar_estagio(request):
             "error": True,
             "mensagem": "Nenhum Estagio Localizado!"
         }
-    return render(request,"home/ESTG_dashboard.html",dados)
+    return render(request, url_dashboard_estagio, dados)
     
 @login_required(login_url = "/login/")    
 def editar_estagio(request,id_estagio):
@@ -79,12 +83,12 @@ def editar_estagio(request,id_estagio):
             estagio.save()
 
             msg = "Estagio Alterado com sucesso!"
-            return render(request, "home/ESTG_dashboard.html", cadastrado_estagio(form, msg))
+            return render(request, url_dashboard_estagio, cadastrado_estagio(form, msg))
         
         msg = "Ocorreu um Erro"
-        return render(request, "home/ESTG_dashboard.html", cadastrado_estagio(form, msg))
+        return render(request, url_dashboard_estagio, cadastrado_estagio(form, msg))
     else:
-        return render(request, "home/ESTG_editar_estagio.html", editar_estagio)
+        return render(request, url_editar_estagio, editar_estagio)
 
 
 def cadastrado_estagio(form, msg):

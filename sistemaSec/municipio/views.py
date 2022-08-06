@@ -6,6 +6,10 @@ from sistemaSec.nte.models import NTE
 from .forms import MunicipioForm
 from django.forms.models import model_to_dict
 
+url_criar_municipio = "home/MUNI_criar_municipio.html"
+url_dashboard_municipio = "home/MUNI_dashboard.html"
+url_editar_municipio = "home/MUNI_editar_municipio.html"
+
 @login_required(login_url = "/login/")
 def criar_municipio(request):
     form = MunicipioForm(request.POST)
@@ -13,7 +17,7 @@ def criar_municipio(request):
     if request.method == "GET":
         form = MunicipioForm()
 
-        return render(request,"home/MUNI_criar_municipio.html", {"form": form})
+        return render(request, url_criar_municipio, {"form": form})
     else:
         if form.is_valid():
             nome_municipio = form.cleaned_data.get("nome_municipio")
@@ -24,10 +28,10 @@ def criar_municipio(request):
                 
             municipio.save()
             msg = "Municipio Cadastrado com Sucesso!"
-            return render(request,"home/MUNI_dashboard.html",cadastrado_municipio(form, msg))
+            return render(request, url_dashboard_municipio,cadastrado_municipio(form, msg))
         
         msg = "Ocorreu um ERRO no Cadastro!"
-        return render(request,"home/MUNI_dashboard.html",cadastrado_municipio(form, msg))
+        return render(request, url_dashboard_municipio,cadastrado_municipio(form, msg))
 
 @login_required(login_url ="/login/")
 def consultar_municipio(request):
@@ -53,7 +57,7 @@ def consultar_municipio(request):
             "error": True,
             "mensagem": "Nenhum Municipio Localizado!"
         }
-    return render(request,"home/MUNI_dashboard.html",dados)
+    return render(request, url_dashboard_municipio,dados)
     
 @login_required(login_url = "/login/")    
 def editar_municipio(request,id_municipio):
@@ -71,12 +75,12 @@ def editar_municipio(request,id_municipio):
             municipio.save()
 
             msg = "Municipio Alterado com Sucesso!"
-            return render(request,"home/MUNI_dashboard.html",cadastrado_municipio(form, msg))
+            return render(request, url_dashboard_municipio,cadastrado_municipio(form, msg))
 
         msg = "Ocorreu um erro!"
-        return render(request,"home/MUNI_dashboard.html",cadastrado_municipio(form, msg))
+        return render(request, url_dashboard_municipio,cadastrado_municipio(form, msg))
     else:
-        return render(request,"home/MUNI_editar_municipio.html",edt_municipio)
+        return render(request, url_editar_municipio,edt_municipio)
 
 def cadastrado_municipio(form, msg):
     municipios = Municipio.objects.all()

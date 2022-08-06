@@ -7,13 +7,17 @@ from sistemaSec.nte.models import NTE
 from .forms import NTEForm
 from django.forms.models import model_to_dict
 
+url_criar_nte = "home/NTE_criar_nte.html"
+url_dashboard_nte = "home/NTE_dashboard.html"
+url_editar_nte = "home/NTE_editar_nte.html"
+
 @login_required(login_url="/login/")
 def criar_nte(request):
     form = NTEForm(request.POST)
-
+    print(url_criar_nte)
     if request.method == "GET":
         form = NTEForm()
-        return render(request,"home/NTE_criar_nte.html", {"form": form})
+        return render(request,url_criar_nte, {"form": form})
 
     else: 
         if form.is_valid(): 
@@ -28,10 +32,10 @@ def criar_nte(request):
             nte.save()
             msg = "NTE Cadastrado com Sucesso!"
 
-            return render(request,"home/NTE_dashboard.html",cadastrado_nte(form, msg))
+            return render(request, url_dashboard_nte,cadastrado_nte(form, msg))
 
         msg = "Ocorreu um ERRO no Cadastro!"
-        return render(request,"home/NTE_dashboard.html",cadastrado_nte(form, msg))
+        return render(request, url_dashboard_nte,cadastrado_nte(form, msg))
 
 @login_required(login_url="/login/")
 def consultar_nte(request):
@@ -56,7 +60,7 @@ def consultar_nte(request):
             "mensagem": "Nenhum NTE Localizado!"
         }
 
-    return render(request,"home/NTE_dashboard.html",dados)
+    return render(request, url_dashboard_nte,dados)
     
 @login_required(login_url="/login/")    
 def editar_nte(request,id_NTE):
@@ -73,12 +77,12 @@ def editar_nte(request,id_NTE):
             nte.save()
 
             msg = "NTE Alterado com Sucesso!"
-            return render(request,"home/NTE_dashboard.html",cadastrado_nte(form, msg))
+            return render(request, url_dashboard_nte,cadastrado_nte(form, msg))
 
         msg = "Ocorreu um erro!"
-        return render(request,"home/NTE_dashboard.html",cadastrado_nte(form, msg))
+        return render(request, url_dashboard_nte,cadastrado_nte(form, msg))
     else:
-        return render(request, "home/NTE_editar_nte.html", edt_nte)
+        return render(request, url_editar_nte, edt_nte)
 
 
 def cadastrado_nte(form, msg):

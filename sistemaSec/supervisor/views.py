@@ -8,13 +8,17 @@ from sistemaSec.sede.models import Sede
 from .forms import SupervisorForm
 from django.forms.models import model_to_dict
 
+url_criar_supervisor = "home/SUPE_criar_supervisor.html"
+url_dashboard_supervisor = "home/SUPE_dashboard.html"
+url_editar_supervisor = "home/SUPE_editar_supervisor.html"
+
 @login_required(login_url = "/login/")
 def criar_supervisor(request):
     form = SupervisorForm(request.POST)
     
     if request.method == "GET":
         form = SupervisorForm()
-        return render(request, "home/SUPE_criar_supervisor.html", {"form": form})
+        return render(request, url_criar_supervisor, {"form": form})
     
     else:
         if form.is_valid():
@@ -29,11 +33,11 @@ def criar_supervisor(request):
             supervisor.save()
             msg = "Supervisor Cadastrado com Sucesso!"
 
-            return render(request, "home/SUPE_dashboard.html", cadastrado_supervisor(form, msg))
+            return render(request, url_dashboard_supervisor, cadastrado_supervisor(form, msg))
         
         msg = "Ocorreu um ERRO no Cadastro!"
             
-        return render(request, "home/SUPE_dashboard.html", cadastrado_supervisor(form, msg))
+        return render(request, url_dashboard_supervisor, cadastrado_supervisor(form, msg))
 
 
 @login_required(login_url = "/login/")
@@ -60,7 +64,7 @@ def consultar_supervisor(request):
             "mensagem": "Nenhum Supervisor Localizado!"
         }
    
-    return render(request,"home/SUPE_dashboard.html",dados)
+    return render(request, url_dashboard_supervisor,dados)
     
 @login_required(login_url = "/login/")    
 def editar_supervisor(request,id_supervisor):
@@ -81,11 +85,11 @@ def editar_supervisor(request,id_supervisor):
             supervisor.save()
             
             msg = "Supervisor Alterado com Sucesso!"
-            return render(request,"home/SUPE_dashboard.html", cadastrado_supervisor(form, msg))
+            return render(request, url_dashboard_supervisor, cadastrado_supervisor(form, msg))
         msg = "Ocorreu um erro!"
-        return render(request,"home/SUPE_dashboard.html", cadastrado_supervisor(form, msg))
+        return render(request, url_dashboard_supervisor, cadastrado_supervisor(form, msg))
     else:
-        return render(request, "home/SUPE_editar_supervisor.html", editar_supervisor)
+        return render(request, url_editar_supervisor, editar_supervisor)
     
 
 def cadastrado_supervisor(form, msg):

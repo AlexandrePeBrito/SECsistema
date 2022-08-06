@@ -6,6 +6,10 @@ from django.contrib.auth.decorators import login_required
 from sistemaSec.faculdade.models import Faculdade
 from .forms import FaculdadeForm
 
+url_criar_faculdade = "home/FACU_criar_faculdade.html"
+url_dashboard_faculdade = "home/FACU_dashboard.html"
+url_editar_faculdade = "home/FACU_editar_faculdade.html"
+
 @login_required(login_url = "/login/")
 def criar_faculdade(request):
     form = FaculdadeForm(request.POST)
@@ -13,7 +17,7 @@ def criar_faculdade(request):
     if request.method == "GET":
         form = FaculdadeForm()
 
-        return render(request, "home/FACU_criar_faculdade.html", {"form": form})
+        return render(request, url_criar_faculdade, {"form": form})
         
     else:
         if form.is_valid():
@@ -30,10 +34,10 @@ def criar_faculdade(request):
         
             faculdade.save()
             msg = "Faculdade Cadastrada com Sucesso!"
-            return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(form, msg))
+            return render(request, url_dashboard_faculdade, cadastrado_faculdade(form, msg))
         
         msg = "Ocorreu um ERRO no Cadastro!"
-        return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(form, msg))
+        return render(request, url_dashboard_faculdade, cadastrado_faculdade(form, msg))
 
 @login_required(login_url = "/login/")
 def consultar_faculdade(request):
@@ -58,7 +62,7 @@ def consultar_faculdade(request):
             "error": True,
             "mensagem": "Nenhuma Faculdade Localizada!"
         }
-    return render(request,"home/FACU_dashboard.html",dados)
+    return render(request, url_dashboard_faculdade, dados)
     
 @login_required(login_url = "/login/")    
 def editar_faculdade(request,id_faculdade):
@@ -76,12 +80,12 @@ def editar_faculdade(request,id_faculdade):
             faculdade.save()
 
             msg = "Faculdade Alterado com Sucesso!"
-            return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(form, msg))
+            return render(request, url_dashboard_faculdade, cadastrado_faculdade(form, msg))
 
         msg = "Ocorreu um erro!"
-        return render(request,"home/FACU_dashboard.html",cadastrado_faculdade(form, msg))
+        return render(request, url_dashboard_faculdade, cadastrado_faculdade(form, msg))
     else:
-        return render(request,"home/FACU_editar_faculdade.html", edt_faculdade)
+        return render(request, url_editar_faculdade, edt_faculdade)
 
 def cadastrado_faculdade(form, msg):
     faculdades = Faculdade.objects.all()

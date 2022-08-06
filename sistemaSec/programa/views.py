@@ -6,6 +6,10 @@ from django.contrib.auth.decorators import login_required
 from sistemaSec.programa.models import Programa
 from .forms import ProgramaForm
 
+url_criar_programa = "home/PROG_criar_programa.html"
+url_dashboard_programa = "home/PROG_dashboard.html"
+url_editar_programa = "home/PROG_editar_programa.html"
+
 @login_required(login_url = "/login/")
 def criar_programa(request):
     form = ProgramaForm(request.POST)
@@ -13,7 +17,7 @@ def criar_programa(request):
     if request.method == "GET":
         form = ProgramaForm()
 
-        return render(request,"home/PROG_criar_programa.html", {"form": form})
+        return render(request, url_criar_programa, {"form": form})
     
     else:
         if form.is_valid():
@@ -24,10 +28,10 @@ def criar_programa(request):
             programa.save()
             msg = "Programa Cadastrado com Sucesso!"
 
-            return render(request,"home/PROG_dashboard.html",cadastrado_programa(form, msg))
+            return render(request, url_dashboard_programa,cadastrado_programa(form, msg))
 
         msg = "Ocorreu um ERRO no Cadastro!"
-        return render(request,"home/PROG_dashboard.html",cadastrado_programa(form, msg))
+        return render(request, url_dashboard_programa,cadastrado_programa(form, msg))
 
 @login_required(login_url = "/login/")
 def consultar_programa(request):
@@ -52,7 +56,7 @@ def consultar_programa(request):
             "mensagem": "Nenhum Programa Localizado!"
         }
 
-    return render(request,"home/PROG_dashboard.html",dados)
+    return render(request, url_dashboard_programa,dados)
     
 @login_required(login_url = "/login/")    
 def editar_programa(request,id_programa):
@@ -72,9 +76,9 @@ def editar_programa(request,id_programa):
             return render(request,"home/PROG_dashboard.html",cadastrado_programa(form, msg))
 
         msg = "Ocorreu um erro!"
-        return render(request,"home/PROG_dashboard.html",cadastrado_programa(form, msg))
+        return render(request,url_dashboard_programa,cadastrado_programa(form, msg))
     else:
-        return render(request,"home/PROG_editar_programa.html", edt_programa)
+        return render(request, url_editar_programa, edt_programa)
 
 def cadastrado_programa(form, msg):
     programa = Programa.objects.all()
