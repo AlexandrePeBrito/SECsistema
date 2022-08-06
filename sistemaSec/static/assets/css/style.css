@@ -4332,7 +4332,6 @@ p.text-muted {
   -webkit-background-clip: text;
   -webkit-text-fill-color: unset;
 }
-
 /* ====== [ Header color end ] ======== */
 /* ====== [ Brand color start ] ======== */
 .pcoded-navbar[class*="brand-"]:not(.brand-default) .mobile-menu span,
