@@ -179,12 +179,12 @@ def is_cpf_valid(cpf):
         # Decrement weight
         weight = weight - 1
 
-    verifyingDigit = 11 -  sum % 11
+    verifying_digit = 11 -  sum % 11
 
-    if verifyingDigit > 9 :
-        firstVerifyingDigit = 0
+    if verifying_digit > 9 :
+        first_verifying_digit = 0
     else:
-        firstVerifyingDigit = verifyingDigit
+        first_verifying_digit = verifying_digit
 
     """ Calculating the second check digit of cpf. """
     sum = 0
@@ -195,14 +195,14 @@ def is_cpf_valid(cpf):
         # Decrement weight
         weight = weight - 1
 
-    verifyingDigit = 11 -  sum % 11
+    verifying_digit = 11 -  sum % 11
 
-    if verifyingDigit > 9 :
-        secondVerifyingDigit = 0
+    if verifying_digit > 9 :
+        second_verifying_digit = 0
     else:
-        secondVerifyingDigit = verifyingDigit
+        second_verifying_digit = verifying_digit
 
-    if cpf[-2:] == "%s%s" % (firstVerifyingDigit,secondVerifyingDigit):
+    if cpf[-2:] == "%s%s" % (first_verifying_digit,second_verifying_digit):
         return True
     return False
 
