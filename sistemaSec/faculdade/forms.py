@@ -17,12 +17,15 @@ class FaculdadeForm(forms.ModelForm):
         model = Faculdade
         fields = "__all__"
 
+    requerido = "required oninvalid"
+    campo_requerido = "this.setCustomValidity('Campo requerido')"  
+
     nome_faculdade = forms.CharField(
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Nome da Faculdade",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
     cnpj_faculdade = forms.CharField(
@@ -38,7 +41,7 @@ class FaculdadeForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Nome do Diretor da Faculdade",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -47,7 +50,7 @@ class FaculdadeForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Telefone da Faculdade",
                 "class": "form-control mask-telefone",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -56,6 +59,6 @@ class FaculdadeForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Campus da Faculdade",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))

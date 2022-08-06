@@ -50,8 +50,8 @@ def criar_estagiario_partiu_estagio(request):
             bairro = form.cleaned_data.get("bairro_estagiario")
             numero = form.cleaned_data.get("numero_estagiario")
             complemento = form.cleaned_data.get("complemento_estagiario")
-            Matricula = form.cleaned_data.get("matricula_estagiario")
-            situaçao = form.cleaned_data.get("situacao_estagiario")
+            matricula = form.cleaned_data.get("matricula_estagiario")
+            situacao = form.cleaned_data.get("situacao_estagiario")
             supervisor = form.cleaned_data.get("supervisor_estagiario")
             sede = form.cleaned_data.get("sede_estagiario")
             faculdade = form.cleaned_data.get("faculdade_estagiario")
@@ -65,8 +65,8 @@ def criar_estagiario_partiu_estagio(request):
                 data_nascimento_estagiario = nascimento,
                 genero_estagiario = genero, raca_estagiario = raca,
                 bairro_estagiario = bairro, numero_estagiario = numero,
-                complemento_estagiario = complemento, matricula_estagiario = Matricula,
-                situacao_estagiario = situaçao, supervisor_estagiario = supervisor,
+                complemento_estagiario = complemento, matricula_estagiario = matricula,
+                situacao_estagiario = situacao, supervisor_estagiario = supervisor,
                 sede_estagiario = sede, faculdade_estagiario = faculdade,
                 estagio_estagiario = estagio)
             
@@ -153,7 +153,7 @@ def editar_estagiario_partiu_estagio(request, cpf_estagiario):
 
 
 
-def isCpfValid(cpf):
+def is_cpf_valid(cpf):
      # Check if type is str
     if not isinstance(cpf,str):
         return False
@@ -206,13 +206,13 @@ def isCpfValid(cpf):
         return True
     return False
 
-def isEmpty(campo):
+def is_empty(campo):
     if len(campo) == 0:
         return False
     else:
         return True
 
-def isChoiceEmpty(campo):
+def is_choice_empty(campo):
     if campo == 0:
         return False
     else:
@@ -277,8 +277,8 @@ def criar_estagiario_mais_futuro(request):
             bairro = form.cleaned_data.get("bairro_estagiario")
             numero = form.cleaned_data.get("numero_estagiario")
             complemento = form.cleaned_data.get("complemento_estagiario")
-            Matricula = form.cleaned_data.get("matricula_estagiario")
-            situaçao = form.cleaned_data.get("situacao_estagiario")
+            matricula = form.cleaned_data.get("matricula_estagiario")
+            situacao = form.cleaned_data.get("situacao_estagiario")
             supervisor = form.cleaned_data.get("supervisor_estagiario")
             sede = form.cleaned_data.get("sede_estagiario")
             faculdade = form.cleaned_data.get("faculdade_estagiario")
@@ -292,8 +292,8 @@ def criar_estagiario_mais_futuro(request):
                 data_nascimento_estagiario = nascimento,
                 genero_estagiario = genero, raca_estagiario = raca,
                 bairro_estagiario = bairro, numero_estagiario = numero,
-                complemento_estagiario = complemento, matricula_estagiario = Matricula,
-                situacao_estagiario = situaçao, supervisor_estagiario = supervisor,
+                complemento_estagiario = complemento, matricula_estagiario = matricula,
+                situacao_estagiario = situacao, supervisor_estagiario = supervisor,
                 sede_estagiario = sede, faculdade_estagiario = faculdade,
                 estagio_estagiario = estagio)
             
@@ -364,7 +364,7 @@ def editar_estagiario_mais_futuro(request,cpf_estagiario):
 
             msg = "Estagiario Alterado com sucesso!"
             return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg))
-        u
+        
         print(form.errors)
         msg = "Ocorreu um Erro"
         return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg))

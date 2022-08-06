@@ -96,7 +96,7 @@ def cadastrado_faculdade(form, msg):
     }
     return dados
 
-def isEmpty(campo):
+def is_empty(campo):
     if len(campo) == 0:
         return False
     else:

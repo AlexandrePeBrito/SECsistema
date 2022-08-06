@@ -18,12 +18,15 @@ class MunicipioForm(forms.ModelForm):
         model = Municipio
         fields = "__all__"
 
+    requerido = "required oninvalid"
+    campo_requerido = "this.setCustomValidity('Campo requerido')" 
+
     nome_municipio = forms.CharField(
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Nome do Município",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
     
@@ -31,6 +34,6 @@ class MunicipioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))

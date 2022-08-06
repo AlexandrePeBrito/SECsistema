@@ -17,12 +17,15 @@ class NTEForm(forms.ModelForm):
         model = NTE
         fields = "__all__"
 
+    requerido = "required oninvalid"
+    campo_requerido = "this.setCustomValidity('Campo requerido')"  
+
     nome_direitor_NTE =  forms.CharField(
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Nome do Diretor",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -31,7 +34,7 @@ class NTEForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Telefone do NTE",
                 "class": "form-control mask-telefone",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -40,7 +43,7 @@ class NTEForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Email do NTE",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
    

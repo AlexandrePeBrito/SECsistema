@@ -17,12 +17,15 @@ class SupervisorForm(forms.ModelForm):
         model = Supervisor
         fields = "__all__"
 
+    requerido = "required oninvalid"
+    campo_requerido = "this.setCustomValidity('Campo requerido')" 
+
     nome_supervisor = forms.CharField(
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Nome do Supervisor",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -31,7 +34,7 @@ class SupervisorForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Email do Supervisor",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
     telefone_supervisor = forms.CharField(
@@ -39,7 +42,7 @@ class SupervisorForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Telefone do Supervisor",
                 "class": "form-control mask-telefone",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
     

@@ -19,12 +19,15 @@ class SedeForm(forms.ModelForm):
         model = Sede
         fields = "__all__"
 
+    requerido = "required oninvalid"
+    campo_requerido = "this.setCustomValidity('Campo requerido')" 
+
     nome_sede = forms.CharField(
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Nome da Sede",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -33,7 +36,7 @@ class SedeForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Nome do Responsável da Sede",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -42,7 +45,7 @@ class SedeForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Bairro da Sede",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -51,7 +54,7 @@ class SedeForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Email da Sede",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -60,7 +63,7 @@ class SedeForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Telefone da Sede",
                 "class": "form-control mask-telefone",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -76,7 +79,7 @@ class SedeForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -84,6 +87,6 @@ class SedeForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))

@@ -20,12 +20,15 @@ class EstagiarioForm(forms.ModelForm):
         model = Estagiario
         fields = "__all__"
 
+    requerido = "required oninvalid"
+    campo_requerido = "this.setCustomValidity('Campo requerido')" 
+
     cpf_estagiario = forms.CharField(
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "CPF do Estagiário",
                 "class": "form-control mask-cpf",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -34,7 +37,7 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Nome do Estagiário",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
         
@@ -43,7 +46,7 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "RG do Estagiário",
                 "class": "form-control mask-rg",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
     
@@ -55,7 +58,7 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -64,7 +67,7 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Email do Estagiário",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -80,7 +83,7 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -97,7 +100,7 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Telefone do Estagiário",
                 "class": "form-control mask-telefone",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -114,7 +117,7 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Data de nascimento",
                 "class": "form-control mask-data",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -126,7 +129,7 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
     
@@ -141,7 +144,7 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -150,7 +153,7 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Bairro",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -187,7 +190,7 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
    
@@ -195,7 +198,7 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
 
@@ -203,7 +206,7 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
     
@@ -211,7 +214,7 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
     
@@ -219,6 +222,6 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                requerido: campo_requerido
             }
         ))
