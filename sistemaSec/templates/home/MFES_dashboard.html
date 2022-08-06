@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Partiu Estagio {% endblock %} 
+{% block title %} Mais Futuro {% endblock %} 
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -15,7 +15,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">DashBoard - Estagiario NOVO</h5>
+                                <h5 class="m-b-10">DashBoard - Mais Futuro</h5>
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
@@ -46,47 +46,47 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Estagiarios Mais Futuro</h5>
+                                    <h5>Estagiários Mais Futuro</h5>
                                 </div>
                                 
                                 <div class="card-body">
                                     <div>
-                                        <a href="{% url 'criar_estagiario_mais_futuro' %}"  id="criar-entidade" type="button" class="btn btn-success">+ Criar Estagiario</a>
+                                        <a href="{% url 'criar_estagiario_mais_futuro' %}"  id="criar-entidade" type="button" class="btn btn-success">+ Criar Estagiário</a>
                                     </div>
                                     
                                     <form action="{% url 'consultar_estagiario_mais_futuro' %}" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <h5 id="consultar" class="m-b-10">Consultar</h5>
-                                        <input type="text" class="form-control nome-consultar" name="buscar_estagiario_partiu_estagio" placeholder="Nome do Estagiario">
+                                        <input type="text" class="form-control nome-consultar" name="buscar_estagiario_partiu_estagio" placeholder="Nome do Estagiário">
                                         
                                         <div id="linhaForms">
                                             <div>
-                                                <input type="text" class="form-control mask-cpf campo-duplo-consulta" style="margin-left: 10%;" name="buscar_cpf_estagiario_partiu_estagio" placeholder="CPF do Estagiario">
+                                                <input type="text" class="form-control mask-cpf campo-duplo-consulta" style="margin-left: 10%;" name="buscar_cpf_estagiario_partiu_estagio" placeholder="CPF do Estagiário">
                                             </div>
                                             <div>
-                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 1%;" name="buscar_situacao_estagiario_partiu_estagio" placeholder="Situacao do Estagiario">
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 1%;" name="buscar_situacao_estagiario_partiu_estagio" placeholder="Situção do Estagiário">
                                             </div>
                                         </div>
                                         
                                         <div id="linhaForms">
                                             <div>
-                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 10%;" name="buscar_turno_estagiario_partiu_estagio" placeholder="Turno do Estagiario">
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 10%;" name="buscar_turno_estagiario_partiu_estagio" placeholder="Turno do Estagiário">
                                             </div>
                                             <div>
-                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 1%;" name="buscar_bairro_estagiario_partiu_estagio" placeholder="Bairro do Estagiario">
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 1%;" name="buscar_bairro_estagiario_partiu_estagio" placeholder="Bairro do Estagiário">
                                             </div>
                                         </div>
                                         
                                         <div id="linhaForms">
                                             <div>
-                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 10%;" name="buscar_supervisor_estagiario_partiu_estagio" placeholder="Supervisor do Estagiario">
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 10%;" name="buscar_supervisor_estagiario_partiu_estagio" placeholder="Supervisor do Estagiário">
                                             </div>
                                             <div>
-                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 1%;" name="buscar_sede_estagiario_partiu_estagio" placeholder="Sede do Estagiario">
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 1%;" name="buscar_sede_estagiario_partiu_estagio" placeholder="Sede do Estagiário">
                                             </div>
                                         </div>
 
-                                        <input type="text" class="form-control nome-consultar" name="buscar_faculdade_estagiario_partiu_estagio" placeholder="Faculdade do Estagiario">
+                                        <input type="text" class="form-control nome-consultar" name="buscar_faculdade_estagiario_partiu_estagio" placeholder="Faculdade do Estagiário">
                                         
                                         <button type="submit" id="btn-consultar" class="btn btn-primary">Consultar</button>
                                     </form>
@@ -101,7 +101,7 @@
                                                     <tr>
                                                         <th>CPF</th>
                                                         <th>Nome</th>
-                                                        <th>Situaçao</th>
+                                                        <th>Situação</th>
                                                         <th>Turno</th>
                                                         <th>Bairro</th>
                                                         <th>Supervisor</th>
