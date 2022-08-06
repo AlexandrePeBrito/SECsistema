@@ -50,21 +50,24 @@
                                 {% endif %}
                                 <div class="card-body">
                                     <div>
-                                        <a href="{% url 'criar_estagio' %}" type="button" class="btn btn-success" style="margin-left: 85%;">+ Criar Estagio</a>
+                                        <a href="{% url 'criar_estagio' %}" id="criar-entidade" type="button" class="btn btn-success">+ Criar Estagio</a>
                                     </div>
                                     <form action="{% url 'consultar_estagio' %}" enctype="multipart/form-data">
                                         {% csrf_token %}
-                                        <div class="form-group">
-                                            <label for="nome">Consultar</label>
-                                            <input type="text" class="form-control" name="buscar_area" placeholder="area">
-                                        </div>
-                                        <div>
-                                            <input type="text" class="form-control" name="buscar_edital" placeholder="Edital">
-                                        </div>
-                                        <div>
-                                            <input type="text" class="form-control" name="buscar_curso" placeholder="Curso">
-                                        </div>                                            
-                                        <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-left: 45%;">Consultar</button>
+
+                                        <h5 id="consultar" class="m-b-10">Consultar</h5>
+                                        <input type="text" class="form-control nome-consultar" name="buscar_curso" placeholder="Nome do Curso">
+                                        
+                                        <div id="linhaForms">
+                                            <div>
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 10%;" name="buscar_area" placeholder="area">
+                                            </div>
+                                            <div>
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 1%;" name="buscar_edital" placeholder="Edital">
+                                            </div>
+                                        </div>   
+                                        
+                                        <button type="submit" id="btn-consultar" class="btn btn-primary" >Consultar</button>
                                     </form>
 
                                     {% if estagios %}

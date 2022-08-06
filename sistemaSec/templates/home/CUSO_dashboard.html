@@ -50,17 +50,18 @@
                                 {% endif %}
                                 <div class="card-body">
                                     <div>
-                                        <a href="{% url 'criar_curso' %}" type="button" class="btn btn-success" style="margin-left: 85%;">+ Criar Curso</a>
+                                        <a href="{% url 'criar_curso' %}" id="criar-entidade" type="button" class="btn btn-success" >+ Criar Curso</a>
                                     </div>
                                     <form action="{% url 'consultar_curso' %}" enctype="multipart/form-data">
                                         {% csrf_token %}
-                                        <div class="form-group">
-                                            <label for="codigo">Consultar</label>
-                                            <input type="text" class="form-control" name="buscar_curso" placeholder="Nome do Curso">
-                                        </div>
+
+                                        <h5 id="consultar" class="m-b-10">Consultar</h5>
+                                        <input type="text" class="form-control nome-consultar" name="buscar_curso" placeholder="Nome do Curso">
                                                                                     
-                                        <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-left: 45%;">Consultar</button>
+                                        <button type="submit" id="btn-consultar" class="btn btn-primary">Consultar</button>
                                     </form>
+
+                                    <br><br><br><br><br><br>
 
                                     {% if cursos %}
                                     <div class="card-block table-border-style">

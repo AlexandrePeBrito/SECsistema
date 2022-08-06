@@ -50,20 +50,25 @@
                                 {% endif %}
                                 <div class="card-body">
                                     <div>
-                                        <a href="{% url 'criar_edital' %}" type="button" class="btn btn-success" style="margin-left: 85%;">+ Criar Edital</a>
+                                        <a href="{% url 'criar_edital' %}" id="criar-entidade" type="button" class="btn btn-success">+ Criar Edital</a>
                                     </div>
                                     <form action="{% url 'consultar_edital' %}" enctype="multipart/form-data">
                                         {% csrf_token %}
-                                        <div class="form-group">
-                                            <label for="nome">Consultar</label>
-                                            <input type="text" class="form-control" name="buscar_edital" placeholder="Numero do Edital">
-                                            
-                                        </div>
-                                        <div>
-                                            <input type="text" class="form-control" name="buscar_programa" placeholder="Programa">
+
+                                        <h5 id="consultar" class="m-b-10">Consultar</h5>
+                                        
+                                        <div id="linhaForms">
+                                            <div>
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 10%;" name="buscar_edital" placeholder="Codigo do Edital">
+                                            </div>
+                                            <div>
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 1%;" name="buscar_programa" placeholder="Nome do Programa">
+                                            </div>
                                         </div>                                            
-                                        <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-left: 45%;">Consultar</button>
+                                        <button type="submit" id="btn-consultar" class="btn btn-primary">Consultar</button>
                                     </form>
+
+                                    <br><br><br><br><br><br>
 
                                     {% if editais %}
                                     <div class="card-block table-border-style">

@@ -50,20 +50,26 @@
                                 {% endif %}
                                 <div class="card-body">
                                     <div>
-                                        <a href="{% url 'criar_municipio' %}" type="button" class="btn btn-success" style="margin-left: 85%;">+ Criar Municipio</a>
+                                        <a href="{% url 'criar_municipio' %}" id="criar-entidade" type="button" class="btn btn-success">+ Criar Municipio</a>
                                     </div>
                                     <form action="{% url 'consultar_municipio' %}" enctype="multipart/form-data">
                                         {% csrf_token %}
-                                        <div class="form-group">
-                                            <label for="nome">Consultar</label>
-                                            <input type="text" class="form-control" name="buscar_municipio" placeholder="Nome do Municipio">
-                                            
+                                        
+                                        <h5 id="consultar" class="m-b-10">Consultar</h5>
+ 
+                                        <div id="linhaForms">
+                                            <div>
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 10%;" name="buscar_municipio" placeholder="Nome do Municipio">
+                                            </div>
+                                            <div>
+                                                <input type="text" class="form-control mask-matricula campo-duplo-consulta" style="margin-left: 1%;" name="buscar_nte" placeholder="Numero do NTE">
+                                            </div>
                                         </div>
-                                        <div>
-                                            <input type="text" class="form-control mask-matricula" name="buscar_nte" placeholder="NTE">
-                                        </div>                                            
-                                        <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-left: 45%;">Consultar</button>
+                                                                                   
+                                        <button type="submit" id="btn-consultar" class="btn btn-primary">Consultar</button>
                                     </form>
+
+                                    <br><br><br><br><br><br>
 
                                     {% if municipios %}
                                     <div class="card-block table-border-style">

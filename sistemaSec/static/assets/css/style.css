@@ -6905,18 +6905,25 @@ pre[class*=language-]:after, pre[class*=language-]:before {
   font-size: 14px;
 }
 
-#criar-sede{
-  margin-left: 736px;
+#consultar{
+  margin-left: 5%;
+}
+
+#criar-entidade{
+  margin-left: 89%;
+  float: right;
+  margin-right: 5%;
 }
 
 .nome-consultar{
-  margin-left: 25px;
-  width: 833px;
+  margin-left: 5%;
+  width: 90%;
 }
 
 #btn-consultar{
+  float: right;
   margin-top: 10px;
-  margin-left: 752px;
+  margin-right:5%
 }
 
 #linhaForms {
@@ -6929,7 +6936,7 @@ pre[class*=language-]:after, pre[class*=language-]:before {
 }
 
 #linhaForms .campo-duplo-consulta {
-  width: 410px;
+  width: 89%;
 }
 
 .custom-select:focus,
