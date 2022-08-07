@@ -22,6 +22,7 @@ class CursoForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Nome do Cruso",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                "required oninvalid" : "this.setCustomValidity('Campo requerido')",
+                "onchange" : "this.setCustomValidity('')"
             }
         ))

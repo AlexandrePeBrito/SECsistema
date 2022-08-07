@@ -21,13 +21,16 @@ class EstagioForm(forms.ModelForm):
 
     requerido = "required oninvalid"
     campo_requerido = "this.setCustomValidity('Campo requerido')"  
+    onchange = "onchange"
+    campo_requerido_empty = "this.setCustomValidity('')"
 
     carga_horaria_estagio = forms.CharField(
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Carga Horária do Estágio",
                 "class": "form-control mask-matricula",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -36,7 +39,8 @@ class EstagioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Setor do Estágio",
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -44,7 +48,8 @@ class EstagioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
     
@@ -52,7 +57,8 @@ class EstagioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
     

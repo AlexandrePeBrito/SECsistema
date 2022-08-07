@@ -16,17 +16,19 @@ def criar_faculdade(request):
 
     if request.method == "GET":
         form = FaculdadeForm()
-
+        print("Entrou GET")
         return render(request, url_criar_faculdade, {"form": form})
         
     else:
+        print("Entrou GET")
         if form.is_valid():
+            print("Entrou VALID")
             nome_faculdade = form.cleaned_data.get("nome_faculdade")
             cnpj_faculdade = form.cleaned_data.get("cnpj_faculdade")
             direitor_faculdade = form.cleaned_data.get("nome_direitor_faculdade")
             campus = form.cleaned_data.get("campus_faculdade")
             telefone = form.cleaned_data.get("telefone_faculdade")
-
+            
         
             faculdade = Faculdade.objects.create(nome_faculdade = nome_faculdade,
             cnpj_faculdade = cnpj_faculdade, nome_direitor_faculdade = direitor_faculdade,

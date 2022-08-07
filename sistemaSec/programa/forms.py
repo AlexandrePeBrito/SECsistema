@@ -22,6 +22,7 @@ class ProgramaForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Nome do Programa",
                 "class": "form-control",
-                "required oninvalid" : "this.setCustomValidity('Campo requerido')"
+                "required oninvalid" : "this.setCustomValidity('Campo requerido')",
+                "onchange" : "this.setCustomValidity('')"
             }
         ))

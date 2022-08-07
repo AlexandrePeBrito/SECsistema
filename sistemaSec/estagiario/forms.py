@@ -22,13 +22,16 @@ class EstagiarioForm(forms.ModelForm):
 
     requerido = "required oninvalid"
     campo_requerido = "this.setCustomValidity('Campo requerido')" 
+    onchange = "onchange"
+    campo_requerido_empty = "this.setCustomValidity('')"
 
     cpf_estagiario = forms.CharField(
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "CPF do Estagiário",
                 "class": "form-control mask-cpf",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -37,7 +40,8 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Nome do Estagiário",
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
         
@@ -46,7 +50,8 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "RG do Estagiário",
                 "class": "form-control mask-rg",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
     
@@ -58,7 +63,8 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -67,7 +73,8 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Email do Estagiário",
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -83,7 +90,8 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -100,7 +108,8 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Telefone do Estagiário",
                 "class": "form-control mask-telefone",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -117,7 +126,8 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Data de nascimento",
                 "class": "form-control mask-data",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -129,7 +139,8 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
     
@@ -144,7 +155,8 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -153,7 +165,8 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Bairro",
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -178,7 +191,6 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Matrícula do Estagiário",
                 "class": "form-control mask-matricula",
-                requerido: False
             }
         ))
 
@@ -191,7 +203,8 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
    
@@ -199,7 +212,8 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -207,7 +221,8 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
     
@@ -215,7 +230,8 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
     
@@ -223,6 +239,7 @@ class EstagiarioForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))

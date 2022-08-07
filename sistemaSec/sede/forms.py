@@ -21,13 +21,16 @@ class SedeForm(forms.ModelForm):
 
     requerido = "required oninvalid"
     campo_requerido = "this.setCustomValidity('Campo requerido')" 
+    onchange = "onchange"
+    campo_requerido_empty = "this.setCustomValidity('')"
 
     nome_sede = forms.CharField(
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Nome da Sede",
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -36,7 +39,8 @@ class SedeForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Nome do Responsável da Sede",
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -45,7 +49,8 @@ class SedeForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Bairro da Sede",
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -54,7 +59,8 @@ class SedeForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Email da Sede",
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -63,7 +69,8 @@ class SedeForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Telefone da Sede",
                 "class": "form-control mask-telefone",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -79,7 +86,8 @@ class SedeForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
 
@@ -87,6 +95,7 @@ class SedeForm(forms.ModelForm):
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
-                requerido: campo_requerido
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
             }
         ))
