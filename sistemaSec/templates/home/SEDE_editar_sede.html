@@ -40,7 +40,7 @@
                                     <form role="form" method="POST" action="" >
                                         {% csrf_token %}
                                         
-                                        <label>Nome da Sede</label>
+                                        <label>Nome da Sede<b>*</b></label>
                                         <div>{{ form.nome_sede }}</div>
                                         <div id="linhaForms"> 
                                             <div class="unidade">
@@ -48,31 +48,31 @@
                                                 <div>{{ form.codigo_inep_sede }}</div>
                                             </div>
                                             <div>
-                                                <label>Telefone da Sede</label>
+                                                <label>Telefone da Sede<b>*</b></label>
                                                 <div>{{ form.telefone_sede }}</div>
                                             </div>
                                         </div>
 
-                                        <label>Nome do Responsável da Sede</label>
+                                        <label>Nome do Responsável da Sede<b>*</b></label>
                                         <div>{{ form.nome_responsavel_sede }}</div>
                                         
-                                        <label>Email da Sede</label>
+                                        <label>Email da Sede<b>*</b></label>
                                         <div>{{ form.email_sede }}</div>
 
                                         <div id="linhaForms">
                                             <div>
-                                                <label>Bairro</label>
+                                                <label>Bairro<b>*</b></label>
                                                 <div>{{ form.bairro_sede }}</div>
                                             </div>
                                         </div>
 
                                         <div id="linhaForms"> 
                                             <div class="unidade">
-                                                <label>Município da Sede</label>
+                                                <label>Município da Sede<b>*</b></label>
                                                 <div>{{ form.id_municipio_sede }}</div>
                                             </div>
                                             <div>
-                                                <label>NTE da Sede</label>
+                                                <label>NTE da Sede<b>*</b></label>
                                                 <div>{{ form.id_nte_sede }}</div>
                                             </div>
                                         </div>

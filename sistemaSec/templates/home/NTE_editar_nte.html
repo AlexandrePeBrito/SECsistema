@@ -40,15 +40,15 @@
                                     <form role="form" method="POST" action="" >
                                         {% csrf_token %}
                                         
-                                        <label>Nome do Diretor do NTE</label>
+                                        <label>Nome do Diretor do NTE<b>*</b></label>
                                         <div>{{ form.nome_direitor_NTE }}</div>
 
-                                        <label>Email do NTE</label>
+                                        <label>Email do NTE<b>*</b></label>
                                         <div>{{ form.email_NTE }}</div>
 
                                         <div id="linhaForms"> 
                                             <div class="unidade">
-                                                <label>Telefone do NTE</label>
+                                                <label>Telefone do NTE<b>*</b></label>
                                                 <div>{{ form.telefone_NTE }}</div>
                                             </div>
                                         </div>

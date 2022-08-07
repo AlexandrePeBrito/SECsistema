@@ -87,7 +87,7 @@ class EstagiarioForm(forms.ModelForm):
             }
         ))
 
-    nis_pis_estagiario = forms.CharField(
+    nis_pis_estagiario = forms.CharField(required = False,
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "NIS do Estagiário",
@@ -112,7 +112,7 @@ class EstagiarioForm(forms.ModelForm):
             }
         ))
 
-    data_nascimento_estagiario = forms.CharField(
+    data_nascimento_estagiario = forms.CharField(required = False,
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Data de nascimento",
@@ -165,7 +165,7 @@ class EstagiarioForm(forms.ModelForm):
             }
         ))
 
-    complemento_estagiario = forms.CharField(
+    complemento_estagiario = forms.CharField(required = False,
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Complemento",
@@ -173,11 +173,12 @@ class EstagiarioForm(forms.ModelForm):
             }
         ))
 
-    matricula_estagiario = forms.CharField(
+    matricula_estagiario = forms.CharField(required = False,
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Matrícula do Estagiário",
                 "class": "form-control mask-matricula",
+                requerido: False
             }
         ))
 

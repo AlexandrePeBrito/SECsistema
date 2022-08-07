@@ -40,10 +40,10 @@
                                     <form role="form" method="POST" action="" >
                                         {% csrf_token %}
                                         
-                                        <label>Nome da Faculdade</label>
+                                        <label>Nome da Faculdade<b>*</b></label>
                                         <div>{{ form.nome_faculdade }}</div>
 
-                                        <label>Nome do Diretor da Faculdade</label>
+                                        <label>Nome do Diretor da Faculdade<b>*</b></label>
                                         <div>{{ form.nome_direitor_faculdade }}</div>
                                         
                                         <div id="linhaForms"> 
@@ -52,7 +52,7 @@
                                                 <div>{{ form.cnpj_faculdade }}</div>
                                             </div>
                                             <div >
-                                                <label>Telefone da Faculdade</label>
+                                                <label>Telefone da Faculdade<b>*</b></label>
                                                 <div>{{ form.telefone_faculdade }}</div>
                                             </div>
                                         </div>

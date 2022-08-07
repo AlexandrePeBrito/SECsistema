@@ -40,15 +40,15 @@
                                     <form role="form" method="POST" action="" >
                                         {% csrf_token %}
                                         
-                                        <label>Código do Edital</label>
+                                        <label>Código do Edital<b>*</b></label>
                                         <div>{{ form.id_edital }}</div>
                                         <div id="linhaForms"> 
                                             <div class="unidade">
-                                                <label>Quantidades de Vagas</label>
+                                                <label>Quantidades de Vagas<b>*</b></label>
                                                 <div>{{ form.quantidade_vagas_edital }}</div>
                                             </div>
                                             <div>
-                                                <label>Programa do Edital</label>
+                                                <label>Programa do Edital<b>*</b></label>
                                                 <div>{{ form.id_programa_edital }}</div>
                                             </div>
                                         </div>

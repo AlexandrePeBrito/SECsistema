@@ -30,7 +30,7 @@ class MunicipioForm(forms.ModelForm):
             }
         ))
     
-    id_nte_municipio = forms.ModelChoiceField(queryset=NTE.objects.all(), 
+    id_nte_municipio = forms.ModelChoiceField(queryset=NTE.objects.all(),
         widget = forms.Select(
             attrs = {
                 "class": "form-control",

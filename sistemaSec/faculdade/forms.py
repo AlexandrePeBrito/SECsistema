@@ -28,7 +28,7 @@ class FaculdadeForm(forms.ModelForm):
                 requerido: campo_requerido
             }
         ))
-    cnpj_faculdade = forms.CharField(
+    cnpj_faculdade = forms.CharField(required = False,
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "CNPJ da Faculdade",
@@ -54,11 +54,10 @@ class FaculdadeForm(forms.ModelForm):
             }
         ))
 
-    campus_faculdade = forms.CharField(
+    campus_faculdade = forms.CharField(required = False,
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Campus da Faculdade",
                 "class": "form-control",
-                requerido: campo_requerido
             }
         ))

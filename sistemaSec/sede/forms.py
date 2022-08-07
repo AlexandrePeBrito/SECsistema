@@ -67,7 +67,7 @@ class SedeForm(forms.ModelForm):
             }
         ))
 
-    codigo_inep_sede = forms.CharField(
+    codigo_inep_sede = forms.CharField(required = False,
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Código do Inep da Sede",
