@@ -78,7 +78,6 @@
                                                     <tr>
                                                         <th>Código</th>
                                                         <th>Quantidades de Vagas</th>
-                                                        <th>Programa</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -86,7 +85,6 @@
                                                     <tr>
                                                         <td>{{ edital.id_edital }}</td>
                                                         <td>{{ edital.quantidade_vagas_edital }}</td>
-                                                        <td>{{ edital.id_programa_edital }}</td>
                                                         <td><a href="{% url 'editar_edital' edital.id_edital %}" type="button" class="btn btn-success" style="margin-top: 10px; margin-left: 45%;">Editar</a></td>
                                                     </tr>
                                                     {% endfor %}

@@ -10,7 +10,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from sistemaSec.estagiario.models import Estagiario
 from sistemaSec.supervisor.models import Supervisor
-from sistemaSec.estagio.models import Estagio
 from sistemaSec.faculdade.models import Faculdade
 from sistemaSec.sede.models import Sede
 
@@ -235,11 +234,4 @@ class EstagiarioForm(forms.ModelForm):
             }
         ))
     
-    estagio_estagiario = forms.ModelChoiceField(queryset=Estagio.objects.all(), 
-        widget = forms.Select(
-            attrs = {
-                "class": "form-control",
-                requerido: campo_requerido,
-                onchange: campo_requerido_empty
-            }
-        ))
+   

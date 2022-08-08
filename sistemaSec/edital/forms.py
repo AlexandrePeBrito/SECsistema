@@ -42,11 +42,4 @@ class EditalForm(forms.ModelForm):
             }
         ))
 
-    id_programa_edital = forms.ModelChoiceField(queryset=Programa.objects.all(), 
-        widget = forms.Select(
-            attrs = {
-                "class": "form-control",
-                requerido: campo_requerido,
-                onchange: campo_requerido_empty
-            }
-        ))
+    

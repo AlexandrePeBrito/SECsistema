@@ -6,9 +6,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from cpf_field.models import CPFField
 from ..supervisor.models import Supervisor
-from ..estagio.models import Estagio
 from ..faculdade.models import Faculdade
 from ..sede.models import Sede
+from ..edital.models import Edital
+from ..programa.models import Programa
+from ..curso.models import Curso
+
 
 class Estagiario(models.Model):
     cpf_estagiario = CPFField(primary_key=True)
@@ -32,7 +35,9 @@ class Estagiario(models.Model):
     supervisor_estagiario = models.ForeignKey(Supervisor, on_delete=models.CASCADE, related_name="supervisor", null = True)
     sede_estagiario = models.ForeignKey(Sede, on_delete=models.PROTECT, related_name="sede", null = True)
     faculdade_estagiario = models.ForeignKey(Faculdade, on_delete=models.PROTECT, related_name="faculdade", null = True)
-    estagio_estagiario = models.ForeignKey(Estagio, on_delete=models.PROTECT, related_name="estagio", null = True)
+    id_programa_estagiario = models.ForeignKey(Programa, on_delete=models.PROTECT, related_name="programa", null = True)
+    id_edital_estagiario = models.ForeignKey(Edital, on_delete=models.PROTECT, related_name="edital", null = True)
+    id_cursos_estagiario = models.ForeignKey(Curso, on_delete=models.PROTECT, related_name="curso", null = True)
     
     def __str__(self):
         return self.nome_estagiario

@@ -47,10 +47,6 @@
                                                 <label>Quantidades de Vagas<b>*</b></label>
                                                 <div>{{ form.quantidade_vagas_edital }}</div>
                                             </div>
-                                            <div>
-                                                <label>Programa do Edital<b>*</b></label>
-                                                <div>{{ form.id_programa_edital }}</div>
-                                            </div>
                                         </div>
                                         
                                         <div  class="card"></div>
@@ -71,13 +67,6 @@
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
     <script src="/static/assets/js/pages/mask.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="></script>
-
-    <script>
-        $(document).ready(function() {
-            $('#id_id_programa_edital').select2();
-        });
-    </script>
+   
 {% endblock javascripts %}
 

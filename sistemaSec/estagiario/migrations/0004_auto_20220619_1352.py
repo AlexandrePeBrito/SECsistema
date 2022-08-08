@@ -7,7 +7,6 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('estagio', '0002_remove_estagio_id_programa_estagio'),
         ('supervisor', '0003_rename_id_sede_supervisor_supervisor_sede_supervisor'),
         ('sistemaSec_sede', '0001_initial'),
         ('faculdade', '0001_initial'),
@@ -15,11 +14,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='estagiario',
-            name='estagio_estagiario',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, related_name='estagio', to='estagio.estagio'),
-        ),
+        
         migrations.AddField(
             model_name='estagiario',
             name='faculdade_estagiario',

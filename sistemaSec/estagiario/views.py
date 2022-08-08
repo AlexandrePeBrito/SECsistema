@@ -16,7 +16,6 @@ from sistemaSec.estagiario.models import Estagiario
 from sistemaSec.programa.models import Programa
 from sistemaSec.supervisor.models import Supervisor
 from sistemaSec.sede.models import Sede
-from sistemaSec.estagio.models import Estagio
 from sistemaSec.faculdade.models import Faculdade
 from .forms import EstagiarioForm
 from django.forms.models import model_to_dict
@@ -91,7 +90,7 @@ def criar_estagiario_partiu_estagio(request):
             supervisor = form.cleaned_data.get("supervisor_estagiario")
             sede = form.cleaned_data.get("sede_estagiario")
             faculdade = form.cleaned_data.get("faculdade_estagiario")
-            estagio = form.cleaned_data.get("estagio_estagiario")
+            
 
             estagiario = Estagiario.objects.create(cpf_estagiario = cpf,
                 nome_estagiario = nome_estagiario, rg_estagiario = rg,
@@ -103,8 +102,7 @@ def criar_estagiario_partiu_estagio(request):
                 bairro_estagiario = bairro, numero_estagiario = numero,
                 complemento_estagiario = complemento, matricula_estagiario = matricula,
                 situacao_estagiario = situacao, supervisor_estagiario = supervisor,
-                sede_estagiario = sede, faculdade_estagiario = faculdade,
-                estagio_estagiario = estagio)
+                sede_estagiario = sede, faculdade_estagiario = faculdade)
             
             estagiario.save()
             msg = "Estagiario Cadastrado com Sucesso!"
@@ -139,18 +137,17 @@ def consultar_estagiario_partiu_estagio(request):
             lista_por_supervisor = lista_por_bairro.filter(Q(supervisor_estagiario__nome_supervisor__icontains=supervisor_consulta))
             lista_por_sede = lista_por_supervisor.filter(Q(sede_estagiario__nome_sede__icontains=sede_consulta))
             lista_por_faculdade = lista_por_sede.filter(Q(faculdade_estagiario__nome_faculdade__icontains=faculdade_consulta))
-            lista_partiu_estagio = lista_por_faculdade.filter(Q(estagio_estagiario=1))
 
     
-    if lista_partiu_estagio:
+    if lista_por_faculdade:
         dados = {
-            "estagiarios": lista_partiu_estagio,
+            "estagiarios": lista_por_faculdade,
             "error": False,
             "mensagem": "Consulta Feita com Sucesso!"
         }
     else:
         dados = {
-            "estagiarios": lista_partiu_estagio,
+            "estagiarios": lista_por_faculdade,
             "error": True,
             "mensagem": "Nenhum Estagiario Localizado!"
         }
@@ -255,12 +252,10 @@ def is_choice_empty(campo):
 
 def cadastrado_estagiario_partiu_estagio(form, msg):
     programa_consulta = get_object_or_404(Programa,id_programa = 1)
-    sede_consulta = Edital.objects.filter(id_programa_edital_id = programa_consulta)
-    estagio = Estagio.objects.filter(id_edital_estagio_id__in = sede_consulta)
-    estagiario = Estagiario.objects.filter(estagio_estagiario_id__in = estagio)
+ 
     
     dados ={
-        "estagiarios": estagiario,
+        "estagiarios": programa_consulta,
         "form": form,
         "mensagem":msg
     }
@@ -269,12 +264,9 @@ def cadastrado_estagiario_partiu_estagio(form, msg):
 
 def cadastrado_estagiario_mais_futuro(form, msg):
     programa_consulta = get_object_or_404(Programa,id_programa = 2)
-    sede_consulta = Edital.objects.filter(id_programa_edital_id = programa_consulta)
-    estagio = Estagio.objects.filter(id_edital_estagio_id__in = sede_consulta)
-    estagiario = Estagiario.objects.filter(estagio_estagiario_id__in = estagio)
     
     dados ={
-        "estagiarios": estagiario,
+        "estagiarios": programa_consulta,
         "form": form,
         "mensagem":msg
     }
@@ -316,7 +308,6 @@ def criar_estagiario_mais_futuro(request):
             supervisor = form.cleaned_data.get("supervisor_estagiario")
             sede = form.cleaned_data.get("sede_estagiario")
             faculdade = form.cleaned_data.get("faculdade_estagiario")
-            estagio = form.cleaned_data.get("estagio_estagiario")
 
             estagiario = Estagiario.objects.create(cpf_estagiario = cpf,
                 nome_estagiario = nome_estagiario, rg_estagiario = rg,
@@ -328,8 +319,7 @@ def criar_estagiario_mais_futuro(request):
                 bairro_estagiario = bairro, numero_estagiario = numero,
                 complemento_estagiario = complemento, matricula_estagiario = matricula,
                 situacao_estagiario = situacao, supervisor_estagiario = supervisor,
-                sede_estagiario = sede, faculdade_estagiario = faculdade,
-                estagio_estagiario = estagio)
+                sede_estagiario = sede, faculdade_estagiario = faculdade)
             
             estagiario.save()
             msg = "Estagiario Cadastrado com Sucesso!"
@@ -364,17 +354,16 @@ def consultar_estagiario_mais_futuro(request):
             lista_por_supervisor = lista_por_bairro.filter(Q(supervisor_estagiario__nome_supervisor__icontains=supervisor_consulta))
             lista_por_sede = lista_por_supervisor.filter(Q(sede_estagiario__nome_sede__icontains=sede_consulta))
             lista_por_faculdade = lista_por_sede.filter(Q(faculdade_estagiario__nome_faculdade__icontains=faculdade_consulta))
-            lista_mais_futuro = lista_por_faculdade.filter(Q(estagio_estagiario=2))
 
-    if lista_mais_futuro:
+    if lista_por_faculdade:
         dados = {
-            "estagiarios": lista_mais_futuro,
+            "estagiarios": lista_por_faculdade,
             "error": False,
             "mensagem": "Consulta Feita com Sucesso!"
         }
     else:
         dados = {
-            "estagiarios": lista_mais_futuro,
+            "estagiarios": lista_por_faculdade,
             "error": True,
             "mensagem": "Nenhum Estagiario Localizado!"
         }

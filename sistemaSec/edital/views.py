@@ -23,11 +23,10 @@ def criar_edital(request):
         if form.is_valid():
             id_edital = form.cleaned_data.get("id_edital")
             quantidade_vagas = form.cleaned_data.get("quantidade_vagas_edital")
-            programa = form.cleaned_data.get("id_programa_edital")
+            
         
             edital = Edital.objects.create(id_edital = id_edital,
-                quantidade_vagas_edital = quantidade_vagas,
-                id_programa_edital = programa)
+                quantidade_vagas_edital = quantidade_vagas)
             
             edital.save()
             msg = "Edital Cadastrado com Sucesso!"
@@ -46,17 +45,16 @@ def consultar_edital(request):
         programa_consulta=request.GET["buscar_programa"]
         if consultar_edital:
             lista_por_edital = edital.filter(Q(id_edital__icontains = edital_consulta))
-            listar_por_programa = lista_por_edital.filter(Q(id_programa_edital__nome_programa__icontains = programa_consulta))
     
-    if listar_por_programa:
+    if lista_por_edital:
         dados = {
-            "editais": listar_por_programa,
+            "editais": lista_por_edital,
             "error": False,
             "mensagem": "Consulta Feita com Sucesso!"
         }
     else:
         dados = {
-            "editais": listar_por_programa,
+            "editais": lista_por_edital,
             "error": True,
             "mensagem": "Nenhum Edital Localizado!"
         }
