@@ -259,11 +259,12 @@ def is_choice_empty(campo):
         return True
 
 def cadastrado_estagiario_partiu_estagio(form, msg):
-    programa_consulta = get_object_or_404(Programa,id_programa = 1)
+    todos_estagiario = Estagiario.objects.all()
+    estagiario = todos_estagiario.filter(Q(programa_estagiario = 1))
  
     
     dados ={
-        "estagiarios": programa_consulta,
+        "estagiarios": estagiario,
         "form": form,
         "mensagem":msg
     }
