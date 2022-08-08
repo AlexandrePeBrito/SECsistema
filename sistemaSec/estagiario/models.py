@@ -35,9 +35,9 @@ class Estagiario(models.Model):
     supervisor_estagiario = models.ForeignKey(Supervisor, on_delete=models.CASCADE, related_name="supervisor", null = True)
     sede_estagiario = models.ForeignKey(Sede, on_delete=models.PROTECT, related_name="sede", null = True)
     faculdade_estagiario = models.ForeignKey(Faculdade, on_delete=models.PROTECT, related_name="faculdade", null = True)
-    id_programa_estagiario = models.ForeignKey(Programa, on_delete=models.PROTECT, related_name="programa", null = True)
-    id_edital_estagiario = models.ForeignKey(Edital, on_delete=models.PROTECT, related_name="edital", null = True)
-    id_cursos_estagiario = models.ForeignKey(Curso, on_delete=models.PROTECT, related_name="curso", null = True)
+    programa_estagiario = models.ForeignKey(Programa, on_delete=models.PROTECT, related_name="programa", null = True)
+    edital_estagiario = models.ForeignKey(Edital, on_delete=models.PROTECT, related_name="edital", null = True)
+    curso_estagiario = models.ForeignKey(Curso, on_delete=models.PROTECT, related_name="curso", null = True)
     
     def __str__(self):
         return self.nome_estagiario

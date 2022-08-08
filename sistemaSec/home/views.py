@@ -18,6 +18,8 @@ from sistemaSec.faculdade.models import Faculdade
 from sistemaSec.edital.models import Edital
 from sistemaSec.municipio.models import Municipio
 from sistemaSec.sede.models import Sede
+from django.db.models import Q
+
 
 @login_required(login_url = "/login/")
 def index(request):
@@ -53,20 +55,22 @@ def pages(request):
 
 @login_required(login_url = "/login/")
 def dashboard_estagiario_partiu_estagio(request):
-    programa_consulta = get_object_or_404(Programa,id_programa = 1)
-
+    todos_estagiario = Estagiario.objects.all()
+    estagiario = todos_estagiario.filter(Q(programa_estagiario = 1))
+    
     dados ={
-        "estagiarios": programa_consulta
+        "estagiarios": estagiario
     }
     return render(request, "home/PAES_dashboard.html",dados)
 
 
 @login_required(login_url = "/login/")
 def dashboard_estagiario_mais_futuro(request):
-    programa_consulta = get_object_or_404(Programa,id_programa = 2)
-   
+    todos_estagiario = Estagiario.objects.all()
+    estagiario = todos_estagiario.filter(Q(programa_estagiario = 2))
+    
     dados = {
-        "estagiarios": programa_consulta
+        "estagiarios": estagiario
     }
     return render(request, "home/MFES_dashboard.html",dados)
 

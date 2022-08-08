@@ -12,6 +12,9 @@ from sistemaSec.estagiario.models import Estagiario
 from sistemaSec.supervisor.models import Supervisor
 from sistemaSec.faculdade.models import Faculdade
 from sistemaSec.sede.models import Sede
+from ..edital.models import Edital
+from ..programa.models import Programa
+from ..curso.models import Curso
 
 class EstagiarioForm(forms.ModelForm):
     
@@ -226,6 +229,33 @@ class EstagiarioForm(forms.ModelForm):
         ))
     
     faculdade_estagiario = forms.ModelChoiceField(queryset=Faculdade.objects.all(), 
+        widget = forms.Select(
+            attrs = {
+                "class": "form-control",
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
+            }
+        ))
+
+    programa_estagiario = forms.ModelChoiceField(queryset=Programa.objects.all(), 
+        widget = forms.Select(
+            attrs = {
+                "class": "form-control",
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
+            }
+        ))
+    
+    edital_estagiario = forms.ModelChoiceField(queryset=Edital.objects.all(), 
+        widget = forms.Select(
+            attrs = {
+                "class": "form-control",
+                requerido: campo_requerido,
+                onchange: campo_requerido_empty
+            }
+        ))
+
+    curso_estagiario = forms.ModelChoiceField(queryset=Curso.objects.all(), 
         widget = forms.Select(
             attrs = {
                 "class": "form-control",
