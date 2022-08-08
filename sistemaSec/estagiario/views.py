@@ -188,7 +188,6 @@ def editar_estagiario_partiu_estagio(request, cpf_estagiario):
 
 
 
-
 def is_cpf_valid(cpf):
      # Check if type is str
     if not isinstance(cpf,str):
@@ -267,7 +266,6 @@ def cadastrado_estagiario_partiu_estagio(form, msg):
     }
    
     return dados
-
 
 def cadastrado_estagiario_mais_futuro(form, msg):
     programa_consulta = get_object_or_404(Programa,id_programa = 2)
