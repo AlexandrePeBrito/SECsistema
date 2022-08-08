@@ -41,7 +41,7 @@ $(document).ready(function() {
         resize: true,
         responsive:true,
         ykeys: ['a', 'b', 'c'],
-        labels: ['Bar 1', 'Bar 2', 'Bar 3'],
+        labels: ['Ativo', 'Desclassificado', 'Desligado'],
         barColors: ["0-#1de9b6-#1dc4e9", "0-#899FD4-#A389D4", "#04a9f5"]
     });
     // [ bar-simple ] chart end
