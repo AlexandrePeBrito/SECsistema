@@ -18,7 +18,8 @@ from sistemaSec.faculdade.models import Faculdade
 from sistemaSec.edital.models import Edital
 from sistemaSec.municipio.models import Municipio
 from sistemaSec.sede.models import Sede
-from sistemaSec.estagio.models import Estagio
+from django.db.models import Q
+
 
 @login_required(login_url = "/login/")
 def index(request):
@@ -54,10 +55,9 @@ def pages(request):
 
 @login_required(login_url = "/login/")
 def dashboard_estagiario_partiu_estagio(request):
-    programa_consulta = get_object_or_404(Programa,id_programa = 1)
-    sede_consulta = Edital.objects.filter(id_programa_edital_id = programa_consulta)
-    estagio = Estagio.objects.filter(id_edital_estagio_id__in = sede_consulta)
-    estagiario = Estagiario.objects.filter(estagio_estagiario_id__in = estagio)
+    todos_estagiario = Estagiario.objects.all()
+    estagiario = todos_estagiario.filter(Q(programa_estagiario = 1))
+    
     dados ={
         "estagiarios": estagiario
     }
@@ -66,10 +66,9 @@ def dashboard_estagiario_partiu_estagio(request):
 
 @login_required(login_url = "/login/")
 def dashboard_estagiario_mais_futuro(request):
-    programa_consulta = get_object_or_404(Programa,id_programa = 2)
-    sede_consulta = Edital.objects.filter(id_programa_edital_id = programa_consulta)
-    estagio = Estagio.objects.filter(id_edital_estagio_id__in = sede_consulta)
-    estagiario = Estagiario.objects.filter(estagio_estagiario_id__in = estagio)
+    todos_estagiario = Estagiario.objects.all()
+    estagiario = todos_estagiario.filter(Q(programa_estagiario = 2))
+    
     dados = {
         "estagiarios": estagiario
     }
@@ -127,8 +126,3 @@ def dashboard_sede(request):
     dados = {"sedes": sede}
     return render(request, "home/SEDE_dashboard.html",dados)
 
-@login_required(login_url = "/login/")
-def dashboard_estagio(request):
-    estagio = Estagio.objects.all()
-    dados = {"estagios": estagio}
-    return render(request, "home/ESTG_dashboard.html",dados)

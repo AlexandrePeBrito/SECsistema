@@ -5,7 +5,6 @@ class Edital(models.Model):
     id_edital = models.CharField(primary_key=True, max_length=7)
     quantidade_vagas_edital = models.IntegerField()
     #foreign key
-    id_programa_edital = models.ForeignKey(Programa, on_delete=models.PROTECT, related_name="editais")
     def __str__(self):
         return self.id_edital
 

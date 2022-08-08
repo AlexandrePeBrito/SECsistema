@@ -56,15 +56,8 @@
                                         {% csrf_token %}
 
                                         <h5 id="consultar" class="m-b-10">Consultar</h5>
-                                        
-                                        <div id="linhaForms">
-                                            <div>
-                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 10%;" name="buscar_edital" placeholder="Código do Edital">
-                                            </div>
-                                            <div>
-                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 1%;" name="buscar_programa" placeholder="Nome do Programa">
-                                            </div>
-                                        </div>                                            
+                                        <input type="text" class="form-control nome-consultar"  name="buscar_edital" placeholder="Código do Edital">
+                                                                                  
                                         <button type="submit" id="btn-consultar" class="btn btn-primary">Consultar</button>
                                     </form>
 
@@ -78,7 +71,6 @@
                                                     <tr>
                                                         <th>Código</th>
                                                         <th>Quantidades de Vagas</th>
-                                                        <th>Programa</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -86,7 +78,6 @@
                                                     <tr>
                                                         <td>{{ edital.id_edital }}</td>
                                                         <td>{{ edital.quantidade_vagas_edital }}</td>
-                                                        <td>{{ edital.id_programa_edital }}</td>
                                                         <td><a href="{% url 'editar_edital' edital.id_edital %}" type="button" class="btn btn-success" style="margin-top: 10px; margin-left: 45%;">Editar</a></td>
                                                     </tr>
                                                     {% endfor %}

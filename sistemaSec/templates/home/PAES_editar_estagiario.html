@@ -129,11 +129,22 @@
                                             <div class="unidade">
                                                 <label>Sede do Estagiário<b>*</b></label>
                                                 <div>{{ form.sede_estagiario }}</div>
-                                            </div>
+                                            </div> 
                                             <div>
-                                                <label>Estágio do Estagiário<b>*</b></label>
-                                                <div>{{ form.estagio_estagiario }}</div>
-                                            </div>    
+                                                <label>Curso do Estagiário<b>*</b></label>
+                                                <div>{{ form.curso_estagiario }}</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div id="linhaForms">
+                                            <div class="unidade">
+                                                <label>Programa do Estagiário<b>*</b></label>
+                                                <div>{{ form.programa_estagiario }}</div>
+                                            </div> 
+                                            <div>
+                                                <label>Edital do Estagiário<b>*</b></label>
+                                                <div>{{ form.edital_estagiario }}</div>
+                                            </div>
                                         </div>
 
                                         <div class="card"></div>
@@ -152,6 +163,26 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#id_turno_estagiario').select2();
+            $('#id_semestre_estagiario').select2();
+            $('#id_genero_estagiario').select2();
+            $('#id_raca_estagiario').select2();
+            $('#id_situacao_estagiario').select2();
+            $('#id_supervisor_estagiario').select2();
+            $('#id_sede_estagiario').select2();
+            $('#id_faculdade_estagiario').select2();
+            $('#id_curso_estagiario').select2();
+            $('#id_programa_estagiario').select2();
+            $('#id_edital_estagiario').select2();
+        });
+    </script>
+{% endblock javascripts %}
 
 
