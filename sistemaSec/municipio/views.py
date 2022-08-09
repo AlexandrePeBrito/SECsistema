@@ -2,7 +2,6 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from sistemaSec.municipio.models import Municipio
-from sistemaSec.nte.models import NTE
 from .forms import MunicipioForm
 from django.forms.models import model_to_dict
 
@@ -10,6 +9,22 @@ url_criar_municipio = "home/MUNI_criar_municipio.html"
 url_dashboard_municipio = "home/MUNI_dashboard.html"
 url_editar_municipio = "home/MUNI_editar_municipio.html"
 
+def grafico_municipio(request):
+    nte = Municipio.objects.raw("Select 1 as id_municipio, id_NTE as nome, count(id_municipio) as qtd, '#ff0000' as cor from municipio_municipio join nte_nte on nte_nte.id_NTE = municipio_municipio.id_nte_municipio_id group by id_NTE")
+
+    cores = ["#ed0919", "#2a07f0", "#b33062", "#5652c7", "#ed0919", "#2a07f0", "#b33062", "#5652c7"]
+    #"#1de9b6", "#A389D4", "#04a9f5", 
+    i = 0
+    for n in nte:
+        n.cor = cores[i]
+        i = i + 1
+
+    grafico ={
+        "ntes": nte,
+    }
+
+    return render(request, "home/MUNI_grafico.html", grafico)
+    
 @login_required(login_url = "/login/")
 def criar_municipio(request):
     form = MunicipioForm(request.POST)

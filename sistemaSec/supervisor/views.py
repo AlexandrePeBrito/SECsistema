@@ -12,6 +12,23 @@ url_criar_supervisor = "home/SUPE_criar_supervisor.html"
 url_dashboard_supervisor = "home/SUPE_dashboard.html"
 url_editar_supervisor = "home/SUPE_editar_supervisor.html"
 
+def grafico_supervisor(request):
+    sede = Supervisor.objects.raw("Select 1 as id_supervisor, nome_sede as nome, count(id_supervisor) as qtd, '#ff0000' as cor from supervisor_supervisor_sede_supervisor join supervisor_supervisor on supervisor_supervisor.id_supervisor = supervisor_supervisor_sede_supervisor.supervisor_id join sistemasec_sede_sede on sistemasec_sede_sede.id_sede = supervisor_supervisor_sede_supervisor.sede_id group by nome_sede")
+    
+    
+    cores = ["#ed0919", "#2a07f0", "#b33062", "#5652c7", "#ed0919", "#2a07f0", "#b33062", "#5652c7"]
+    #"#1de9b6", "#A389D4", "#04a9f5", 
+    i = 0
+    for s in sede:
+        s.cor = cores[i]
+        i = i + 1
+
+    grafico ={
+        "sedes": sede,
+    }
+
+    return render(request, "home/SUPE_grafico.html", grafico) 
+
 @login_required(login_url = "/login/")
 def criar_supervisor(request):
     form = SupervisorForm(request.POST)

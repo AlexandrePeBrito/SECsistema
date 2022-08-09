@@ -1,13 +1,14 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!-- GRAFICO SEDE-->
 <script type="text/javascript">
   google.charts.load("current", {packages:['corechart']});
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
-    ["Genero", "Quantidade", { role: "style" } ],
-      {% for genero in generos %}
-        ["{{ genero.nome }}", {{ genero.qtd}}, "{{ genero.cor}}"],
+    ["Sede", "Quantidade", { role: "style" } ],
+      {% for sede in sedes %}
+        ["{{ sede.nome }}", {{ sede.qtd}}, "{{ sede.cor}}"],
       {% endfor %}
     ]);
 
@@ -20,14 +21,13 @@
                      2]);
 
     var options = {
-      title: "Quantidades de estagiarios pelo Gênero",
+      title: "Quantidade de Supervisores por Sede",
       width: 450,
       height: 350,
       bar: {groupWidth: "65%"},
       legend: { position: "none" },
     };
-    var chart = new google.visualization.ColumnChart(document.getElementById("chart-genero"));
+    var chart = new google.visualization.ColumnChart(document.getElementById("chart-sede"));
     chart.draw(view, options);
 }
 </script>
-<!--<div id="columnchart_values" style="width: 900px; height: 300px;"></div>-->

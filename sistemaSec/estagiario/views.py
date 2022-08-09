@@ -11,12 +11,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 import re
-from sistemaSec.edital.models import Edital
 from sistemaSec.estagiario.models import Estagiario
-from sistemaSec.programa.models import Programa
-from sistemaSec.supervisor.models import Supervisor
-from sistemaSec.sede.models import Sede
-from sistemaSec.faculdade.models import Faculdade
+
 from .forms import EstagiarioForm
 from django.forms.models import model_to_dict
 
@@ -111,11 +107,11 @@ def criar_estagiario_partiu_estagio(request):
             
             estagiario.save()
             msg = "Estagiario Cadastrado com Sucesso!"
-            return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg))
+            return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg, True))
         
         print(form.errors)
         msg = "Ocorreu um Error!"
-        return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg))
+        return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg, False))
 
 @login_required(login_url = "/login/")
 def consultar_estagiario_partiu_estagio(request):
@@ -178,11 +174,11 @@ def editar_estagiario_partiu_estagio(request, cpf_estagiario):
             estagiario.save()
 
             msg = "Estagiario Alterado com sucesso!"
-            return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg))
+            return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg, True))
         
         print(form.errors)
         msg = "Ocorreu um Erro"
-        return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg))
+        return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg, False))
     else:    
         return render(request, url_editar_estagiario_partiu_estagio, editar_estagiario_partiu_estagio)
 
@@ -258,7 +254,7 @@ def is_choice_empty(campo):
     else:
         return True
 
-def cadastrado_estagiario_partiu_estagio(form, msg):
+def cadastrado_estagiario_partiu_estagio(form, msg, error):
     todos_estagiario = Estagiario.objects.all()
     estagiario = todos_estagiario.filter(Q(programa_estagiario = 1))
  
@@ -266,18 +262,20 @@ def cadastrado_estagiario_partiu_estagio(form, msg):
     dados ={
         "estagiarios": estagiario,
         "form": form,
+        "error": error,
         "mensagem":msg
     }
    
     return dados
 
-def cadastrado_estagiario_mais_futuro(form, msg):
+def cadastrado_estagiario_mais_futuro(form, msg, error):
     todos_estagiario = Estagiario.objects.all()
     estagiario = todos_estagiario.filter(Q(programa_estagiario = 2))
     
     dados ={
         "estagiarios": estagiario,
         "form": form,
+        "error": error,
         "mensagem":msg
     }
    
@@ -338,11 +336,11 @@ def criar_estagiario_mais_futuro(request):
             
             estagiario.save()
             msg = "Estagiario Cadastrado com Sucesso!"
-            return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg))
+            return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg, True))
         
         print(form.errors)
         msg = "Ocorreu um Error!"
-        return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg))
+        return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg, False))
 
 @login_required(login_url="/login/")
 def consultar_estagiario_mais_futuro(request):
@@ -406,11 +404,11 @@ def editar_estagiario_mais_futuro(request,cpf_estagiario):
             estagiario.save()
 
             msg = "Estagiario Alterado com sucesso!"
-            return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg))
+            return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg, True))
         
         print(form.errors)
         msg = "Ocorreu um Erro"
-        return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg))
+        return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg, False))
     else:    
         return render(request, url_editar_estagiario_mais_futuro, editar_estagiario_partiu_estagio)
     

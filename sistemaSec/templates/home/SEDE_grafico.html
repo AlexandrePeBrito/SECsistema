@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Charts Morris {% endblock %} 
+{% block title %} Dados Gráficos {% endblock %} 
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
@@ -11,7 +11,7 @@
 
 {% block content %}
 
-{% include 'grafico/PAES_grafico_geral.html' %}
+{% include 'grafico/SEDE_grafico_geral.html' %}
 
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
@@ -25,7 +25,7 @@
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="javascript:">Gráficos Estagiário</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:">Gráficos Sedes</a></li>
                         </ul>
                     </div>
                 </div>
@@ -40,40 +40,28 @@
                     <div class="col-xl-6">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Gênero</h5>
+                                <h5>Município </h5>
                             </div>
-                            <div id="chart-genero"></div>
+                            <div id="chart-municipio"></div>
                         </div>
                     </div>
                     <div class="col-xl-6">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Raça</h5>
+                                <h5>NTE</h5>
                             </div>
                             <div class="card-block">
-                                <div id="chart-raca"></div>
+                                <div id="chart-nte"></div>
                             </div>
                         </div>
                     </div>
-                
                     <div class="col-xl-6">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Turno</h5>
+                                <h5>Bairro</h5>
                             </div>
                             <div class="card-block">
-                                <div id="chart-turno"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Situação</h5>
-                            </div>
-                            <div class="card-block">
-                                <div id="chart-situacao"></div>
+                                <div id="chart-bairro"></div>
                             </div>
                         </div>
                     </div>

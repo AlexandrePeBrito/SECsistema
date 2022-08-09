@@ -12,6 +12,37 @@ url_dashboard_sede = "home/SEDE_dashboard.html"
 url_editar_sede = "home/SEDE_editar_sede.html"
 
 @login_required(login_url = "/login/")
+def grafico_sede(request):
+    municipio = Sede.objects.raw("select 1 as id_sede, nome_municipio as nome, count(id_sede) as qtd, '#ff0000' as cor from sistemasec_sede_sede right join municipio_municipio on id_municipio_sede_id = id_municipio group by nome_municipio")
+    nte = Sede.objects.raw("select 1 as id_sede, id_NTE as nome, count(id_sede) as qtd, '#ff0000' as cor from sistemasec_sede_sede right join nte_nte on id_nte_sede_id = id_NTE group by id_NTE")
+    bairro = Sede.objects.raw("select 1 as id_sede, bairro_sede as nome, count(id_sede) as qtd, '#ff0000' as cor from sistemasec_sede_sede group by bairro_sede")
+
+    cores = ["#ed0919", "#2a07f0", "#b33062", "#5652c7", "#ed0919", "#2a07f0", "#b33062", "#5652c7"]
+    #"#1de9b6", "#A389D4", "#04a9f5", 
+
+    i = 0
+    for m in municipio:
+        m.cor = cores[i]
+        i = i + 1
+
+    i = 0
+    for n in nte:
+        n.cor = cores[i]
+        i = i + 1
+
+    i = 0
+    for b in bairro:
+        b.cor = cores[i]
+        i = i + 1
+
+    grafico ={
+        "municipios": municipio,
+        "ntes": nte,
+        "bairros": bairro
+    }
+    return render(request, "home/SEDE_grafico.html", grafico)
+
+@login_required(login_url = "/login/")
 def criar_sede(request):
     form = SedeForm(request.POST)
 

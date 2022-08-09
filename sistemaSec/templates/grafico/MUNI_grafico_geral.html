@@ -1,13 +1,14 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!-- GRAFICO NTE-->
 <script type="text/javascript">
   google.charts.load("current", {packages:['corechart']});
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
-    ["Raca", "Quantidade", { role: "style" } ],
-      {% for raca in racas %}
-        ["{{ raca.nome }}", {{ raca.qtd}}, "{{ raca.cor}}"],
+    ["NTE", "Quantidade", { role: "style" } ],
+      {% for nte in ntes %}
+        ["{{ nte.nome }}", {{ nte.qtd}}, "{{ nte.cor}}"],
       {% endfor %}
     ]);
 
@@ -20,14 +21,13 @@
                      2]);
 
     var options = {
-      title: "Quantidades de estagiarios por Raça",
+      title: "Quantidade de Municípios por NTE",
       width: 450,
-      height: 290,
+      height: 350,
       bar: {groupWidth: "65%"},
       legend: { position: "none" },
     };
-    var chart = new google.visualization.ColumnChart(document.getElementById("chart-raca"));
+    var chart = new google.visualization.ColumnChart(document.getElementById("chart-nte"));
     chart.draw(view, options);
 }
 </script>
-<!--<div id="columnchart_values" style="width: 900px; height: 300px;"></div>-->
