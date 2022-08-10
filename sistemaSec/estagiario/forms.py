@@ -54,7 +54,7 @@ class EstagiarioForm(forms.ModelForm):
         ))
     
     turno = (
-        ("0","Selecione"),
+        ("","Selecione"),
         ("Matutino","Matutino"),
         ("Vespertino","Vespertino"))
     turno_estagiario = forms.ChoiceField(choices=turno, 
@@ -77,7 +77,7 @@ class EstagiarioForm(forms.ModelForm):
         ))
 
     semestres = (
-        ("0","Selecione"),
+        ("","Selecione"),
         ("1","1"),("2","2"),
         ("3","3"),("4","4"),
         ("5","5"),("6","6"),
@@ -129,7 +129,7 @@ class EstagiarioForm(forms.ModelForm):
         ))
 
     genero = (
-        ("0","Selecione"),
+        ("","Selecione"),
         ('Masculino','Masculino'),
         ('Feminino','Feminino'))
     genero_estagiario = forms.ChoiceField(choices=genero, 
@@ -142,7 +142,7 @@ class EstagiarioForm(forms.ModelForm):
         ))
     
     raca = (
-        ("0","Selecione"),
+        ("","Selecione"),
         ("Branca","Branca"),
         ("Preta","Preta"),
         ("Parda","Parda"),
@@ -192,7 +192,7 @@ class EstagiarioForm(forms.ModelForm):
         ))
 
     situacao = (
-        ("0","Selecione"),
+        ("","Selecione"),
         ("Ativo","Ativo"),
         ("Desligado","Desligado"),
         ("Desclassificado","Desclassificado"))

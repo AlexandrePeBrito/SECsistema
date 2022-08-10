@@ -239,10 +239,10 @@ def is_cpf_valid(cpf):
     return False
 
 def is_empty(campo):
-    if len(campo) == 0:
-        return False
-    else:
+    if campo == 0:
         return True
+    else:
+        return False
 
 def is_choice_empty(campo):
     if campo == 0:
