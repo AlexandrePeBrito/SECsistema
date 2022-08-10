@@ -37,9 +37,17 @@
                                     <h5>Cadastrar Estagiario</h5>
                                 </div>
                                 {% if mensagem %}
-                                    <div class="alert alert-success" role="alert">
-                                        <p>{{ mensagem }}</p>
-                                    </div>
+                                    {% if error %}
+                                        <div class="alert alert-danger" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-success" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% endif %}
                                 {% endif %}
                                 <div class="col-md-6">
                                     <form role="form" method="POST" action="" >
@@ -87,7 +95,7 @@
                                             </div>    
                                         </div>
 
-                                        <label>Responsável pelo Estagiário<b>*</b></label>
+                                        <label>Responsável pelo Estagiário</label>
                                         <div>{{ form.nome_responsavel_estagiario }}</div>
 
                                         <div id="linhaForms">

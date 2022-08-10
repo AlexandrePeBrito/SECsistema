@@ -107,11 +107,9 @@ def criar_estagiario_partiu_estagio(request):
             
             estagiario.save()
             msg = "Estagiario Cadastrado com Sucesso!"
-            return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg, True))
+            return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg, False))
         
-        print(form.errors)
-        msg = "Ocorreu um Error!"
-        return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg, False))
+        return render(request, url_criar_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, form.errors, True))
 
 @login_required(login_url = "/login/")
 def consultar_estagiario_partiu_estagio(request):
@@ -174,11 +172,9 @@ def editar_estagiario_partiu_estagio(request, cpf_estagiario):
             estagiario.save()
 
             msg = "Estagiario Alterado com sucesso!"
-            return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg, True))
+            return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg, False))
         
-        print(form.errors)
-        msg = "Ocorreu um Erro"
-        return render(request, url_dashboard_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, msg, False))
+        return render(request, url_editar_estagiario_partiu_estagio, cadastrado_estagiario_partiu_estagio(form, form.errors, True))
     else:    
         return render(request, url_editar_estagiario_partiu_estagio, editar_estagiario_partiu_estagio)
 
@@ -368,11 +364,9 @@ def criar_estagiario_mais_futuro(request):
             
             estagiario.save()
             msg = "Estagiario Cadastrado com Sucesso!"
-            return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg, True))
-        
-        print(form.errors)
-        msg = "Ocorreu um Error!"
-        return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg, False))
+            return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg, False))
+            
+        return render(request, url_criar_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, form.errors, True))
 
 @login_required(login_url="/login/")
 def consultar_estagiario_mais_futuro(request):
@@ -436,11 +430,9 @@ def editar_estagiario_mais_futuro(request,cpf_estagiario):
             estagiario.save()
 
             msg = "Estagiario Alterado com sucesso!"
-            return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg, True))
+            return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg, False))
         
-        print(form.errors)
-        msg = "Ocorreu um Erro"
-        return render(request, url_dashboard_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, msg, False))
+        return render(request, url_criar_estagiario_mais_futuro, cadastrado_estagiario_mais_futuro(form, form.errors, True))
     else:    
         return render(request, url_editar_estagiario_mais_futuro, editar_estagiario_partiu_estagio)
     

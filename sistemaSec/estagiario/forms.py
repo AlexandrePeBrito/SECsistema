@@ -115,7 +115,7 @@ class EstagiarioForm(forms.ModelForm):
             }
         ))
 
-    nome_responsavel_estagiario = forms.CharField(
+    nome_responsavel_estagiario = forms.CharField(required = False,
         widget = forms.TextInput(
             attrs = {
                 "placeholder": "Nome do Responsável",
@@ -128,8 +128,7 @@ class EstagiarioForm(forms.ModelForm):
             attrs = {
                 "placeholder": "Data de nascimento",
                 "class": "form-control mask-data",
-                requerido: campo_requerido,
-                onchange: campo_requerido_empty
+
             }
         ))
 
