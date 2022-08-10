@@ -1,7 +1,7 @@
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import render
 from django.db.models import Q
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+
 from django.contrib.auth.decorators import login_required
 from sistemaSec.edital.models import Edital
 from .forms import EditalForm
@@ -42,7 +42,6 @@ def consultar_edital(request):
     
     if "buscar_edital" in request.GET:
         edital_consulta=request.GET["buscar_edital"]
-        programa_consulta=request.GET["buscar_programa"]
         if consultar_edital:
             lista_por_edital = edital.filter(Q(id_edital__icontains = edital_consulta))
     

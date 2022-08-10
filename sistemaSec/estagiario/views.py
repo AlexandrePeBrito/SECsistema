@@ -5,10 +5,10 @@ Copyright (c) 2019 - present AppSeed.us
 
 # Create your views here.
 import re
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import render
 from django.db.models import Q
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+
 from django.contrib.auth.decorators import login_required
 import re
 from sistemaSec.estagiario.models import Estagiario

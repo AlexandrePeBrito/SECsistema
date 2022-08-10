@@ -4,10 +4,6 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from django import forms
-from django.forms import CharField, ModelForm
-from django.contrib.admin.widgets import AutocompleteSelect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from sistemaSec.estagiario.models import Estagiario
 from sistemaSec.supervisor.models import Supervisor
 from sistemaSec.faculdade.models import Faculdade
