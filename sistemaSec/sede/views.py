@@ -69,10 +69,9 @@ def criar_sede(request):
                 
             sede.save()
             msg = "Sede Cadastrada com Sucesso!"
-            return render(request, url_dashboard_sede,cadastrado_sede(form, msg))
+            return render(request, url_dashboard_sede,cadastrado_sede(form, msg, False))
         
-        msg = "Ocorreu um Error!"
-        return render(request, url_dashboard_sede,cadastrado_sede(form, msg))
+        return render(request, url_criar_sede,cadastrado_sede(form, form.errors, True))
 
 @login_required(login_url = "/login/")
 def consultar_sede(request):
@@ -119,18 +118,18 @@ def editar_sede(request,id_sede):
             sede.save()
 
             msg = "Sede Alterada com Sucesso!"
-            return render(request, url_dashboard_sede,cadastrado_sede(form, msg))
+            return render(request, url_dashboard_sede,cadastrado_sede(form, msg, False))
 
-        msg = "Ocorreu um erro!"
-        return render(request, url_dashboard_sede,cadastrado_sede(form, msg))
+        return render(request, url_criar_sede,cadastrado_sede(form, form.errors, True))
     else:        
         return render(request, url_editar_sede, edt_sede)
 
-def cadastrado_sede(form, msg):
+def cadastrado_sede(form, msg, error):
     sede = Sede.objects.all()
     dados = {
         "sedes": sede,
         "form": form,
+        "error": error,
         "mensagem":msg
     }
     return dados

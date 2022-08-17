@@ -50,11 +50,9 @@ def criar_supervisor(request):
             supervisor.save()
             msg = "Supervisor Cadastrado com Sucesso!"
 
-            return render(request, url_dashboard_supervisor, cadastrado_supervisor(form, msg))
+            return render(request, url_dashboard_supervisor, cadastrado_supervisor(form, msg, False))
         
-        msg = "Ocorreu um ERRO no Cadastro!"
-            
-        return render(request, url_dashboard_supervisor, cadastrado_supervisor(form, msg))
+        return render(request, url_criar_supervisor, cadastrado_supervisor(form, form.errors, True))
 
 
 @login_required(login_url = "/login/")
@@ -102,18 +100,18 @@ def editar_supervisor(request,id_supervisor):
             supervisor.save()
             
             msg = "Supervisor Alterado com Sucesso!"
-            return render(request, url_dashboard_supervisor, cadastrado_supervisor(form, msg))
-        msg = "Ocorreu um erro!"
-        return render(request, url_dashboard_supervisor, cadastrado_supervisor(form, msg))
+            return render(request, url_dashboard_supervisor, cadastrado_supervisor(form, msg, False))
+        return render(request, url_criar_supervisor, cadastrado_supervisor(form, form.errors, True))
     else:
         return render(request, url_editar_supervisor, editar_supervisor)
     
 
-def cadastrado_supervisor(form, msg):
+def cadastrado_supervisor(form, msg, error):
     supervisor = Supervisor.objects.all()
     dados = {
         "supervisores":supervisor,
         "form": form,
+        "error": error,
         "mensagem":msg
     }
     return dados

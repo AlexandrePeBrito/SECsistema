@@ -32,10 +32,10 @@ def criar_nte(request):
             nte.save()
             msg = "NTE Cadastrado com Sucesso!"
 
-            return render(request, url_dashboard_nte,cadastrado_nte(form, msg))
+            return render(request, url_dashboard_nte,cadastrado_nte(form, msg, False))
 
-        msg = "Ocorreu um ERRO no Cadastro!"
-        return render(request, url_dashboard_nte,cadastrado_nte(form, msg))
+        return render(request, url_criar_nte,cadastrado_nte(form, form.errors, True))
+        
 
 @login_required(login_url="/login/")
 def consultar_nte(request):
@@ -77,19 +77,19 @@ def editar_nte(request,id_NTE):
             nte.save()
 
             msg = "NTE Alterado com Sucesso!"
-            return render(request, url_dashboard_nte,cadastrado_nte(form, msg))
+            return render(request, url_dashboard_nte,cadastrado_nte(form, msg, False))
 
-        msg = "Ocorreu um erro!"
-        return render(request, url_dashboard_nte,cadastrado_nte(form, msg))
+        return render(request, url_criar_nte,cadastrado_nte(form, form.errors, True))
     else:
         return render(request, url_editar_nte, edt_nte)
 
 
-def cadastrado_nte(form, msg):
+def cadastrado_nte(form, msg, error):
     nte = NTE.objects.all()
     dados ={
         "NTEs": nte,
         "form": form,
+        "error": error,
         "mensagem":msg
     }
     return dados
