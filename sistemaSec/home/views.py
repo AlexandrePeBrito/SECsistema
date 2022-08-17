@@ -26,11 +26,12 @@ def index(request):
     situacao = Estagiario.objects.raw("select 1 as cpf_estagiario, situacao_estagiario as nome , count(cpf_estagiario) as qtd from estagiario_estagiario group by situacao_estagiario")
     sede_bairro = Sede.objects.raw("select 1 as id_sede, bairro_sede as nome, count(id_sede) as qtd from sistemasec_sede_sede group by bairro_sede")
     municipio_nte = Municipio.objects.raw("Select 1 as id_municipio, id_NTE as nome, count(id_municipio) as qtd from municipio_municipio join nte_nte on nte_nte.id_NTE = municipio_municipio.id_nte_municipio_id group by id_NTE")
+    supervisor_sede = Supervisor.objects.raw("Select 1 as id_supervisor, nome_sede as nome, count(id_supervisor) as qtd, '#ff0000' as cor from supervisor_supervisor join sistemasec_sede_sede on sede_supervisor_id=id_sede group by nome_sede")
 
     context = {
         "segment": "index",
         "situacao": situacao,
-        #"supervisores": supervisor_sede,
+        "supervisores": supervisor_sede,
         "sedes": sede_bairro,
         "municipios": municipio_nte,
     }

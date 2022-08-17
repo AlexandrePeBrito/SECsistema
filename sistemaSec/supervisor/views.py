@@ -13,7 +13,7 @@ url_dashboard_supervisor = "home/SUPE_dashboard.html"
 url_editar_supervisor = "home/SUPE_editar_supervisor.html"
 
 def grafico_supervisor(request):
-    sede = Supervisor.objects.raw("Select 1 as id_supervisor, nome_sede as nome, count(id_supervisor) as qtd, '#ff0000' as cor from supervisor_supervisor group by nome_sede")
+    sede = Supervisor.objects.raw("Select 1 as id_supervisor, nome_sede as nome, count(id_supervisor) as qtd, '#ff0000' as cor from supervisor_supervisor join sistemasec_sede_sede on sede_supervisor_id=id_sede group by nome_sede")
     
     
     cores = ["#ed0919", "#2a07f0", "#b33062", "#5652c7", "#ed0919", "#2a07f0", "#b33062", "#5652c7"]
