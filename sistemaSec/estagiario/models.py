@@ -32,7 +32,7 @@ class Estagiario(models.Model):
     situacao_estagiario = models.CharField(max_length=15)
     #FOREIGN KEY
     supervisor_estagiario = models.ForeignKey(Supervisor, on_delete=models.CASCADE, related_name="supervisor", null = True)
-    sede_estagiario = models.ForeignKey(Sede, on_delete=models.PROTECT, related_name="sede", null = True)
+    sede_estagiario = models.ForeignKey(Sede, on_delete=models.PROTECT, related_name="sede_estagiario", null = True)
     faculdade_estagiario = models.ForeignKey(Faculdade, on_delete=models.PROTECT, related_name="faculdade", null = True)
     programa_estagiario = models.ForeignKey(Programa, on_delete=models.PROTECT, related_name="programa", null = True)
     edital_estagiario = models.ForeignKey(Edital, on_delete=models.PROTECT, related_name="edital", null = True)

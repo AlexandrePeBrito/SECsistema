@@ -13,7 +13,7 @@ url_dashboard_supervisor = "home/SUPE_dashboard.html"
 url_editar_supervisor = "home/SUPE_editar_supervisor.html"
 
 def grafico_supervisor(request):
-    sede = Supervisor.objects.raw("Select 1 as id_supervisor, nome_sede as nome, count(id_supervisor) as qtd, '#ff0000' as cor from supervisor_supervisor_sede_supervisor join supervisor_supervisor on supervisor_supervisor.id_supervisor = supervisor_supervisor_sede_supervisor.supervisor_id join sistemasec_sede_sede on sistemasec_sede_sede.id_sede = supervisor_supervisor_sede_supervisor.sede_id group by nome_sede")
+    sede = Supervisor.objects.raw("Select 1 as id_supervisor, nome_sede as nome, count(id_supervisor) as qtd, '#ff0000' as cor from supervisor_supervisor group by nome_sede")
     
     
     cores = ["#ed0919", "#2a07f0", "#b33062", "#5652c7", "#ed0919", "#2a07f0", "#b33062", "#5652c7"]
@@ -45,8 +45,8 @@ def criar_supervisor(request):
             sede_supervisor = form.cleaned_data.get("sede_supervisor")
             
             supervisor = Supervisor.objects.create(nome_supervisor = nome_supervisor,
-                email_supervisor = email_supervisor, telefone_supervisor = telefone_supervisor)
-            supervisor.sede_supervisor.add(sede_supervisor)
+                email_supervisor = email_supervisor, telefone_supervisor = telefone_supervisor, sede_supervisor= sede_supervisor)
+            
             supervisor.save()
             msg = "Supervisor Cadastrado com Sucesso!"
 
@@ -94,9 +94,6 @@ def editar_supervisor(request,id_supervisor):
         form = SupervisorForm(request.POST, instance = supervisor)
         sedes = Sede.objects.all()
         if form.is_valid():
-            sede_nome = form.cleaned_data.get("sede_supervisor")
-            sede = sedes.filter(Q(nome_sede__icontains = sede_nome))
-            supervisor.sede_supervisor.set(sede)
             supervisor.save()
             
             msg = "Supervisor Alterado com Sucesso!"
