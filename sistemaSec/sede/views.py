@@ -13,25 +13,31 @@ url_editar_sede = "home/SEDE_editar_sede.html"
 
 @login_required(login_url = "/login/")
 def grafico_sede(request):
-    municipio = Sede.objects.raw("select 1 as id_sede, nome_municipio as nome, count(id_sede) as qtd, '#ff0000' as cor from sistemasec_sede_sede right join municipio_municipio on id_municipio_sede_id = id_municipio group by nome_municipio")
+    municipio = Sede.objects.raw("select 1 as id_sede, nome_municipio as nome, count(id_sede) as qtd, '#ff0000' as cor from sistemasec_sede_sede right join municipio_municipio on id_municipio_sede_id = id_municipio group by nome_municipio LIMIT 20")
     nte = Sede.objects.raw("select 1 as id_sede, id_NTE as nome, count(id_sede) as qtd, '#ff0000' as cor from sistemasec_sede_sede right join nte_nte on id_nte_sede_id = id_NTE group by id_NTE")
-    bairro = Sede.objects.raw("select 1 as id_sede, bairro_sede as nome, count(id_sede) as qtd, '#ff0000' as cor from sistemasec_sede_sede group by bairro_sede")
+    bairro = Sede.objects.raw("select 1 as id_sede, bairro_sede as nome, count(id_sede) as qtd, '#ff0000' as cor from sistemasec_sede_sede group by bairro_sede LIMIT 20")
 
     cores = ["#ed0919", "#2a07f0", "#b33062", "#5652c7", "#ed0919", "#2a07f0", "#b33062", "#5652c7"]
     #"#1de9b6", "#A389D4", "#04a9f5", 
 
     i = 0
     for m in municipio:
+        if i == len(cores):
+            i = 0
         m.cor = cores[i]
         i = i + 1
 
     i = 0
     for n in nte:
+        if i == len(cores):
+            i = 0
         n.cor = cores[i]
         i = i + 1
 
     i = 0
     for b in bairro:
+        if i == len(cores):
+            i = 0
         b.cor = cores[i]
         i = i + 1
 

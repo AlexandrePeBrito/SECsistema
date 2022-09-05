@@ -16,6 +16,8 @@ def grafico_municipio(request):
     #"#1de9b6", "#A389D4", "#04a9f5", 
     i = 0
     for n in nte:
+        if i == len(cores):
+            i = 0
         n.cor = cores[i]
         i = i + 1
 
