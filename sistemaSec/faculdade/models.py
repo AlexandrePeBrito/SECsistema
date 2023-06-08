@@ -7,5 +7,9 @@ class Faculdade(models.Model):
     nome_direitor_faculdade = models.CharField(max_length=100)
     telefone_faculdade = models.CharField(max_length=15)
     campus_faculdade = models.CharField(max_length=50)
+    
+    class Meta:
+        db_table = 'FACU_faculdade'
+
     def __str__(self):
         return self.nome_faculdade

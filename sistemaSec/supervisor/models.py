@@ -6,6 +6,10 @@ class Supervisor(models.Model):
     nome_supervisor = models.CharField(max_length=200)
     telefone_supervisor = models.CharField(max_length=15)
     email_supervisor = models.CharField(max_length=200)
-    sede_supervisor = models.ForeignKey(Sede, on_delete=models.PROTECT, related_name="sede_supervisor", null = True)
+    
+    class Meta:
+        db_table = 'SUPE_supervisor'
+
     def __str__(self):
         return self.nome_supervisor
+

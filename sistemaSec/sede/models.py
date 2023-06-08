@@ -1,5 +1,5 @@
 from django.db import models
-from ..nte.models import NTE
+
 from ..municipio.models import Municipio
 
 class Sede(models.Model):
@@ -11,8 +11,11 @@ class Sede(models.Model):
     bairro_sede = models.CharField(max_length=50)
     email_sede = models.CharField(max_length=200)
     #foreign key
-    id_nte_sede = models.ForeignKey(NTE, on_delete=models.PROTECT, related_name="sedes")
     id_municipio_sede = models.ForeignKey(Municipio, on_delete=models.PROTECT, related_name="sedes")
+    
+    class Meta:
+        db_table = 'SEDE_sede'
+
     def __str__(self):
         return self.nome_sede
 
