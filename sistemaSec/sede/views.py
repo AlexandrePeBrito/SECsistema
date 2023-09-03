@@ -13,9 +13,9 @@ url_editar_sede = "home/SEDE_editar_sede.html"
 
 @login_required(login_url = "/login/")
 def grafico_sede(request):
-    municipio = Sede.objects.raw("select 1 as id_sede, nome_municipio as nome, count(id_sede) as qtd, '#ff0000' as cor from sistemasec_sede_sede right join municipio_municipio on id_municipio_sede_id = id_municipio group by nome_municipio LIMIT 20")
-    nte = Sede.objects.raw("select 1 as id_sede, id_NTE as nome, count(id_sede) as qtd, '#ff0000' as cor from sistemasec_sede_sede right join nte_nte on id_nte_sede_id = id_NTE group by id_NTE")
-    bairro = Sede.objects.raw("select 1 as id_sede, bairro_sede as nome, count(id_sede) as qtd, '#ff0000' as cor from sistemasec_sede_sede group by bairro_sede LIMIT 20")
+    municipio = Sede.objects.raw("select 1 as id_sede, nome_municipio as nome, count(id_sede) as qtd, '#ff0000' as cor from sede_sede right join muni_municipio on id_municipio_sede_id = id_municipio group by nome_municipio LIMIT 20")
+    nte = Sede.objects.raw("select 1 as id_sede, id_NTE as nome, COUNT(id_sede) as qtd, '#ff0000' as cor FROM nte_nte LEFT JOIN muni_municipio ON id_nte_municipio_id = id_NTE LEFT JOIN sede_sede ON id_municipio_sede_id = id_municipio GROUP BY id_NTE")
+    bairro = Sede.objects.raw("select 1 as id_sede, bairro_sede as nome, count(id_sede) as qtd, '#ff0000' as cor from sede_sede group by bairro_sede LIMIT 20")
 
     cores = ["#ed0919", "#2a07f0", "#b33062", "#5652c7", "#ed0919", "#2a07f0", "#b33062", "#5652c7"]
     #"#1de9b6", "#A389D4", "#04a9f5", 

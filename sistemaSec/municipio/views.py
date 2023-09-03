@@ -10,7 +10,7 @@ url_dashboard_municipio = "home/MUNI_dashboard.html"
 url_editar_municipio = "home/MUNI_editar_municipio.html"
 
 def grafico_municipio(request):
-    nte = Municipio.objects.raw("Select 1 as id_municipio, id_NTE as nome, count(id_municipio) as qtd, '#ff0000' as cor from municipio_municipio join nte_nte on nte_nte.id_NTE = municipio_municipio.id_nte_municipio_id group by id_NTE")
+    nte = Municipio.objects.raw("Select 1 as id_municipio, id_NTE as nome, count(id_municipio) as qtd, '#ff0000' as cor from muni_municipio join nte_nte on nte_nte.id_NTE = muni_municipio.id_nte_municipio_id group by id_NTE")
 
     cores = ["#ed0919", "#2a07f0", "#b33062", "#5652c7", "#ed0919", "#2a07f0", "#b33062", "#5652c7"]
     #"#1de9b6", "#A389D4", "#04a9f5", 
