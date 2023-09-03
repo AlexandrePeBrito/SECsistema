@@ -1,0 +1,104 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Partiu Estagio {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">DashBoard - Supervisor</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><span class="feather icon-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'dashboard_supervisor' %}">DashBoard</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Supervisor</h5>
+                                </div>
+                                {% if mensagem %}
+                                    {% if error %}
+                                        <div class="alert alert-danger" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-success" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                                <div class="card-body">
+                                    <div>
+                                        <a href="{% url 'criar_supervisor' %}" id="criar-entidade" type="button" class="btn btn-success">+ Criar Supervisor</a>
+                                    </div>
+                                    <form action="{% url 'consultar_supervisor' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        
+                                        <h5 id="consultar" class="m-b-10">Consultar</h5>
+                                        <input type="text" class="form-control nome-consultar" name="buscar_supervisor" placeholder="Nome do Supervisor">
+                                        
+                                        <button type="submit" id="btn-consultar" class="btn btn-primary">Consultar</button>
+                                    </form>
+
+                                    <br><br><br><br><br><br>
+
+                                    {% if supervisores %}
+                                    <div class="card-block table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Nome</th>
+                                                        <th>Telefone</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for supervisor in supervisores%}
+                                                    <tr>
+                                                        <td>{{ supervisor.id_supervisor }}</td>
+                                                        <td>{{ supervisor.nome_supervisor }}</td>
+                                                        <td>{{ supervisor.telefone_supervisor }}</td>
+                                                        <td><a href="{% url 'editar_supervisor' supervisor.id_supervisor %}" type="button" class="btn btn-success" style="margin-top: 10px; margin-left: 45%;">Editar</a></td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

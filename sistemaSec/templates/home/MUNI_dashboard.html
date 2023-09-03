@@ -1,0 +1,114 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Municipio {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">DashBoard - Município</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><span class="feather icon-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'dashboard_municipio' %}">DashBoard</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Município</h5>
+                                </div>
+                                {% if mensagem %}
+                                    {% if error %}
+                                        <div class="alert alert-danger" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-success" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                                <div class="card-body">
+                                    <div>
+                                        <a href="{% url 'criar_municipio' %}" id="criar-entidade" type="button" class="btn btn-success">+ Criar Município</a>
+                                    </div>
+                                    <form action="{% url 'consultar_municipio' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        
+                                        <h5 id="consultar" class="m-b-10">Consultar</h5>
+ 
+                                        <div id="linhaForms">
+                                            <div>
+                                                <input type="text" class="form-control campo-duplo-consulta" style="margin-left: 10%;" name="buscar_municipio" placeholder="Nome do Município">
+                                            </div>
+                                            <div>
+                                                <input type="text" class="form-control mask-matricula campo-duplo-consulta" style="margin-left: 1%;" name="buscar_nte" placeholder="Número do NTE">
+                                            </div>
+                                        </div>
+                                                                                   
+                                        <button type="submit" id="btn-consultar" class="btn btn-primary">Consultar</button>
+                                    </form>
+
+                                    <br><br><br><br><br><br>
+
+                                    {% if municipios %}
+                                    <div class="card-block table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Nome do Município</th>
+                                                        <th>NTE</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for municipio in municipios%}
+                                                    <tr>
+                                                        <td>{{ municipio.id_municipio }}</td>
+                                                        <td>{{ municipio.nome_municipio }}</td>
+                                                        <td>{{ municipio.id_nte_municipio }}</td>
+                                                        <td><a href="{% url 'editar_municipio' municipio.id_municipio %}" type="button" class="btn btn-success" style="margin-top: 10px; margin-left: 45%;">Editar</a></td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+{% endblock javascripts %}

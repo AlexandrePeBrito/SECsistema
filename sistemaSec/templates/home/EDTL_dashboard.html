@@ -1,0 +1,102 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Edital {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">DashBoard - Edital</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><span class="feather icon-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'dashboard_edital' %}">DashBoard</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Edital</h5>
+                                </div>
+                                {% if mensagem %}
+                                    {% if error %}
+                                        <div class="alert alert-danger" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-success" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                                <div class="card-body">
+                                    <div>
+                                        <a href="{% url 'criar_edital' %}" id="criar-entidade" type="button" class="btn btn-success">+ Criar Edital</a>
+                                    </div>
+                                    <form action="{% url 'consultar_edital' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+
+                                        <h5 id="consultar" class="m-b-10">Consultar</h5>
+                                        <input type="text" class="form-control nome-consultar"  name="buscar_edital" placeholder="Código do Edital">
+                                                                                  
+                                        <button type="submit" id="btn-consultar" class="btn btn-primary">Consultar</button>
+                                    </form>
+
+                                    <br><br><br><br><br><br>
+
+                                    {% if editais %}
+                                    <div class="card-block table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Código</th>
+                                                        <th>Quantidades de Vagas</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for edital in editais%}
+                                                    <tr>
+                                                        <td>{{ edital.id_edital }}</td>
+                                                        <td>{{ edital.quantidade_vagas_edital }}</td>
+                                                        <td><a href="{% url 'editar_edital' edital.id_edital %}" type="button" class="btn btn-success" style="margin-top: 10px; margin-left: 45%;">Editar</a></td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

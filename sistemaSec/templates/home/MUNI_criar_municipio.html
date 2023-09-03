@@ -1,0 +1,82 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Municipio {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ Padrao do HEADER da pagina] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Municipio</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><span class="feather icon-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'dashboard_municipio' %}">DashBoard</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'criar_municipio' %}">Criar Municipio</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [  Padrao do HEADER da pagina ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Criar Municipio</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <form role="form" method="POST" action="" >
+                                        {% csrf_token %}
+                                        
+                                        <label>Nome do Município<b>*</b></label>
+                                        <div>{{ form.nome_municipio }}</div>
+
+                                        <div id="linhaForms"> 
+                                            <div class="unidade">
+                                                <label>NTE<b>*</b></label>
+                                                <div>{{ form.id_nte_municipio }}</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div  class="card"></div>
+                                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#id_id_nte_municipio').select2();
+        });
+    </script>
+{% endblock javascripts %}
+
+
+

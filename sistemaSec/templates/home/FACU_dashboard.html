@@ -1,0 +1,103 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Faculdade {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">DashBoard - Faculdade</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><span class="feather icon-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'dashboard_faculdade' %}">DashBoard</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Faculdade</h5>
+                                </div>
+                                {% if mensagem %}
+                                    {% if error %}
+                                        <div class="alert alert-danger" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-success" role="alert">
+                                            <button class="close" data-dismiss="alert">&times;</button>
+                                            <p>{{ mensagem }}</p>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                                <div class="card-body">
+                                    <div>
+                                        <a href="{% url 'criar_faculdade' %}" id="criar-entidade" type="button" class="btn btn-success">+ Criar Faculdade</a>
+                                    </div>
+                                    <form action="{% url 'consultar_faculdade' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <h5 id="consultar" class="m-b-10">Consultar</h5>
+                                            <input type="text" class="form-control nome-consultar" name="buscar_faculdade" placeholder="Nome da Faculdade">
+                                        </div>
+                                                                                    
+                                        <button type="submit" id="btn-consultar" class="btn btn-primary">Consultar</button>
+                                    </form>
+
+                                    {% if faculdades %}
+                                    <div class="card-block table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Nome</th>
+                                                        <th>Telefone</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for faculdade in faculdades%}
+                                                    <tr>
+                                                        <td>{{ faculdade.id_faculdade }}</td>
+                                                        <td>{{ faculdade.nome_faculdade }}</td>
+                                                        <td>{{ faculdade.telefone_faculdade }}</td>
+                                                        <td><a href="{% url 'editar_faculdade' faculdade.id_faculdade %}" type="button" class="btn btn-success" style="margin-top: 10px; margin-left: 45%;">Editar</a></td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
