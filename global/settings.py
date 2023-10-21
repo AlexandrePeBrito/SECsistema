@@ -82,11 +82,13 @@ WSGI_APPLICATION = "global.wsgi.application"
 
 DATABASES = {
     "default": {
+        #"ENGINE": "django.db.backends.sqlite3",
+        #"NAME": "db.sqlite3",
         "ENGINE": "django.db.backends.mysql", 
         "NAME": "dbsec",
         "USER": "root",
         "PASSWORD": "123456",
-        "HOST": "host.docker.internal",
+        "HOST": "localhost",
         "PORT": "3306",
     },
 }
