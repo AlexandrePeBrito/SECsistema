@@ -23,9 +23,9 @@ from django.db.models import Q
 
 @login_required(login_url = "/login/")
 def index(request):
-    situacao = Estagiario.objects.raw("select 1 as cpf_estagiario, situacao_estagiario as nome , count(cpf_estagiario) as qtd from esta_estagiario group by situacao_estagiario")
-    sede_bairro = Sede.objects.raw("select 1 as id_sede, bairro_sede as nome, count(id_sede) as qtd from sede_sede group by bairro_sede")
-    municipio_nte = Municipio.objects.raw("Select 1 as id_municipio, id_NTE as nome, count(id_municipio) as qtd from muni_municipio join nte_nte on nte_nte.id_NTE = muni_municipio.id_nte_municipio_id group by id_NTE")
+    situacao = Estagiario.objects.raw("select 1 as cpf_estagiario, situacao_estagiario as nome , count(cpf_estagiario) as qtd from ESTA_estagiario group by situacao_estagiario")
+    sede_bairro = Sede.objects.raw("select 1 as id_sede, bairro_sede as nome, count(id_sede) as qtd from SEDE_sede group by bairro_sede")
+    municipio_nte = Municipio.objects.raw("Select 1 as id_municipio, id_NTE as nome, count(id_municipio) as qtd from MUNI_municipio join NTE_nte on NTE_nte.id_NTE = MUNI_municipio.id_nte_municipio_id group by id_NTE")
     supervisor_sede = Supervisor.objects.raw("SELECT 1 AS id_supervisor, nome_sede AS nome, COUNT(id_supervisor) AS qtd, '#ff0000' AS cor FROM SUPE_supervisor JOIN SSES_sede_supervisor_estagiario ON id_supervisor = SSES_id_supervisor_id JOIN SEDE_sede AS sede ON SSES_id_sede_id = id_sede GROUP BY nome_sede")
 
     context = {

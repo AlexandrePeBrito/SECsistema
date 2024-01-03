@@ -6,8 +6,24 @@ services:
     env_file: .env
     build: .
     networks:
-      - db_network
-      - web_network
+      - secsistema_db_network  # Adicionar a rede aqui
+      - secsistema_web_network
+    depends_on:
+      - db
+
+  db:
+    container_name: mysql-db
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: 'dbsec'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: '123456'
+      MYSQL_ROOT_PASSWORD: '123456'
+    networks:
+      - secsistema_db_network  # Adicionar a mesma rede aqui
+    ports:
+      - "3307:3306"
+  
   nginx:
     container_name: nginx
     restart: always
@@ -17,12 +33,12 @@ services:
     volumes:
       - ./nginx:/etc/nginx/conf.d
     networks:
-      - web_network
-    depends_on: 
+      - secsistema_web_network
+    depends_on:
       - appseed-app
+
 networks:
-  db_network:
+  secsistema_db_network:
     driver: bridge
-  web_network:
+  secsistema_web_network:
     driver: bridge
- 

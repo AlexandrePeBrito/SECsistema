@@ -22,10 +22,10 @@ url_editar_estagiario_partiu_estagio = "home/PAES_editar_estagiario.html"
 
 @login_required(login_url = "/login/")
 def grafico_estagiario_partiu_estagio(request):
-    genero = Estagiario.objects.raw("select 1 as cpf_estagiario, genero_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from esta_estagiario where programa_estagiario_id = 4 group by genero_estagiario")
-    raca = Estagiario.objects.raw("select 1 as cpf_estagiario, raca_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from esta_estagiario where programa_estagiario_id = 4 group by raca_estagiario")
-    turno = Estagiario.objects.raw("select 1 as cpf_estagiario, turno_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from esta_estagiario where programa_estagiario_id = 4 group by turno_estagiario")
-    situacao = Estagiario.objects.raw("select 1 as cpf_estagiario, situacao_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from esta_estagiario where programa_estagiario_id = 4 group by situacao_estagiario")
+    genero = Estagiario.objects.raw("select 1 as cpf_estagiario, genero_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from ESTA_estagiario where programa_estagiario_id = 4 group by genero_estagiario")
+    raca = Estagiario.objects.raw("select 1 as cpf_estagiario, raca_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from ESTA_estagiario where programa_estagiario_id = 4 group by raca_estagiario")
+    turno = Estagiario.objects.raw("select 1 as cpf_estagiario, turno_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from ESTA_estagiario where programa_estagiario_id = 4 group by turno_estagiario")
+    situacao = Estagiario.objects.raw("select 1 as cpf_estagiario, situacao_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from ESTA_estagiario where programa_estagiario_id = 4 group by situacao_estagiario")
     
     cores = ["#ed0919", "#2a07f0", "#b33062", "#5652c7", "#ed0919", "#2a07f0", "#b33062", "#5652c7"]
     #"#1de9b6", "#A389D4", "#04a9f5", 
@@ -283,10 +283,10 @@ url_dashboard_estagiario_mais_futuro = "home/MFES_dashboard.html"
 url_editar_estagiario_mais_futuro = "home/MFES_editar_estagiario.html"
 
 def grafico_estagiario_mais_futuro(request):
-    genero = Estagiario.objects.raw("select 1 as cpf_estagiario, genero_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from esta_estagiario where programa_estagiario_id = 3 group by genero_estagiario")
-    raca = Estagiario.objects.raw("select 1 as cpf_estagiario, raca_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from esta_estagiario where programa_estagiario_id = 3 group by raca_estagiario")
-    turno = Estagiario.objects.raw("select 1 as cpf_estagiario, turno_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from esta_estagiario where programa_estagiario_id = 3 group by turno_estagiario")
-    situacao = Estagiario.objects.raw("select 1 as cpf_estagiario, situacao_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from esta_estagiario where programa_estagiario_id = 3 group by situacao_estagiario")
+    genero = Estagiario.objects.raw("select 1 as cpf_estagiario, genero_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from ESTA_estagiario where programa_estagiario_id = 3 group by genero_estagiario")
+    raca = Estagiario.objects.raw("select 1 as cpf_estagiario, raca_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from ESTA_estagiario where programa_estagiario_id = 3 group by raca_estagiario")
+    turno = Estagiario.objects.raw("select 1 as cpf_estagiario, turno_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from ESTA_estagiario where programa_estagiario_id = 3 group by turno_estagiario")
+    situacao = Estagiario.objects.raw("select 1 as cpf_estagiario, situacao_estagiario as nome , count(cpf_estagiario) as qtd, '#ff0000' as cor from ESTA_estagiario where programa_estagiario_id = 3 group by situacao_estagiario")
     
     cores = ["#ed0919", "#2a07f0", "#b33062", "#5652c7", "#ed0919", "#2a07f0", "#b33062", "#5652c7"]
     #"#1de9b6", "#A389D4", "#04a9f5", 

@@ -14,10 +14,10 @@ from ..curso.models import Curso
 class Estagiario(models.Model):
     cpf_estagiario = CPFField(primary_key=True)
     nome_estagiario = models.CharField(max_length=100)
-    rg_estagiario = models.CharField(max_length=12)
+    rg_estagiario = models.CharField(max_length=13)
     turno_estagiario = models.CharField(max_length=10)
     email_estagiario = models.CharField(max_length=200)
-    semestre_estagiario = models.IntegerField()
+    semestre_estagiario = models.IntegerField(null = True)
     nis_pis_estagiario = models.CharField(max_length=14)
     telefone_estagiario = models.CharField(max_length=15)
     nome_responsavel_estagiario = models.CharField(max_length=100)
