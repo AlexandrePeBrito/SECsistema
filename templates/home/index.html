@@ -1,0 +1,80 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Inicio {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+{% include 'grafico/index_grafico_geral.html' %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">DashBoard - Início</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    {% if mensagem %}
+                        <div class="alert alert-success" role="alert">
+                            <button class="close" data-dismiss="alert">&times;</button>
+                            <p>{{ mensagem }}</p>
+                        </div>
+                    {% endif %}
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <!-- [ Morris Chart ] start -->
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Estagiário</h5>
+                                </div>
+                                <div id="donut-estagiario-situacao"></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Supervisor</h5>
+                                </div>
+                                <div id="donut-supervisor-sede"></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Sede</h5>
+                                </div>
+                                <div id="donut-sede-bairro"></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Município</h5>
+                                </div>
+                                <div id="donut-municipio-nte"></div>
+                            </div>
+                        </div>
+                        <!-- [ Morris Chart ] end -->
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

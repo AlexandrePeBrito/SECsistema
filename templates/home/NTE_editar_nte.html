@@ -1,0 +1,76 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} NTE {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ Padrao do HEADER da pagina] start -->
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">NTE</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><span class="feather icon-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'dashboard_nte' %}">DashBoard</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'editar_nte' nte.id_NTE %}">Editar NTE</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [  Padrao do HEADER da pagina ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="m-b-10">Atualizar NTE</h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <form role="form" method="POST" action="" >
+                                        {% csrf_token %}
+                                        
+                                        <label>Nome do Diretor do NTE<b>*</b></label>
+                                        <div>{{ form.nome_direitor_NTE }}</div>
+
+                                        <label>Email do NTE<b>*</b></label>
+                                        <div>{{ form.email_NTE }}</div>
+
+                                        <div id="linhaForms"> 
+                                            <div class="unidade">
+                                                <label>Telefone do NTE<b>*</b></label>
+                                                <div>{{ form.telefone_NTE }}</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="card"></div>
+                                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+    <script src="/static/assets/js/pages/mask.js"></script>
+{% endblock javascripts %}
+
+

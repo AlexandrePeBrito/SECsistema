@@ -1,0 +1,129 @@
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!-- GRAFICO GENERO-->
+<script type="text/javascript">
+  google.charts.load("current", {packages:['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+    ["Genero", "Quantidade", { role: "style" } ],
+      {% for genero in generos %}
+        ["{{ genero.nome }}", {{ genero.qtd}}, "{{ genero.cor}}"],
+      {% endfor %}
+    ]);
+
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1,
+                     { calc: "stringify",
+                       sourceColumn: 1,
+                       type: "string",
+                       role: "annotation" },
+                     2]);
+
+    var options = {
+      title: "Quantidade de Estagiários por Gênero",
+      width: 450,
+      height: 350,
+      bar: {groupWidth: "65%"},
+      legend: { position: "none" },
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById("chart-genero"));
+    chart.draw(view, options);
+}
+</script>
+
+<!-- GRAFICO RAÇA-->
+<script type="text/javascript">
+  google.charts.load("current", {packages:['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+    ["Raca", "Quantidade", { role: "style" } ],
+      {% for raca in racas %}
+        ["{{ raca.nome }}", {{ raca.qtd}}, "{{ raca.cor}}"],
+      {% endfor %}
+    ]);
+
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1,
+                     { calc: "stringify",
+                       sourceColumn: 1,
+                       type: "string",
+                       role: "annotation" },
+                     2]);
+
+    var options = {
+      title: "Quantidade de Estagiários por Raça",
+      width: 450,
+      height: 290,
+      bar: {groupWidth: "65%"},
+      legend: { position: "none" },
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById("chart-raca"));
+    chart.draw(view, options);
+}
+</script>
+
+<!-- GRAFICO SITUAÇAO-->
+<script type="text/javascript">
+  google.charts.load("current", {packages:['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+    ["Situacao", "Quantidade", { role: "style" } ],
+      {% for situa in situacao %}
+        ["{{ situa.nome }}", {{ situa.qtd}}, "{{ situa.cor}}"],
+      {% endfor %}
+    ]);
+
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1,
+                     { calc: "stringify",
+                       sourceColumn: 1,
+                       type: "string",
+                       role: "annotation" },
+                     2]);
+
+    var options = {
+      title: "Quantidade de Estagiários pela Situação",
+      width: 450,
+      height: 350,
+      bar: {groupWidth: "65%"},
+      legend: { position: "none" },
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById("chart-situacao"));
+    chart.draw(view, options);
+}
+</script>
+
+<!-- GRAFICO SITUAÇAO-->
+<script type="text/javascript">
+  google.charts.load("current", {packages:['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+    ["Turno", "Quantidade", { role: "style" } ],
+      {% for turno in turnos %}
+        ["{{ turno.nome }}", {{ turno.qtd}}, "{{ turno.cor}}"],
+      {% endfor %}
+    ]);
+
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1,
+                     { calc: "stringify",
+                       sourceColumn: 1,
+                       type: "string",
+                       role: "annotation" },
+                     2]);
+
+    var options = {
+      title: "Quantidade de Estagiários pelo Turno",
+      width: 450,
+      height: 350,
+      bar: {groupWidth: "65%"},
+      legend: { position: "none" },
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById("chart-turno"));
+    chart.draw(view, options);
+}
+</script>

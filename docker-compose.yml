@@ -1,44 +1,51 @@
 version: '3.8'
+
 services:
   appseed-app:
+    build:
+      context: /home/alexandre/Documents/sec-django/django-datta-able
     container_name: appseed_app
     restart: always
-    env_file: .env
-    build: .
     networks:
-      - secsistema_db_network  # Adicionar a rede aqui
-      - secsistema_web_network
-    depends_on:
-      - db
-
-  db:
-    container_name: mysql-db
-    image: mysql:latest
-    environment:
-      MYSQL_DATABASE: 'dbsec'
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: '123456'
-      MYSQL_ROOT_PASSWORD: '123456'
-    networks:
-      - secsistema_db_network  # Adicionar a mesma rede aqui
-    ports:
-      - "3307:3306"
+      - db_network
+      - web_network
   
   nginx:
     container_name: nginx
     restart: always
     image: "nginx:latest"
     ports:
-      - "85:85"
+      - "5085:5085"
     volumes:
-      - ./nginx:/etc/nginx/conf.d
+      - /home/alexandre/Documents/sec-django/django-datta-able/nginx:/etc/nginx/conf.d
     networks:
-      - secsistema_web_network
-    depends_on:
+      - web_network
+    depends_on: 
       - appseed-app
+  
+  db:
+    image: mysql:8
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: dbsec
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - db_network
+      - web_network
 
 networks:
-  secsistema_db_network:
+  db_network:
     driver: bridge
-  secsistema_web_network:
+    external: true
+  web_network:
     driver: bridge
+    external: true
+
+volumes:
+  mysql_data: {}

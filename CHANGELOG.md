@@ -1,5 +1,143 @@
 # Change Log
 
+## [1.0.25] 2024-01-06
+### Changes
+
+- Fix Docker Script
+
+## [1.0.24] 2023-10-21
+### Changes
+
+- Update Dependencies 
+- Update README 
+
+## [1.0.23] 2023-07-27
+### Changes
+
+- Fixes:
+  - #27 - Form field not displaying in Page
+  - #28 - Var not displaying in index.html
+  - #32 - Data not displayed in Index.html
+
+## [1.0.22] 2023-07-03
+### Changes
+
+- Bump [Dynamic DataTables](https://appseed.us/developer-tools/django-dynamic-datatables/) to `v1.0.25`
+  - Fix the Exports: `PDF` & `CSV`
+
+## [1.0.21] 2023-07-01
+### Changes
+
+- Sidebar Added Icons (minor)
+  - [API Generator](https://appseed.us/developer-tools/django-api-generator/)
+  - [Dynamic DataTables](https://appseed.us/developer-tools/django-dynamic-datatables/)  
+  
+## [1.0.20] 2023-07-01
+### Changes
+
+- Integrate [API Generator](https://appseed.us/developer-tools/django-api-generator/)
+  - URI: `/api/product/` 
+- HOME.Admin
+  - Automatic Models Registration  
+
+## [1.0.19] 2023-07-01
+### Changes
+
+- Embed [Dynamic DataTables](https://appseed.us/developer-tools/django-dynamic-datatables/) in page
+  - URI: `/tables/` 
+
+## [1.0.18] 2023-06-28
+### Changes
+
+- Integrate [Dynamic DataTables](https://appseed.us/developer-tools/django-dynamic-datatables/) Library
+  - URI: `/datatb/product/` 
+
+## [1.0.17] 2023-06-13
+### Changes
+
+- DOCS Update (readme)
+
+## [1.0.16] 2023-06-13
+### Changes
+
+- HOT Reload in Docker 
+ - Django Code + Templates
+
+## [1.0.15] 2023-06-03
+### Changes
+
+- Bump UI version
+  - [Django Datta Admin](https://github.com/app-generator/django-admin-datta) `v1.0.10`
+
+## [1.0.14] 2023-06-02
+### Changes
+
+- Patch #29 - Fix Broken Links
+- Bump UI version
+  - [Django Datta Admin](https://github.com/app-generator/django-admin-datta) `v1.0.9`
+
+## [1.0.13] 2023-05-30
+### Changes
+
+- Bump UI version
+  - [Django Datta Admin](https://github.com/app-generator/django-admin-datta) `v1.0.8`
+
+## [1.0.12] 2023-02-27
+### Changes
+
+- Create Local Directories
+  - `assets`
+  - `templates`
+
+## [1.0.11] 2023-02-27
+### Changes
+
+- Bump UI version
+  - [Django Datta Admin](https://github.com/app-generator/django-admin-datta) `v1.0.3`
+- Update DOCS
+
+## [1.0.10] 2023-02-27
+### Changes
+
+- Move to theme-based pattern
+  - [Django Datta Admin](https://github.com/app-generator/django-admin-datta)
+- 🚀 `Deployment` 
+  - `CI/CD` flow via `Render`
+
+## [1.0.9] 2022-09-10
+### Improvements
+
+- Added Github OAuth via AllAuth. requires in `.env`:
+  - `GITHUB_ID`=<YOUR_GITHUB_ID>
+  - `GITHUB_SECRET`=<YOUR_GITHUB_SECRET>
+
+## [1.0.8] 2022-06-28
+### Improvements
+
+- Bump UI: `v1.0.0-enh1`
+  - Added `dark-mode`
+  - User profile page 
+
+## [1.0.7] 2022-06-23
+### Improvements
+
+- Improved `Auth UX`
+- Built with [Datta Able Generator](https://appseed.us/generator/datta-able/)
+  - Timestamp: `2022-06-23 19:28`
+
+## [1.0.6] 2022-06-13
+### Improvements
+
+- Improved `Auth UX`
+- Built with [Datta Able Generator](https://appseed.us/generator/datta-able/)
+  - Timestamp: `2022-05-30 21:20`
+
+## [1.0.5] 2022-05-30
+### Improvements
+
+- Built with [Datta Able Generator](https://appseed.us/generator/datta-able/)
+  - Timestamp: `2022-05-30 21:05`
+
 ## [1.0.4] 2022-01-16
 ### Improvements
 

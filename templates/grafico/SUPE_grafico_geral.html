@@ -1,0 +1,33 @@
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!-- GRAFICO SEDE-->
+<script type="text/javascript">
+  google.charts.load("current", {packages:['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+    ["Sede", "Quantidade", { role: "style" } ],
+      {% for sede in sedes %}
+        ["{{ sede.nome }}", {{ sede.qtd}}, "{{ sede.cor}}"],
+      {% endfor %}
+    ]);
+
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1,
+                     { calc: "stringify",
+                       sourceColumn: 1,
+                       type: "string",
+                       role: "annotation" },
+                     2]);
+
+    var options = {
+      title: "Quantidade de Supervisores por Sede",
+      width: 450,
+      height: 350,
+      bar: {groupWidth: "65%"},
+      legend: { position: "none" },
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById("chart-sede"));
+    chart.draw(view, options);
+}
+</script>

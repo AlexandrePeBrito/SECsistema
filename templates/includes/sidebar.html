@@ -1,0 +1,115 @@
+
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand header-logo">
+                <a class="b-brand">
+                    <img class="rounded-circle" style="width:40px;" src="/static/assets/images/teste.ico" alt="activity-user">
+                    <span class="b-title">Secretaria de Educação</span>
+                </a>
+            </div>
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Início</label>
+                    </li>
+                    <li data-username="Para voltar para a Tela Inicial" 
+                        class="nav-item {% if 'index' in segment %} active {% endif %}">
+                        <a href="/" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Início</span></a>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Programas</label>
+                    </li>
+                    <li data-username="Componentes que rodam sobre o programa Mais Futuro" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Mais futuro</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{% url 'dashboard_estagiario_mais_futuro' %}" class=""><i class="feather icon-users"></i> Estagiarios</a></li>
+                            <li class=""><a href="{% url 'grafico_estagiario_mais_futuro' %}" class=""><i class="feather icon-bar-chart-2"></i> Dados</a></li>
+                        </ul>
+                    </li>
+                    <li data-username="Componentes que rodam sobre o programa Partiu Estágio" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Partiu Estágio</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{% url 'dashboard_estagiario_partiu_estagio' %}" class=""><i class="feather icon-users"></i> Estagiarios</a></li>
+                            <li class=""><a href="{% url 'grafico_estagiario_partiu_estagio' %}" class=""><i class="feather icon-bar-chart-2"></i> Dados</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Entidades</label>
+                    </li>
+                    <li data-username="Componentes que rodam sobre o programa Mais Futuro" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Supervisores</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{% url 'dashboard_supervisor' %}" class="">Supervisores</a></li>
+                            <li class=""><a href="{% url 'grafico_supervisor' %}" class=""><i class="feather icon-bar-chart-2"></i> Dados</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li data-username="Componentes que rodam sobre o programa Mais Futuro" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Sedes</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{% url 'dashboard_sede' %}" class="">Sedes</a></li>
+                            <li class=""><a href="{% url 'grafico_sede' %}" class=""><i class="feather icon-bar-chart-2"></i> Dados</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li data-username="Componentes que rodam sobre o programa Mais Futuro" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">NTEs</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{% url 'dashboard_nte' %}" class="">NTE</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li data-username="Componentes que rodam sobre o programa Mais Futuro" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Municípios</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{% url 'dashboard_municipio' %}" class="">Municípios</a></li>
+                            <li class=""><a href="{% url 'grafico_municipio' %}" class=""><i class="feather icon-bar-chart-2"></i> Dados</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li data-username="Componentes que rodam sobre o programa Mais Futuro" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Cursos</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{% url 'dashboard_curso' %}" class="">Cursos</a></li>
+                        </ul>
+                    </li>
+
+                    <li data-username="Componentes que rodam sobre o programa Mais Futuro" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Programas</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{% url 'dashboard_programa' %}" class="">Programas</a></li>
+                        </ul>
+                    </li>
+
+                    <li data-username="Componentes que rodam sobre o programa Mais Futuro" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Faculdades</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{% url 'dashboard_faculdade' %}" class="">Faculdades</a></li>
+                        </ul>
+                    </li>
+
+                    <li data-username="Componentes que rodam sobre o programa Mais Futuro" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Editais</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="{% url 'dashboard_edital' %}" class="">Editais</a></li>
+                        </ul>
+                    </li>                    
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Pages</label>
+                    </li> 
+                    <li data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
+                        <ul class="pcoded-submenu">
+                            <li class=""><a href="/auth-reset-pass.html" class="">Reset Pass</a></li>
+                            
+                        </ul>
+                    </li>
+                    <li data-username="Disabled Menu" class="nav-item">
+                        <a href="{% url 'logout' %}" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
