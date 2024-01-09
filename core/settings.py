@@ -116,7 +116,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 DB_ENGINE   = os.getenv('DB_ENGINE'   , "mysql")
 DB_USERNAME = os.getenv('DB_USERNAME' , "root")
 DB_PASS     = os.getenv('DB_PASS'     , "123456")
-DB_HOST     = os.getenv('DB_HOST'     , '127.0.0.1')
+DB_HOST     = os.getenv('DB_HOST'     , 'localhost')
 DB_PORT     = os.getenv('DB_PORT'     , "3306")
 DB_NAME     = os.getenv('DB_NAME'     , "dbsec")
 
